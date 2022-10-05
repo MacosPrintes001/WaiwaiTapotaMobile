@@ -127,33 +127,33 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 10,),
 
                 //Forgot Password
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children:  [
-                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context, MaterialPageRoute(
-                            builder: (context){
-                              return const ForgotPasswordPage();
-                            }
-                          )
-                        );
-                      },
-                       child: Text(
-                        "Forgot Password?",
-                        style: GoogleFonts.roboto(
-                          color: Colors.lightBlue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15
-                        ),
-                       ),
-                     ),
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children:  [
+                //      GestureDetector(
+                //       onTap: () {
+                //         Navigator.push(
+                //           context, MaterialPageRoute(
+                //             builder: (context){
+                //               return const ForgotPasswordPage();
+                //             }
+                //           )
+                //         );
+                //       },
+                //        child: Text(
+                //         "Forgot Password?",
+                //         style: GoogleFonts.roboto(
+                //           color: Colors.lightBlue,
+                //           fontWeight: FontWeight.bold,
+                //           fontSize: 15
+                //         ),
+                //        ),
+                //      ),
+                //     ],
+                //   ),
+                // ),
           
                 const SizedBox(height:  10),
           

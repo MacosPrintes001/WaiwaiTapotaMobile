@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/dictionary_materials/dict_home_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'login_page.dart';
 
