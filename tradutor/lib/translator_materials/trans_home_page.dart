@@ -27,6 +27,7 @@ class _TransHomePageState extends State<TransHomePage> {
       appBar: AppBar(
         title: const  Text("Translator"),
         elevation: 0.0,
+        backgroundColor: Colors.green[700]
         
       ),
       //menu appbar
@@ -37,12 +38,12 @@ class _TransHomePageState extends State<TransHomePage> {
             const DrawerHeader(child: Icon(Icons.home_filled)),
             ListTile(
               leading: const Icon(Icons.translate),
-              title: const  Text("T R A N S L A T O R"),
+              title: const  Text("T R A D U T O R"),
               onTap: (){},// ENVIA PARA A PAGINA DE TRADUÇÃO
             ),
             ListTile(
               leading: const Icon(Icons.book),
-              title: const Text("D I C T I O N A R Y"),
+              title: const Text("D I C I O N A R I O"),
               onTap:callDictionaryPage,// enviar para 
             ),
             ListTile(
@@ -63,10 +64,10 @@ class _TransHomePageState extends State<TransHomePage> {
               image: AssetImage("assets/logo.png"),
               width: 300,
             ),
-            Text("WORKING ON THIS SCREEN",
-            style: TextStyle(
-              color: Colors.white
-            ),
+            Text("TRABALHANDO NESTA TELA",
+              style: TextStyle(
+                color: Colors.white
+              ),
             ),
           ],
         ),

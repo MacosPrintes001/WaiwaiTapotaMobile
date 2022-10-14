@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:xml/xml.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tradutor/system_pages/login_page.dart';
@@ -13,22 +16,57 @@ class DictHomePage extends StatefulWidget {
 
 
 class _DictHomePageState extends State<DictHomePage> {
-  String dropdownFrom = "Portuguese";
+  String dropdownFrom = "Portugues";
   String dropdownTo = "Waiwai";
   String userinput = "";
   String result = "";
 
-  List <String> availableLang =  <String>['Portuguese', 'Waiwai', 'TEST1', 'TEST2'];
+  List <String> availableLang =  <String>['Portugues', 'Waiwai', 'TEST1', 'TEST2'];
   List <String> languageCode =  <String>['pt', 'wai', 't1', 't2'];
-//Translate
 
-  resultTranslate()async{
+  
+
+  
+  //Translate
+  resultTranslate()async{    
+
     // final translator = GoogleTranslator();
     // translator.translate(userinput, from: languageCode[availableLang.indexOf(dropdownFrom)], to: languageCode[availableLang.indexOf(dropdownTo)]).then(print);
     // var translation = await translator.translate(userinput, to: languageCode[availableLang.indexOf(dropdownTo)]);
     setState(() {
       //result = translation.text;
-      result = "tracução";
+      if( dropdownFrom == "Portugues" && dropdownTo == "Waiwai"){
+        // ignore: prefer_const_declarations
+        final ptTowai = '''<?xml version="1.0"?>
+          <bookshelf>
+            <martelo>Aama</martelo>
+            <abacate>Aape</abacate>
+            <tosse>Aato</tosse>
+            
+          </bookshelf>''';
+      final document = XmlDocument.parse(ptTowai);
+      final titles = document.findAllElements(userinput.toLowerCase());
+      var trad = titles.map((node) => node.text);
+      var t = trad.toString().replaceAll("(", '').replaceAll(")", '');
+      result = t;
+      }
+
+      if(dropdownFrom == "Waiwai" && dropdownTo == "Portugues"){
+        // ignore: prefer_const_declarations
+        final ptTowai = '''<?xml version="1.0"?>
+          <bookshelf>
+            <aama>martelo</aama>
+            <aape>abacate</aape>
+            <aato>tosse</aato>
+            
+          </bookshelf>''';
+      final document = XmlDocument.parse(ptTowai);
+      final titles = document.findAllElements(userinput.toLowerCase());
+      var trad = titles.map((node) => node.text);
+      var t = trad.toString().replaceAll("(", '').replaceAll(")", '');
+      result = t;
+      }
+      
     });
   }
   callTranslatorPage(){
@@ -47,9 +85,13 @@ class _DictHomePageState extends State<DictHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dictionary"),
+        title: const Text("Dicionário"),
         elevation: 0.0,
+        backgroundColor: Colors.green[700],
+        
       ),
+
+      
       //menu appbar
       drawer: Drawer(
         backgroundColor: Colors.white,
@@ -58,12 +100,12 @@ class _DictHomePageState extends State<DictHomePage> {
             const DrawerHeader(child: Icon(Icons.home_filled)),
             ListTile(
               leading: const Icon(Icons.translate),
-              title: const  Text("T R A N S L A T O R", ),
+              title: const  Text("T R A D U T O R", ),
               onTap: callTranslatorPage,// ENVIA PARA A PAGINA DE TRADUÇÃO
             ),
             ListTile(
               leading: const Icon(Icons.book),
-              title: const Text("D I C T I O N A R Y"),
+              title: const Text("D I C I O N A R I O"),
               onTap:callDictionaryPage,// enviar para 
             ),
             ListTile(
@@ -83,7 +125,7 @@ class _DictHomePageState extends State<DictHomePage> {
           children: [
             Row(
               children: [
-               Expanded(flex: 1, child:Text('From:  ',style: GoogleFonts.roboto(color: Colors.lightBlue,fontWeight: FontWeight.bold,fontSize: 15)),),
+               Expanded(flex: 1, child:Text('De:  ',style: GoogleFonts.roboto(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),),
                 Expanded(
                   flex: 5,
                   child: DropdownButton<String>(
@@ -91,10 +133,10 @@ class _DictHomePageState extends State<DictHomePage> {
                     icon: const Icon(Icons.arrow_downward),
                     iconSize: 24,
                     elevation: 16,
-                    style: const TextStyle(color: Colors.deepPurple),
+                    style: const TextStyle(color: Colors.lightBlue),
                     underline: Container(
                       height: 2,
-                      color: Colors.deepPurpleAccent,
+                      color: Colors.lightBlue,
                     ),
                     onChanged: (String? newValue) {
                       setState(() {
@@ -116,8 +158,8 @@ class _DictHomePageState extends State<DictHomePage> {
 
             Row(
               children: [
-                Expanded(flex: 1, child: Text('To:  ',          
-                  style: GoogleFonts.roboto(color: Colors.lightBlue,fontWeight: FontWeight.bold,fontSize: 15)
+                Expanded(flex: 1, child: Text('Para:  ',          
+                  style: GoogleFonts.roboto(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)
                   ),
                 ),
                 Expanded(
@@ -127,10 +169,10 @@ class _DictHomePageState extends State<DictHomePage> {
                     icon: const Icon(Icons.arrow_downward),
                     iconSize: 24,
                     elevation: 16,
-                    style: const TextStyle(color: Colors.deepPurple),
+                    style: const TextStyle(color: Colors.lightBlue),
                     underline: Container(
                       height: 2,
-                      color: Colors.deepPurpleAccent,
+                      color: Colors.lightBlue,
                     ),
                     onChanged: (String? newValue) {
                       setState(() {
@@ -163,8 +205,7 @@ class _DictHomePageState extends State<DictHomePage> {
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.all(Radius.circular(15)))),
-            ),
+                      borderRadius: BorderRadius.all(Radius.circular(15)))),),
 
             const SizedBox(height: 10,),
 
@@ -175,21 +216,18 @@ class _DictHomePageState extends State<DictHomePage> {
                   borderRadius: BorderRadius.circular(8),
                   side: const BorderSide(color: Colors.blue,)
                 ),
-                child:  Text('Translate',
-                  style: GoogleFonts.roboto(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),
-),
+                child:  Text('Traduzir',
+                  style: GoogleFonts.roboto(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
                 onPressed: (){
                   resultTranslate();
                 }
               ),
-
+              
               // Result
               const SizedBox(height: 10,),
               Center(child: Text('Resultado: $result', style: const TextStyle(color: Colors.black, fontSize: 20 ))),
          
-              const SizedBox(height: 100,),
-        
-
+            const SizedBox(height: 100,),
 
           ]
         ),

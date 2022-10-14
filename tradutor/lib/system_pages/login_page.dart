@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                         borderSide: const BorderSide(color: Color.fromARGB(84, 11, 214, 108)),
                         borderRadius: BorderRadius.circular(12)
                       ),
-                      hintText: 'Password',
+                      hintText: 'Senha',
                       fillColor: Colors.grey[200], 
                       filled: true,
                     ),
@@ -189,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Not a member?",
+                      "Não tem conta?",
                       style: GoogleFonts.roboto(
                         color: Colors.white,
                         fontWeight: FontWeight.bold
@@ -206,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       },
                        child: Text(
-                        "Register Now",
+                        "Registrar Agora",
                         style: GoogleFonts.roboto(
                           color: Colors.lightBlue,
                           fontWeight: FontWeight.bold,
