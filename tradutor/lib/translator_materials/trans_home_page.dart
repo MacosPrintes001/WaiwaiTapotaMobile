@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tradutor/dictionary_materials/dict_home_page.dart';
+import 'package:tradutor/dictionary_materials/pages/home_page.dart';
 
 
 class TransHomePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _TransHomePageState extends State<TransHomePage> {
     try{
       Navigator.of(context).pushReplacement(
       // ignore: prefer_const_constructors
-      CupertinoPageRoute(builder: (ctx) =>   DictHomePage()));
+      CupertinoPageRoute(builder: (ctx) =>   HomePage(title: "Waiwai Translator",)));
     }catch(e){}
 
     

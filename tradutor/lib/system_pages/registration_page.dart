@@ -1,7 +1,9 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tradutor/dictionary_materials/dict_home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tradutor/dictionary_materials/pages/home_page.dart';
 
 import 'login_page.dart';
 
@@ -44,13 +46,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
         //   email: _emailController.text.trim(), 
         //   password: _passwordController.text.trim(),
         // );
-        Navigator.of(context).push(CupertinoPageRoute(builder: (ctx) =>  const DictHomePage()));
+        Navigator.of(context).push(CupertinoPageRoute(builder: (ctx) =>  const HomePage(title: "Waiwai Translator",)));
       }catch(w){
         showDialog(
         context: context, 
         builder: (context){
+          // ignore: prefer_const_constructors
           return AlertDialog(
-            content: Text(""),
+            content: const Text(""),
           );
         }
       );
