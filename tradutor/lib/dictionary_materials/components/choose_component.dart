@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tradutor/dictionary_materials/pages/language_page.dart';
 
 class ChooseLanguage extends StatefulWidget {
-  const ChooseLanguage({super.key});
+  const ChooseLanguage(LanguagePage languagePage, {super.key});
 
   @override
   State<ChooseLanguage> createState() => _ChooseLanguageState();

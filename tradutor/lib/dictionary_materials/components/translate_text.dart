@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'action_button.dart';
 
 class TranslateText extends StatefulWidget {
-  const TranslateText({super.key});
+  const TranslateText({super.key, required this.onTextTouched});
+
+  final Function(bool) onTextTouched;
 
   @override
   State<TranslateText> createState() => _TranslateTextState();
@@ -24,7 +26,9 @@ class _TranslateTextState extends State<TranslateText> {
           children: <Widget>[
             Expanded(
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  widget.onTextTouched(true);
+                },
                 child: Container(
                   width: double.infinity,
                   padding:
@@ -41,17 +45,25 @@ class _TranslateTextState extends State<TranslateText> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Material(
-                  color: Colors.white,
-                  child: Column(
-                    children: const <Widget>[
-                      ActionButton(
-                        icon: Icons.play_arrow_sharp,
-                        text: "Fale para mim",
-                      ),
-                    ],
-                  ),
+                ActionButton(
+                  icon: Icons.play_arrow_sharp,
+                  text: "Fale para mim", onClick: (){},
                 ),
+
+                ActionButton(
+                  onClick: () async {
+                    // var result = await Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => ,
+                    //   ),
+                    // );
+
+                  },
+                  icon: Icons.keyboard_voice,
+                  text: "Voice",
+                ),
+                
               ],
             ),
           ],
