@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       //await do login
 
-      await Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => const HomePage(title: "Waiwai Translate")));
+      //await Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => const HomePage(title: "Waiwai Translate")));
     } catch (e) {
       showDialog(
           context: context,
@@ -189,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return RegistrationPage();
+                      return const RegistrationPage();
                     }));
                   },
                   child: Text(

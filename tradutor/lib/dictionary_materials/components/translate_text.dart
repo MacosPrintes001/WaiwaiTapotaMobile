@@ -1,5 +1,8 @@
+// ignore_for_file: implementation_imports, depend_on_referenced_packages
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
+import '../providers/translate_provider.dart';
 import 'action_button.dart';
 
 class TranslateText extends StatefulWidget {
@@ -12,13 +15,17 @@ class TranslateText extends StatefulWidget {
 }
 
 class _TranslateTextState extends State<TranslateText> {
+  late TranslateProvider _translateProvider;
+
   @override
   Widget build(BuildContext context) {
+    _translateProvider = Provider.of<TranslateProvider>(context, listen: true);
+
     return Card(
       color: Colors.white,
-      margin: const EdgeInsets.all(0.0),
+      margin: EdgeInsets.all(0.0),
       elevation: 2.0,
-      child: SizedBox(
+      child: Container(
         height: 150.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,12 +34,11 @@ class _TranslateTextState extends State<TranslateText> {
             Expanded(
               child: InkWell(
                 onTap: () {
-                  widget.onTextTouched(true);
+                  this.widget.onTextTouched(true);
                 },
                 child: Container(
                   width: double.infinity,
-                  padding:
-                      const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
                   child: Text(
                     "Enter text",
                     style: TextStyle(
@@ -46,24 +52,9 @@ class _TranslateTextState extends State<TranslateText> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 ActionButton(
-                  icon: Icons.play_arrow_sharp,
-                  text: "Fale para mim", onClick: (){},
-                ),
-
-                ActionButton(
-                  onClick: () async {
-                    // var result = await Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => ,
-                    //   ),
-                    // );
-
-                  },
-                  icon: Icons.keyboard_voice,
-                  text: "Voice",
-                ),
-                
+                    icon: Icons.voice_chat_outlined,
+                    text: "text",
+                    onClick: () {}, imageIcon: const AssetImage(''),)
               ],
             ),
           ],

@@ -3,9 +3,7 @@ class Translate {
   late String translatedText;
   late bool isStarred;
 
-  Translate(String text, String translated, bool isStarred) {
-    this.text = text;
-    this.translatedText = translated;
-    this.isStarred = isStarred;
+  Translate(this.text, String translated, this.isStarred) {
+    translatedText = translated;
   }
 }

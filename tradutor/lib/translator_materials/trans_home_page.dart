@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/pages/home_page.dart';
