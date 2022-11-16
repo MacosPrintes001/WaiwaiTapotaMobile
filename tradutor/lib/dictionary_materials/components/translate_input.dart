@@ -17,16 +17,16 @@ class TranslateInput extends StatefulWidget {
 }
 
 class _TranslateInputState extends State<TranslateInput> {
-  late TranslateProvider _translateProvider;
+  TranslateProvider? _translateProvider;
   final TextEditingController _textEditingController = TextEditingController();
   String _textTranslated = "";
 
   _onTextChanged(String text) {
     if (text.isNotEmpty) {
-      _translateProvider.setTextToTranslate(text);
+      _translateProvider!.setTextToTranslate(text);
       _translatingText(text);
     } else {
-      _translateProvider.setTextToTranslate("");
+      _translateProvider!.setTextToTranslate("");
       setState(() {
         _textTranslated = "";
       });
@@ -52,7 +52,7 @@ class _TranslateInputState extends State<TranslateInput> {
 
   @override
   Widget build(BuildContext context) {
-    _textEditingController.text = _translateProvider.textToTranslate;
+    _textEditingController.text = _translateProvider!.textToTranslate;
     _translatingText(_textEditingController.text);
 
     return Container(
@@ -80,7 +80,7 @@ class _TranslateInputState extends State<TranslateInput> {
                         onPressed: () {
                           if (_textEditingController.text != "") {
                             setState(() {
-                              _translateProvider.setTextToTranslate("");
+                              _translateProvider!.setTextToTranslate("");
                               _textEditingController.clear();
                               _textTranslated = "";
                             });

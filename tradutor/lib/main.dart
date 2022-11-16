@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'dictionary_materials/providers/translate_provider.dart';
 import 'system_pages/slpash_page.dart';

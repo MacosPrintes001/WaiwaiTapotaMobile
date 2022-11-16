@@ -5,12 +5,6 @@ class Language{
   late bool isDownloaded;
   late bool isDownloadable;
 
-  Language(String code, String name, bool isRecent, bool isDownloaded,
-      bool isDownloadable) {
-    this.name = name;
-    this.code = code;
-    this.isRecent = isRecent;
-    this.isDownloaded = isDownloaded;
-    this.isDownloadable = isDownloadable;
-  }
+  Language(this.code, this.name, this.isRecent, this.isDownloaded,
+      this.isDownloadable);
 }

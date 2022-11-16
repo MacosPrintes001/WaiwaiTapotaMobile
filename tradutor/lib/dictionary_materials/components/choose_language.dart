@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../pages/language_page.dart';
 import '../providers/translate_provider.dart';
 
+
 class ChooseLanguage extends StatefulWidget {
   const ChooseLanguage({super.key});
 
@@ -77,7 +78,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
               color: Colors.white,
               child: InkWell(
                 onTap: () {
-                  _chooseFirstLanguage("Translate from", true);
+                  _chooseFirstLanguage("Traduzir de", true);
                 },
                 child: Center(
                   child: Text(
@@ -106,7 +107,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
               color: Colors.white,
               child: InkWell(
                 onTap: () {
-                  _chooseSecondLanguage("Translate to", false);
+                  _chooseSecondLanguage("Traduzir para", false);
                 },
                 child: Center(
                   child: Text(

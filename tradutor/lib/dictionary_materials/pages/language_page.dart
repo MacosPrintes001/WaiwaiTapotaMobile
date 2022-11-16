@@ -1,16 +1,16 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sticky_header/flutter_sticky_header.dart';
-
+//import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
 import '../components/language_list_element.dart';
 import '../models/language.dart';
 
 class LanguagePage extends StatefulWidget {
-  const LanguagePage({super.key, required this.title, required this.isAutomaticEnabled});
+  const LanguagePage(
+      {super.key, required this.title, required this.isAutomaticEnabled});
 
-   final String title;
+  final String title;
   final bool isAutomaticEnabled;
 
   @override
@@ -20,11 +20,11 @@ class LanguagePage extends StatefulWidget {
 class _LanguagePageState extends State<LanguagePage> {
   final TextEditingController _searchTextController = TextEditingController();
   final List<Language> _languageList = [
-      Language('auto', 'Automatic', false, false, false),
-      Language('ptbr', 'Portugues', false, false, false),
-      Language('wai', 'Waiwai', false, false, false),
-      Language('ts1', 'Teste1', false, false, false),
-      Language('ts2', 'Teste2', false, false, false),
+    Language('auto', 'Automatic', false, false, false),
+    Language('ptbr', 'Portugues', false, false, false),
+    Language('wai', 'Waiwai', false, false, false),
+    Language('ts1', 'Teste1', false, false, false),
+    Language('ts2', 'Teste2', false, false, false),
   ];
 
   @override
@@ -103,56 +103,56 @@ class _LanguagePageState extends State<LanguagePage> {
     return Expanded(
       child: CustomScrollView(
         slivers: <Widget>[
-          SliverStickyHeader(
-            header: Container(
-              height: 60.0,
-              color: Colors.blue[600],
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              alignment: Alignment.centerLeft,
-              child: const Text(
-                'Recent Languages',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, i) => LanguageListElement(
-                      language: recentLanguages[i],
-                      onSelect: _sendBackLanguage,
-                    ),
-                childCount: recentLanguages.length,
-              ),
-            ),
-          ),
-          SliverStickyHeader(
-            header: Container(
-              height: 60.0,
-              color: Colors.blue[600],
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              alignment: Alignment.centerLeft,
-              child: const Text(
-                'All languages',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, i) => LanguageListElement(
-                      language: _languageList[i],
-                      onSelect: _sendBackLanguage,
-                    ),
-                childCount: _languageList.length,
-              ),
-            ),
-          ),
+          // SliverStickyHeader(
+          //   header: Container(
+          //     height: 60.0,
+          //     color: Colors.blue[600],
+          //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //     alignment: Alignment.centerLeft,
+          //     child: const Text(
+          //       'Recent Languages',
+          //       style: TextStyle(
+          //         color: Colors.white,
+          //         fontSize: 16,
+          //         fontWeight: FontWeight.w500,
+          //       ),
+          //     ),
+          //   ),
+          //   sliver: SliverList(
+          //     delegate: SliverChildBuilderDelegate(
+          //       (context, i) => LanguageListElement(
+          //             language: recentLanguages[i],
+          //             onSelect: _sendBackLanguage,
+          //           ),
+          //       childCount: recentLanguages.length,
+          //     ),
+          //   ),
+          // ),
+          // SliverStickyHeader(
+          //   header: Container(
+          //     height: 60.0,
+          //     color: Colors.blue[600],
+          //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //     alignment: Alignment.centerLeft,
+          //     child: const Text(
+          //       'All languages',
+          //       style: TextStyle(
+          //         color: Colors.white,
+          //         fontSize: 16,
+          //         fontWeight: FontWeight.w500,
+          //       ),
+          //     ),
+          //   ),
+          //   sliver: SliverList(
+          //     delegate: SliverChildBuilderDelegate(
+          //       (context, i) => LanguageListElement(
+          //             language: _languageList[i],
+          //             onSelect: _sendBackLanguage,
+          //           ),
+          //       childCount: _languageList.length,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

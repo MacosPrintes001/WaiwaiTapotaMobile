@@ -71,7 +71,9 @@ class _ListTranslateState extends State<ListTranslate> {
   Widget _displayCard(int index) {
     return Card(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(0.0)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(0.0),
+        ),
       ),
       margin: const EdgeInsets.only(left: 8.0, right: 8.0, top: 0.5),
       child: Container(
@@ -109,7 +111,9 @@ class _ListTranslateState extends State<ListTranslate> {
               icon: Icon(
                 _items[index].isStarred ? Icons.star : Icons.star_border,
                 size: 23.0,
-                color: _items[index].isStarred ? Colors.blue[600] : Colors.grey[700],
+                color: _items[index].isStarred
+                    ? Colors.blue[600]
+                    : Colors.grey[700],
               ),
             ),
           ],

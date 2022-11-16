@@ -18,10 +18,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
 
-    late TranslateProvider _translateProvider;
-  FocusNode _textFocusNode = FocusNode();
-  late AnimationController _controller;
-  late Animation _animation;
+  TranslateProvider? _translateProvider;
+  final FocusNode _textFocusNode = FocusNode();
+  AnimationController? _controller;
 
   @override
   void initState() {
@@ -37,33 +36,28 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller!.dispose();
     _textFocusNode.dispose();
     super.dispose();
   }
 
   // Generate animations to enter the text to translate
   _onTextTouched(bool isTouched) {
-    Tween _tween = SizeTween(
-      begin: Size(0.0, kToolbarHeight),
-      end: Size(0.0, 0.0),
-    );
 
-    _animation = _tween.animate(_controller);
 
     if (isTouched) {
       FocusScope.of(context).requestFocus(_textFocusNode);
-      _controller.forward();
+      _controller!.forward();
     } else {
       FocusScope.of(context).requestFocus(FocusNode());
-      _controller.reverse();
+      _controller!.reverse();
     }
 
-    _translateProvider.setIsTranslating(isTouched);
+    _translateProvider!.setIsTranslating(isTouched);
   }
 
   Widget _displaySuggestions() {
-    if (_translateProvider.isTranslating) {
+    if (_translateProvider!.isTranslating) {
       return Container(
         color: Colors.black.withOpacity(0.4),
       );
@@ -92,13 +86,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           Stack(
             children: <Widget>[
               Offstage(
-                offstage: _translateProvider.isTranslating,
+                offstage: _translateProvider!.isTranslating,
                 child: TranslateText(
                   onTextTouched: _onTextTouched,
                 ),
               ),
               Offstage(
-                offstage: !_translateProvider.isTranslating,
+                offstage: !_translateProvider!.isTranslating,
                 child: TranslateInput(
                   onCloseClicked: _onTextTouched,
                   focusNode: _textFocusNode,
@@ -110,8 +104,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             child: Stack(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(top: 8.0),
-                  child: ListTranslate(),
+                  margin: const EdgeInsets.only(top: 8.0),
+                  child: const ListTranslate(),
                 ),
                 _displaySuggestions(),
               ],
