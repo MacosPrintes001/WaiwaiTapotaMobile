@@ -1,4 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/translate_provider.dart';
 
 class TranslateInput extends StatefulWidget {
   const TranslateInput(
@@ -12,41 +17,42 @@ class TranslateInput extends StatefulWidget {
 }
 
 class _TranslateInputState extends State<TranslateInput> {
-  //TranslateProvider _translateProvider;
+  TranslateProvider? _translateProvider;
   final TextEditingController _textEditingController = TextEditingController();
   String _textTranslated = "";
-  //GoogleTranslator _translator = new GoogleTranslator();
 
   _onTextChanged(String text) {
     if (text.isNotEmpty) {
-      //_translateProvider.setTextToTranslate(text);
+      _translateProvider!.setTextToTranslate(text);
       _translatingText(text);
     } else {
-      //_translateProvider.setTextToTranslate("");
+      _translateProvider!.setTextToTranslate("");
       setState(() {
         _textTranslated = "";
       });
     }
   }
 
-
   _translatingText(String text) {
     if (text.isNotEmpty) {
-    //   _translator.translate(text,from: _translateProvider.firstLanguage.code, to: _translateProvider.secondLanguage.code).then((translatedText) {
-    //     if (translatedText != _textTranslated) {
-    //       setState(() {
-    //         _textTranslated = translatedText as String;
-    //       });
-    //     }
-    //   });
-    _textTranslated = _textTranslated;
+      _textTranslated = "Your traduction";
+      // _translator
+      //     .translate(text,
+      //         from: _translateProvider.firstLanguage.code,
+      //         to: _translateProvider.secondLanguage.code)
+      //     .then((translatedText) {
+      //   if (translatedText != _textTranslated) {
+      //     setState(() {
+      //       _textTranslated = translatedText as String;
+      //     });
+      //   }
+      // });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    //_translateProvider = Provider.of<TranslateProvider>(context, listen: true);
-    //_textEditingController.text = _translateProvider.textToTranslate;
+    _textEditingController.text = _translateProvider!.textToTranslate;
     _translatingText(_textEditingController.text);
 
     return Container(
@@ -63,7 +69,7 @@ class _TranslateInputState extends State<TranslateInput> {
                 controller: _textEditingController,
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
-                onChanged:_onTextChanged,
+                onChanged: _onTextChanged,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   suffixIcon: SizedBox(
@@ -74,7 +80,7 @@ class _TranslateInputState extends State<TranslateInput> {
                         onPressed: () {
                           if (_textEditingController.text != "") {
                             setState(() {
-                              //_translateProvider.setTextToTranslate("");
+                              _translateProvider!.setTextToTranslate("");
                               _textEditingController.clear();
                               _textTranslated = "";
                             });
@@ -97,7 +103,7 @@ class _TranslateInputState extends State<TranslateInput> {
           const Divider(),
           Expanded(
             child: Container(
-              margin: const EdgeInsets.only(left: 16.0),
+              margin: EdgeInsets.only(left: 16.0),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(

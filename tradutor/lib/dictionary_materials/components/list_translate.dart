@@ -12,15 +12,68 @@ class ListTranslate extends StatefulWidget {
 class _ListTranslateState extends State<ListTranslate> {
   final List<Translate> _items = [
     Translate(
-    "yellowish",
-    "jaunâtre",
-    true,
-  ),
+      "yellowish",
+      "jaunâtre",
+      true,
+    ),
+    Translate(
+      "to spew out",
+      "cracher",
+      false,
+    ),
+    Translate(
+      "pour combler",
+      "to fill",
+      false,
+    ),
+    Translate(
+      "frisson",
+      "thrill",
+      false,
+    ),
+    Translate(
+      "chime",
+      "carillon",
+      true,
+    ),
+    Translate(
+      "gaz de chiste",
+      "shale gas",
+      false,
+    ),
+    Translate(
+      "a bold statement",
+      "une déclaration audacieuse",
+      true,
+    ),
+    Translate(
+      "slick",
+      "nappe",
+      false,
+    ),
+    Translate(
+      "sketch",
+      "dessin",
+      false,
+    ),
+    Translate(
+      "sketch",
+      "dessin",
+      false,
+    ),
+    Translate(
+      "serve",
+      "desservir",
+      false,
+    ),
   ];
+
   Widget _displayCard(int index) {
     return Card(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(0.0)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(0.0),
+        ),
       ),
       margin: const EdgeInsets.only(left: 8.0, right: 8.0, top: 0.5),
       child: Container(
@@ -71,13 +124,11 @@ class _ListTranslateState extends State<ListTranslate> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: _items.length,
-        itemBuilder: (BuildContext ctxt, int index) {
-          return _displayCard(index);
-        },
-      ),
+    return ListView.builder(
+      itemCount: _items.length,
+      itemBuilder: (BuildContext ctxt, int index) {
+        return _displayCard(index);
+      },
     );
   }
 }

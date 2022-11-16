@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_this, unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
 
@@ -6,22 +6,30 @@ class ActionButton extends StatefulWidget {
   const ActionButton(
       {super.key,
       required this.icon,
-      required this.text, required this.onClick});
+      required this.imageIcon,
+      required this.text,
+      required this.onClick});
 
   final IconData icon;
+  final AssetImage imageIcon;
   final String text;
   final Function onClick;
-  
+
   @override
   State<ActionButton> createState() => _ActionButtonState();
 }
 
 class _ActionButtonState extends State<ActionButton> {
-
   Widget _displayIcon() {
-    if (this.widget.icon != null) {
+    if (widget.icon != null) {
       return Icon(
-        this.widget.icon,
+        widget.icon,
+        size: 23.0,
+        color: Colors.blue[800],
+      );
+    } else if (widget.imageIcon != null) {
+      return ImageIcon(
+        widget.imageIcon,
         size: 23.0,
         color: Colors.blue[800],
       );
@@ -29,26 +37,28 @@ class _ActionButtonState extends State<ActionButton> {
       return Container();
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
       child: TextButton(
-        // padding: EdgeInsets.only(
-        //   left: 8.0,
-        //   right: 8.0,
-        //   top: 2.0,
-        //   bottom: 2.0,
-        // ),
         onPressed: () {
           widget.onClick();
         },
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.only(
+            left: 8.0,
+            right: 8.0,
+            top: 2.0,
+            bottom: 2.0,
+          ),
+        ),
         child: Column(
           children: <Widget>[
             _displayIcon(),
             Text(
-              this.widget.text,
+              widget.text,
               style: const TextStyle(fontSize: 12),
             ),
           ],

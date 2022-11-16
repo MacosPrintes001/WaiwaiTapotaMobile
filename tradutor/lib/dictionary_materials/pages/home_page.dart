@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-
+import 'package:provider/provider.dart';
 
 import '../components/choose_language.dart';
 import '../components/translate_input.dart';
 import '../components/translate_text.dart';
 import '../components/list_translate.dart';
-import '../models/language .dart';
+import '../providers/translate_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -17,36 +16,64 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
 
-    
+  TranslateProvider? _translateProvider;
+  final FocusNode _textFocusNode = FocusNode();
+  AnimationController? _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 150),
+      vsync: this,
+    )..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller!.dispose();
+    _textFocusNode.dispose();
+    super.dispose();
+  }
+
+  // Generate animations to enter the text to translate
   _onTextTouched(bool isTouched) {
-    Tween _tween = SizeTween(
-      begin: Size(0.0, kToolbarHeight),
-      end: Size(0.0, 0.0),
-    );
 
-    //_animation = _tween.animate(_controller);
 
     if (isTouched) {
-      // FocusScope.of(context).requestFocus(_textFocusNode);
-      // _controller.forward();
+      FocusScope.of(context).requestFocus(_textFocusNode);
+      _controller!.forward();
     } else {
       FocusScope.of(context).requestFocus(FocusNode());
-      //_controller.reverse();
+      _controller!.reverse();
     }
 
-    //_translateProvider.setIsTranslating(isTouched);
+    _translateProvider!.setIsTranslating(isTouched);
+  }
+
+  Widget _displaySuggestions() {
+    if (_translateProvider!.isTranslating) {
+      return Container(
+        color: Colors.black.withOpacity(0.4),
+      );
+    } else {
+      return Container();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    _translateProvider = Provider.of<TranslateProvider>(context, listen: true);
 
-    var _textFocusNode;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
+        preferredSize: const Size.fromHeight(kToolbarHeight),
         child: AppBar(
           title: Text(widget.title),
           elevation: 0.0,
@@ -59,13 +86,13 @@ class _HomePageState extends State<HomePage> {
           Stack(
             children: <Widget>[
               Offstage(
-                //offstage: _translateProvider.isTranslating,
+                offstage: _translateProvider!.isTranslating,
                 child: TranslateText(
                   onTextTouched: _onTextTouched,
                 ),
               ),
               Offstage(
-                //offstage: !_translateProvider.isTranslating,
+                offstage: !_translateProvider!.isTranslating,
                 child: TranslateInput(
                   onCloseClicked: _onTextTouched,
                   focusNode: _textFocusNode,
@@ -77,10 +104,10 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(top: 8.0),
-                  child: ListTranslate(),
+                  margin: const EdgeInsets.only(top: 8.0),
+                  child: const ListTranslate(),
                 ),
-               
+                _displaySuggestions(),
               ],
             ),
           ),

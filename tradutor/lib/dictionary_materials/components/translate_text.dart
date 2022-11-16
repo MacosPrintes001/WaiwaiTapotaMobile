@@ -1,3 +1,4 @@
+// ignore_for_file: implementation_imports, depend_on_referenced_packages
 import 'package:flutter/material.dart';
 
 import 'action_button.dart';
@@ -12,8 +13,10 @@ class TranslateText extends StatefulWidget {
 }
 
 class _TranslateTextState extends State<TranslateText> {
+
   @override
   Widget build(BuildContext context) {
+
     return Card(
       color: Colors.white,
       margin: const EdgeInsets.all(0.0),
@@ -31,8 +34,7 @@ class _TranslateTextState extends State<TranslateText> {
                 },
                 child: Container(
                   width: double.infinity,
-                  padding:
-                      const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+                  padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
                   child: Text(
                     "Enter text",
                     style: TextStyle(
@@ -46,24 +48,11 @@ class _TranslateTextState extends State<TranslateText> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 ActionButton(
-                  icon: Icons.play_arrow_sharp,
-                  text: "Fale para mim", onClick: (){},
+                  icon: Icons.voice_chat_outlined,
+                  text: "text",
+                  onClick: () {},
+                  imageIcon: const AssetImage(''),
                 ),
-
-                ActionButton(
-                  onClick: () async {
-                    // var result = await Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => ,
-                    //   ),
-                    // );
-
-                  },
-                  icon: Icons.keyboard_voice,
-                  text: "Voice",
-                ),
-                
               ],
             ),
           ],
