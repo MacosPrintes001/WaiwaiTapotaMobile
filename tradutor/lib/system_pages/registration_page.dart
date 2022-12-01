@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tradutor/dictionary_materials/pages/home_page.dart';
+import 'package:tradutor/system_pages/home_page.dart';
 
 import 'login_page.dart';
 
@@ -46,7 +46,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         //   email: _emailController.text.trim(), 
         //   password: _passwordController.text.trim(),
         // );
-        Navigator.of(context).push(CupertinoPageRoute(builder: (ctx) =>  const HomePage(title: "Waiwai Translator",)));
+        Navigator.of(context).push(CupertinoPageRoute(builder: (ctx) =>  const HomePage()));
       }catch(w){
         showDialog(
         context: context, 
