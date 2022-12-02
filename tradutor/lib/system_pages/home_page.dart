@@ -14,20 +14,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-
     callDict() {
-      Navigator.of(context).push(
-          CupertinoPageRoute(builder: (ctx) => const DictHomePage()));
+      Navigator.of(context)
+          .push(CupertinoPageRoute(builder: (ctx) => const DictHomePage()));
     }
+
     logout() {
-      Navigator.of(context).push(
-          CupertinoPageRoute(builder: (ctx) => const LoginPage()));
+      Navigator.of(context)
+          .push(CupertinoPageRoute(builder: (ctx) => const LoginPage()));
     }
 
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Bem Vindo(a)"),
+        backgroundColor: const Color.fromARGB(190, 0, 77, 40),
       ),
       drawer: Drawer(
         child: ListView(
@@ -68,8 +70,8 @@ class _HomePageState extends State<HomePage> {
             Ink(
               width: 100,
               height: 100,
-              decoration: const BoxDecoration(
-                color: Colors.blue,
+              decoration: BoxDecoration(
+                color: Colors.green[900],
                 shape: BoxShape.rectangle,
               ),
               child: InkWell(
