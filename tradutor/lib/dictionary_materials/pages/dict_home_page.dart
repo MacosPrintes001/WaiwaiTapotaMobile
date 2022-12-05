@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
+import 'word_page.dart';
 
 class DictHomePage extends StatefulWidget {
   const DictHomePage({super.key});
@@ -85,9 +85,13 @@ class _DictHomePageState extends State<DictHomePage> {
               child: ListView.builder(
                 itemCount: display_list.length,
                 itemBuilder: ((context, index) => ListTile(
-                  onTap: (() {
-                    //madar pra outra tela com informações
-                  }),
+                      onTap: (() {
+                        //madar pra outra tela com informações
+                        var a = display_list[index].brWord!;
+                        
+                        Navigator.of(context).push(CupertinoPageRoute(
+                            builder: (ctx) => const WordPage()));
+                      }),
                       contentPadding: const EdgeInsets.all(8.0),
                       title: Text(
                         display_list[index].waiWord!,
