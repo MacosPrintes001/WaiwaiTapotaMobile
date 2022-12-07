@@ -28,6 +28,7 @@ class _WordPageState extends State<WordPage> {
           children: [
             Column(
               children: const [
+                SizedBox(height: 30,),
                 Text(
                   "Palavra Pt-Br",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -44,16 +45,70 @@ class _WordPageState extends State<WordPage> {
             const SizedBox(
               height: 30,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("Wai: $textWai"),
-                const SizedBox(
-                  height: 10,
+            Card(
+              child: Container(
+                width: 380,
+                decoration: BoxDecoration(
+                  color:
+                      const Color.fromARGB(255, 1, 207, 122).withOpacity(0.25),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(10),
+                  ),
                 ),
-                Text("Pt-Br: $textPt"),
-              ],
-            )
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Pt-br",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: null,
+                    ),
+                    SizedBox(
+                      width: 350,
+                      child: Text(
+                        textWai,
+                        textAlign: TextAlign.justify,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              child: Container(
+                width: 380,
+                decoration: BoxDecoration(
+                  color:
+                      const Color.fromARGB(255, 1, 207, 122).withOpacity(0.25),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Wai",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: null,
+                    ),
+                    SizedBox(
+                      width: 350,
+                      child: Text(
+                        textWai,
+                        textAlign: TextAlign.justify,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
