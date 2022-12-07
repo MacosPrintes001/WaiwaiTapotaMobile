@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 class WordPage extends StatefulWidget {
-  const WordPage({super.key});
+
+  const WordPage({super.key, required this.brWord, required this.waiWord, required this.brDescript, required this.waiDescript});
+
+    final String brWord;
+    final String waiWord;
+    final String brDescript;
+    final String waiDescript;
 
   @override
   State<WordPage> createState() => _WordPageState();
 }
 
 class _WordPageState extends State<WordPage> {
-  String textPt =
-      "Lorem ipsum dolor sit amet. Rem delectus eius qui voluptas dolores et ipsum quidem sed enim optio et neque internos aut provident dolore. Sit ipsam molestias in voluptas dolores in laudantium molestiae vel odio quasi. Eum necessitatibus deleniti ut porro corrupti et eius ratione et velit harum!";
-  String textWai =
-      "Lorem ipsum dolor sit amet. Rem delectus eius qui voluptas dolores et ipsum quidem sed enim optio et neque internos aut provident dolore. Sit ipsam molestias in voluptas dolores in laudantium molestiae vel odio quasi. Eum necessitatibus deleniti ut porro corrupti et eius ratione et velit harum!";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,17 +29,17 @@ class _WordPageState extends State<WordPage> {
         child: Column(
           children: [
             Column(
-              children: const [
-                SizedBox(height: 30,),
+              children: [
+                const SizedBox(height: 30,),
                 Text(
-                  "Palavra Pt-Br",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  widget.brWord.toString(),
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Image(
                   image: AssetImage("assets/logo.png"),
                 ),
                 Text(
-                  "Palavra Waiwai",
+                  widget.waiWord,
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -68,7 +70,7 @@ class _WordPageState extends State<WordPage> {
                     SizedBox(
                       width: 350,
                       child: Text(
-                        textWai,
+                        widget.brDescript,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(fontSize: 15),
                       ),
@@ -100,7 +102,7 @@ class _WordPageState extends State<WordPage> {
                     SizedBox(
                       width: 350,
                       child: Text(
-                        textWai,
+                        widget.waiDescript,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(fontSize: 15),
                       ),

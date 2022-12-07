@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'word_page.dart';
 
@@ -39,6 +37,7 @@ class _DictHomePageState extends State<DictHomePage> {
           .toList();
     });
   }
+
   //final dtime =  DateTime.now();
 
   @override
@@ -88,9 +87,22 @@ class _DictHomePageState extends State<DictHomePage> {
                       onTap: (() {
                         //madar pra outra tela com informações
                         var a = display_list[index].brWord!;
-                        
-                        Navigator.of(context).push(CupertinoPageRoute(
-                            builder: (ctx) => const WordPage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WordPage(
+                                      brWord:
+                                          display_list[index].brWord.toString(),
+                                      waiWord: display_list[index]
+                                          .waiWord
+                                          .toString(),
+                                      brDescript: display_list[index]
+                                          .brDescription
+                                          .toString(),
+                                      waiDescript: display_list[index]
+                                          .WaiDescription
+                                          .toString(),
+                                    )));
                       }),
                       contentPadding: const EdgeInsets.all(8.0),
                       title: Text(

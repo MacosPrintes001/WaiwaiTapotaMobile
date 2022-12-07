@@ -1,5 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/system_pages/registration_page.dart';
@@ -13,12 +11,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-// .push(context, MaterialPageRoute(builder: (context) {
-//         return const HomePage(title: "Waiwai Translate",);
-//       }));
-
 class _LoginPageState extends State<LoginPage> {
-  //text controllers
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -33,8 +26,8 @@ class _LoginPageState extends State<LoginPage> {
     try {
       //await do login
 
-      await Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (BuildContext context) => const HomePage()));
+      await Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage(),));
+
     } catch (e) {
       showDialog(
           context: context,

@@ -1,5 +1,4 @@
 //Tela onde vai ficar direcionador dicionario ou tradutor
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/pages/dict_home_page.dart';
 import 'package:tradutor/system_pages/login_page.dart';
@@ -15,13 +14,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     callDict() {
-      Navigator.of(context)
-          .push(CupertinoPageRoute(builder: (ctx) => const DictHomePage()));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const DictHomePage(),
+          ));
     }
 
     logout() {
-      Navigator.of(context)
-          .push(CupertinoPageRoute(builder: (ctx) => const LoginPage()));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginPage(),
+          ));
     }
 
     return Scaffold(
