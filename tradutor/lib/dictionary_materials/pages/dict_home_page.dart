@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'word_page.dart';
@@ -86,23 +88,17 @@ class _DictHomePageState extends State<DictHomePage> {
                 itemBuilder: ((context, index) => ListTile(
                       onTap: (() {
                         //madar pra outra tela com informações
-                        var a = display_list[index].brWord!;
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => WordPage(
-                                      brWord:
-                                          display_list[index].brWord.toString(),
-                                      waiWord: display_list[index]
-                                          .waiWord
-                                          .toString(),
-                                      brDescript: display_list[index]
-                                          .brDescription
-                                          .toString(),
-                                      waiDescript: display_list[index]
-                                          .WaiDescription
-                                          .toString(),
-                                    )));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WordPage(
+                              brWord: display_list[index].brWord.toString(),
+                              waiWord: display_list[index].waiWord.toString(),
+                              brDescript: display_list[index].brDescription.toString(),
+                              waiDescript: display_list[index].WaiDescription.toString(),
+                            ),
+                          ),
+                        );
                       }),
                       contentPadding: const EdgeInsets.all(8.0),
                       title: Text(

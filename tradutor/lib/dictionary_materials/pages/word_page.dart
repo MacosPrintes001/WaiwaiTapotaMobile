@@ -8,6 +8,7 @@ class WordPage extends StatefulWidget {
     final String waiWord;
     final String brDescript;
     final String waiDescript;
+    //final ImageBitmap imagem;
 
   @override
   State<WordPage> createState() => _WordPageState();
@@ -35,12 +36,12 @@ class _WordPageState extends State<WordPage> {
                   widget.brWord.toString(),
                   style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                Image(
+                const Image(
                   image: AssetImage("assets/logo.png"),
                 ),
                 Text(
                   widget.waiWord,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
