@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
               child: InkWell(
                 onTap: callDict,
                 child: const Icon(
-                  Icons.book,
+                  Icons.menu_book_rounded,
                   size: 50,
                   color: Colors.white,
                 ),

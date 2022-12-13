@@ -13,7 +13,7 @@ class DictHomePage extends StatefulWidget {
 
 class _DictHomePageState extends State<DictHomePage> {
   static List<WordModel> main_words_list = [
-    WordModel("Macaco", "waiMacaco", "É macaco", "wai Macaco"),
+    WordModel("Macaco", "waiMacaco", "Nome comum a todos os símios ou primatas antropoides, exceto o homem. ", "Lorem ipsum dolor sit amet. Aut eligendi natus ut rerum animi cum"),
     WordModel("Verde", "waiVerde", "É verde", "wai Verde"),
     WordModel("Melão", "waiMelao", "É Fruta", "wai Fruta"),
     WordModel("Janero", "waiJanero", "É mês", "Wai Mes"),
@@ -47,11 +47,23 @@ class _DictHomePageState extends State<DictHomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
+
         backgroundColor: const Color.fromARGB(190, 0, 77, 40),
-        centerTitle: true,
         title: const Text("Dicionario"),
         elevation: 0.0,
-        actions: [],
+        actions: [
+          TextButton.icon(
+            onPressed: () {},
+            icon: const Icon(
+              color: Colors.white,
+              Icons.replay_outlined,
+            ),
+            label: const Text(
+              "update",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -94,7 +106,7 @@ class _DictHomePageState extends State<DictHomePage> {
                             builder: (context) => WordPage(
                               brWord: display_list[index].brWord.toString(),
                               waiWord: display_list[index].waiWord.toString(),
-                              brDescript: display_list[index].brDescription.toString(),
+                              brDescript:display_list[index].brDescription.toString(),
                               waiDescript: display_list[index].WaiDescription.toString(),
                             ),
                           ),
