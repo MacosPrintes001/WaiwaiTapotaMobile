@@ -1,4 +1,4 @@
-import 'dart:io';
+// ignore_for_file: file_names, empty_catches
 
 import 'package:xml/xml.dart';
 import 'package:flutter/cupertino.dart';
