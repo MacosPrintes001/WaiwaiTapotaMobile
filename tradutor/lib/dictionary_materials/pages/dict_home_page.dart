@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+//PAGINA PRINCIPAL DICIONARIO
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'word_page.dart';
@@ -12,6 +13,8 @@ class DictHomePage extends StatefulWidget {
 }
 
 class _DictHomePageState extends State<DictHomePage> {
+
+  //Criando Lista com valores estaticos, mudar para dinamico quando tiver API
   static List<WordModel> main_words_list = [
     WordModel("Macaco", "waiMacaco", "Nome comum a todos os símios ou primatas antropoides, exceto o homem. ", "Lorem ipsum dolor sit amet. Aut eligendi natus ut rerum animi cum"),
     WordModel("Verde", "waiVerde", "É verde", "wai Verde"),
@@ -52,6 +55,8 @@ class _DictHomePageState extends State<DictHomePage> {
         title: const Text("Dicionario"),
         elevation: 0.0,
         actions: [
+
+          //Botão para atualizar o dicionario local
           TextButton.icon(
             onPressed: () {},
             icon: const Icon(
@@ -78,6 +83,7 @@ class _DictHomePageState extends State<DictHomePage> {
             const SizedBox(
               height: 20.0,
             ),
+            //Campo de busca de palavras
             TextField(
               onChanged: (value) => updateList(value),
               //style: TextStyle(color: Colors.white),

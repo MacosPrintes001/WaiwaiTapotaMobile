@@ -1,3 +1,4 @@
+//Modelo simplificado de dicionario
 class WordModel {
   String? brWord;
   String? waiWord;

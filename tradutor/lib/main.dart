@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'system_pages/slpash_page.dart';
 
+
+//Função principal Flutter
 void main() {
   runApp(const MyApp());
 }

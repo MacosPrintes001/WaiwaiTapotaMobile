@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/pages/dict_home_page.dart';
 import 'package:tradutor/system_pages/login_page.dart';
 
+//Tela Para escolher Dicionario OU Tradutor
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -13,6 +14,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+
+    //Chamar dicionario
     callDict() {
       Navigator.push(
           context,
@@ -21,6 +24,7 @@ class _HomePageState extends State<HomePage> {
           ));
     }
 
+    //Deslogar do sistema
     logout() {
       Navigator.push(
           context,
@@ -33,9 +37,13 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         centerTitle: true,
+
+        //Welcome text
         title: const Text("Bem Vindo(a)"),
         backgroundColor: const Color.fromARGB(190, 0, 77, 40),
       ),
+
+      //Side Bar
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -43,10 +51,12 @@ class _HomePageState extends State<HomePage> {
             const DrawerHeader(
               child: Icon(Icons.home),
             ),
+
+            //SideBar Buttons
             TextButton.icon(
               onPressed: callDict,
               icon: const Icon(
-                Icons.book,
+                Icons.menu_book_rounded,
               ),
               label: const Text('Dicionario'),
             ),
@@ -67,6 +77,8 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+
+      //App Body
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -79,6 +91,8 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.green[900],
                 shape: BoxShape.rectangle,
               ),
+
+              //Botão central chamar dicionario
               child: InkWell(
                 onTap: callDict,
                 child: const Icon(
@@ -91,6 +105,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 30,
             ),
+            //Botão Central Tradutor
             Ink(
               width: 100,
               height: 100,

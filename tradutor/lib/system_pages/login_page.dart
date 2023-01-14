@@ -4,6 +4,7 @@ import 'package:tradutor/system_pages/registration_page.dart';
 
 import 'home_page.dart';
 
+//Tela de login de usuário
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -12,6 +13,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  //definindo controladores para os campos que serão recebidos
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -24,10 +26,12 @@ class _LoginPageState extends State<LoginPage> {
 
   Future signIn() async {
     try {
-      //await do login
-
-      await Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage(),));
-
+      //criar metodo para login
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
     } catch (e) {
       showDialog(
           context: context,
@@ -117,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 10,
                 ),
 
+                //RECUPERAR SENHA
                 //Forgot Password
                 // Padding(
                 //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
