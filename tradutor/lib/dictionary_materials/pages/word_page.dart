@@ -40,7 +40,7 @@ class _WordPageState extends State<WordPage> {
 
               const SizedBox(height: 40),
 
-              //Tilte Portugueses
+              //Titulo Portugues
               TextButton.icon(
                 icon: const Icon(Icons.play_arrow),
                 onPressed: () {},
@@ -48,7 +48,7 @@ class _WordPageState extends State<WordPage> {
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold)),
               ),
-              //portuguese description
+              //Descrição Portugues
               Card(
                 color: const Color.fromARGB(255, 3, 172, 101).withOpacity(0.5),
                 child: Padding(
@@ -63,7 +63,7 @@ class _WordPageState extends State<WordPage> {
               ),
               const SizedBox(height: 30),
 
-              //Tilte Waiwai
+              //Titulo Waiwai
               TextButton.icon(
                 icon: const Icon(Icons.play_arrow),
                 onPressed: () {},
@@ -71,7 +71,7 @@ class _WordPageState extends State<WordPage> {
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold)),
               ),
-              //waiwai description
+              //waiwai descrição
               Card(
                 color: const Color.fromARGB(255, 3, 172, 101).withOpacity(0.5),
                 child: Padding(

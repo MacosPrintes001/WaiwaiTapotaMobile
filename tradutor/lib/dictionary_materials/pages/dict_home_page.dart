@@ -17,7 +17,7 @@ class _DictHomePageState extends State<DictHomePage> {
   //Criando Lista com valores estaticos, mudar para dinamico quando tiver API
   static List<WordModel> main_words_list = [
     WordModel("Macaco", "waiMacaco", "Nome comum a todos os símios ou primatas antropoides, exceto o homem. ", "Lorem ipsum dolor sit amet. Aut eligendi natus ut rerum animi cum"),
-    WordModel("Verde", "waiVerde", "É verde", "wai Verde"),
+    WordModel("Verde", "waiVerde", "Cor Verde", "wai Verde"),
     WordModel("Melão", "waiMelao", "É Fruta", "wai Fruta"),
     WordModel("Janero", "waiJanero", "É mês", "Wai Mes"),
     WordModel("Computador", "waiComputador", "É computador", "Wai Computador"),
@@ -26,7 +26,7 @@ class _DictHomePageState extends State<DictHomePage> {
     WordModel("Macaco", "waiMacaco", "É macaco", "wai Macaco"),
     WordModel("Verde", "waiVerde", "É verde", "wai Verde"),
     WordModel("Melão", "waiMelao", "É Fruta", "wai Fruta"),
-    WordModel("Janero", "waiJanero", "É mês", "Wai Mes"),
+    WordModel("Janeiro", "waiJaneiro", "É um mês", "Wai é um Mes"),
     WordModel("Computador", "waiComputador", "É computador", "Wai Computador"),
     WordModel("Celular", "waiCelular", "É celular", "Wai celular"),
     WordModel("Caderno", "waiCaderno", "É caderno", "Wai Caderno"),
