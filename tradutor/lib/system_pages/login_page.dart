@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/system_pages/registration_page.dart';
 
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future signIn() async {
     try {
-      //criar metodo para login
+      //criar await login
       await Navigator.push(
           context,
           MaterialPageRoute(
@@ -37,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
           context: context,
           builder: (context) {
             return const AlertDialog(
-              content: Text("Email or Password is wrong"),
+              content: Text("Email ou senha errados"),
             );
           });
     }
@@ -46,21 +47,20 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 77,
-          64), //Verde escuro 255, 0, 77, 64 // Verde Claro 75, 0, 191, 165 // Mais ou menos acor da professora 190, 0, 77, 64
+      backgroundColor: const Color.fromARGB(255, 0, 77,64), //Verde escuro 255, 0, 77, 64 // Verde Claro 75, 0, 191, 165 // Mais ou menos acor da professora 190, 0, 77, 64
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //Icon
+                //Icone
                 const Image(
                   image: AssetImage('assets/logo.png'),
                   width: 200,
                 ),
 
-                //App Name
+                //Nome da Aplicação
                 Text(
                   "Waiwai Translator",
                   style: GoogleFonts.roboto(
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 25,
                 ),
 
-                //email textfield
+                //campo de email
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 10),
 
-                //password textfield
+                //campo de senha
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
@@ -105,11 +105,11 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12),),
                       focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
-                              color: Color.fromARGB(84, 11, 214, 108)),
-                          borderRadius: BorderRadius.circular(12)),
+                              color: Color.fromARGB(84, 11, 214, 108),),
+                          borderRadius: BorderRadius.circular(12),),
                       hintText: 'Senha',
                       fillColor: Colors.grey[200],
                       filled: true,
@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 10),
 
-                //sign in button
+                //Botão logar
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
@@ -176,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 25),
 
-                //not a member? register now
+                //Registrar usuario
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
