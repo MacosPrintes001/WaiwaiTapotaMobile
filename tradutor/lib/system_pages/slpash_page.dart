@@ -1,6 +1,9 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tradutor/dictionary_materials/models/util.dart' as util;
+
 import 'login_page.dart';
 
 //Pagina Para load de informações do banco
@@ -14,14 +17,10 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  Future<void> initState() async {
+  initState(){
+    util.getDictionary(context);
     super.initState();
-
-    //Pegando dicionario
-    await util.getDictionary(context);
-    
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +35,6 @@ class _SplashPageState extends State<SplashPage> {
             Image(
               image: AssetImage("assets/logo.png"),
               width: 300,
-            ),
-            Text(
-              "Updating Dictionary...",
-              style: TextStyle(color: Colors.white),
             ),
             SizedBox(height: 30),
             SpinKitWave(
