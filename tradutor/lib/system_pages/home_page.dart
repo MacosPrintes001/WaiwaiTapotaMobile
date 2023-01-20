@@ -1,8 +1,7 @@
 //Tela onde vai ficar direcionador dicionario ou tradutor
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/pages/dict_home_page.dart';
-import 'package:tradutor/system_pages/login_page.dart';
-
+import 'package:tradutor/dictionary_materials/services/api_folders.dart' as service;
 //Tela Para escolher Dicionario OU Tradutor
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,11 +25,7 @@ class _HomePageState extends State<HomePage> {
 
     //Deslogar do sistema
     logout() {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginPage(),
-          ));
+      service.logout(context);
     }
 
     return Scaffold(

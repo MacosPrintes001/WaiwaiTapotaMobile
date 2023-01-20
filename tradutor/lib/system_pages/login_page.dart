@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/system_pages/registration_page.dart';
-import 'package:tradutor/dictionary_materials/models/util.dart' as util;
+import 'package:tradutor/dictionary_materials/services/api_folders.dart'
+    as services;
 
 import 'home_page.dart';
 
@@ -27,35 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future signIn() async {
-    try {
-      var resp = await util.login(_emailController, _passwordController);
-
-      if (resp) {
-        //criar await login
-        // ignore: use_build_context_synchronously
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const HomePage(),
-            ));
-      }else{
-        showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              content: Text("Email ou senha invalidos"),
-            );
-          });
-      }
-    } catch (e) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              content: Text("Erro"),
-            );
-          });
-    }
+    await services.login(_emailController, _passwordController, context);
   }
 
   @override

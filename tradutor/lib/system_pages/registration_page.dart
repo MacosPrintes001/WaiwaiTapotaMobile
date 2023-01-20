@@ -87,17 +87,30 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     fontSize: 42,
                   ),
                 ),
-                const SizedBox(height: 10,),
-                Text(
-                  "Translating your will", 
-                  style: GoogleFonts.roboto(
-                    color: Colors.white,
-                    fontSize: 24,
-                    )
-                  ),
-                
           
                 const SizedBox(height: 30,),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextField(
+                    controller: _emailController,
+                    decoration:  InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12)
+                      ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Color.fromARGB(84, 11, 214, 108)),
+                      borderRadius: BorderRadius.circular(12)
+                    ),
+                    hintText: 'Nome',
+                    fillColor: Colors.grey[200],
+                    filled: true,
+                    ),
+                  ),
+                ),
+          
+                const  SizedBox(height: 10),
           
                 //email textfield
                 Padding(
@@ -137,7 +150,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         borderSide: const BorderSide(color: Color.fromARGB(84, 11, 214, 108)),
                         borderRadius: BorderRadius.circular(12)
                       ),
-                      hintText: 'Password',
+                      hintText: 'senha',
                       fillColor: Colors.grey[200],
                       
                       filled: true,
@@ -163,7 +176,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         borderSide: const BorderSide(color: Color.fromARGB(84, 11, 214, 108)),
                         borderRadius: BorderRadius.circular(12)
                       ),
-                      hintText: 'Confirm Password',
+                      hintText: 'confirmar senha',
                       fillColor: Colors.grey[200],
                       
                       filled: true,
@@ -186,7 +199,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                       child: Center(
                         child:Text(
-                          "Sign Up",
+                          "Cadastrar",
                           style: GoogleFonts.roboto(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -205,7 +218,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "I am a member!",
+                      "Ja tenho conta!",
                       style: GoogleFonts.roboto(
                         color: Colors.white,
                         fontWeight: FontWeight.bold
@@ -216,7 +229,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         Navigator.of(context).push(CupertinoPageRoute(builder: (ctx) =>  const LoginPage()));
                       },
                       child: Text(
-                        " Login now", 
+                        "Logar agora", 
                         style: GoogleFonts.roboto(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
