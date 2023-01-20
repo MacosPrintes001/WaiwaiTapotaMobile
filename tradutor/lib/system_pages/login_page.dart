@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/system_pages/registration_page.dart';
+import 'package:tradutor/dictionary_materials/models/util.dart' as util;
 
 import 'home_page.dart';
 
@@ -27,18 +28,31 @@ class _LoginPageState extends State<LoginPage> {
 
   Future signIn() async {
     try {
-      //criar await login
-      await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ));
+      var resp = await util.login(_emailController, _passwordController);
+
+      if (resp) {
+        //criar await login
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ));
+      }else{
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              content: Text("Email ou senha invalidos"),
+            );
+          });
+      }
     } catch (e) {
       showDialog(
           context: context,
           builder: (context) {
             return const AlertDialog(
-              content: Text("Email ou senha errados"),
+              content: Text("Erro"),
             );
           });
     }
@@ -47,7 +61,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 77,64), //Verde escuro 255, 0, 77, 64 // Verde Claro 75, 0, 191, 165 // Mais ou menos acor da professora 190, 0, 77, 64
+      backgroundColor: const Color.fromARGB(255, 0, 77,
+          64), //Verde escuro 255, 0, 77, 64 // Verde Claro 75, 0, 191, 165 // Mais ou menos acor da professora 190, 0, 77, 64
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -104,12 +119,15 @@ class _LoginPageState extends State<LoginPage> {
                     controller: _passwordController,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),),
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(84, 11, 214, 108),),
-                          borderRadius: BorderRadius.circular(12),),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(84, 11, 214, 108),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       hintText: 'Senha',
                       fillColor: Colors.grey[200],
                       filled: true,

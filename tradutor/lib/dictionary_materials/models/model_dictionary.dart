@@ -7,3 +7,4 @@ class WordModel {
 
   WordModel(this.brWord, this.waiWord, this.brDescription, this.WaiDescription);
 }
+var url = "ola mundo";

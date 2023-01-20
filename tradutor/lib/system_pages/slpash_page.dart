@@ -1,8 +1,6 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
+import 'package:tradutor/dictionary_materials/models/util.dart' as util;
 import 'login_page.dart';
 
 //Pagina Para load de informações do banco
@@ -16,19 +14,14 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
 
-    //esprando tempo para chamar proxima tela
-    //Mudar para atualização dicionario
-    Future.delayed(const Duration(seconds: 4)).then((value) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginPage(),
-          ));
-    });
+    //Pegando dicionario
+    await util.getDictionary(context);
+    
   }
+
 
   @override
   Widget build(BuildContext context) {
