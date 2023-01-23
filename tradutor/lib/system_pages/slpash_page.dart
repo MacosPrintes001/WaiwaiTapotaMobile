@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:tradutor/dictionary_materials/services/api_folders.dart' as services;
+import 'package:tradutor/dictionary_materials/services/api_folders.dart'
+    as services;
 
 //Pagina Para load de informações do banco
 
@@ -15,9 +16,10 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  initState(){
-    services.getDictionary(context);
+  initState() {
+    services.getDictionary(context).then((value) => null);
     super.initState();
+    
   }
 
   @override
