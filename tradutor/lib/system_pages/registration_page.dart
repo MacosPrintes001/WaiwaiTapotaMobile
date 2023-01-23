@@ -23,27 +23,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _senhaController = TextEditingController();
   final _confirSenhaController = TextEditingController();
 
-  bool _passWordConfirmed() {
-    if (_senhaController.text.trim() == _confirSenhaController.text.trim()) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  signUp() {
-    if (_passWordConfirmed()) {
-      Cadastro(context, _senhaController.text, _userNameController.text,_emaiController.text);
-    } else {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              content: Text('SENHAS NÂO COINCIDEM'),
-            );
-          });
-    }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +102,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   validator: (senha) {
                     if (senha == null || senha.isEmpty) {
                       return 'Digite uma senha';
+                    }else if( senha.length < 6){
+                      return 'Digite uma senha mais forte';
                     }
                     return null;
                   },
@@ -141,6 +123,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   validator: (senha) {
                     if (senha == null || senha.isEmpty) {
                       return 'Digite uma senha';
+                    }if(_senhaController.text.trim() != _confirSenhaController.text.trim()){
+                      return 'Senhas Não Coincidem';
                     }
                     return null;
                   },
@@ -155,7 +139,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       minimumSize: const Size(40, 40)),
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
-                      signUp();
+                      Cadastro(context, _senhaController, _userNameController, _emaiController);
                     }
                   },
                   child: const Text(
