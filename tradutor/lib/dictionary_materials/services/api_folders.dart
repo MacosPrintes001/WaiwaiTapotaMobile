@@ -1,6 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:convert' as convert;
 
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/utils/util.dart';
@@ -8,7 +7,7 @@ import 'package:tradutor/system_pages/home_page.dart';
 import 'package:tradutor/system_pages/login_page.dart';
 import 'package:http/http.dart' as http;
 
-const urlbase = 'http://localhost:5000';
+String urlbase = 'http://localhost:5000';
 
 Future getDictionary(context) async {
   Future.delayed(const Duration(seconds: 4)).then((value) {
@@ -30,14 +29,6 @@ Future getDictionary(context) async {
       }
     });
   });
-
-  // Future.delayed(const Duration(seconds: 4)).then((value) {
-  //   Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => const LoginPage(),
-  //       ));
-  // });
 }
 
 Future Cadastro(context, senha, usuario, email) async {
@@ -53,31 +44,24 @@ Future Cadastro(context, senha, usuario, email) async {
   // } finally {}
 }
 
-Future login(usuario, senha, context) async {
+Future login(email, senha, context) async {
   //print('ola ${usuario.text} ${senha.text}');
   //do login
   //usuario.text  senha.text
 
   try {
-    var url = Uri.https(urlbase.toString(), '/auth/login');
-    //var url = Uri.https('www.googleapis.com', '/books', {'q': '{http}'});
+    
+    var url = Uri.parse('${urlbase.toString()}/auth/login');
+    var response = await http.post(
+      url,
+      body: {
+        "email": email.text,
+        "password": senha.text,
+      },
+    );
 
-    // Await the http get response, then decode the json-formatted response.
-    var response = await http.post(url,
-        body: {"email": "junior3@gmail.com", "password": "junior123"});
-    if (response.statusCode == 200) {
-      var jsonResponse =
-          convert.jsonDecode(response.body) as Map<String, dynamic>;
-      var itemCount = jsonResponse['totalItems'];
-      print('Number of books about http: $itemCount.');
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-    }
-
-    //var response = await client.post(Uri.https(urlbase, '/auth/login',),body: {"email": "$usuario", "password": "$senha"});
-    //var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
-    //var uri = Uri.parse(decodedResponse['uri'] as String);
-    //print(await client.get(uri));
+    print(response.body);
+    print(response.statusCode);
 
   } catch (e) {
     showDialog(

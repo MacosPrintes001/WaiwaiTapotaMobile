@@ -1,5 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
@@ -94,8 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
-                      login(
-                          _emaiController.text, _senhaController.text, context);
+                      login(_emaiController, _senhaController, context);
                     }
                   },
                   child: const Text(
