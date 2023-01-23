@@ -1,6 +1,4 @@
 //Modelo simplificado de dicionario
-import 'dart:html';
-
 class WordModel {
   String? brWord;
   String? waiWord;

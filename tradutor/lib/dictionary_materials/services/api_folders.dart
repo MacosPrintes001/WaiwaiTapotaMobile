@@ -1,6 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:convert';
+import 'dart:convert' as convert;
 
 import 'package:flutter/material.dart';
 import 'package:tradutor/system_pages/login_page.dart';
@@ -21,37 +21,45 @@ Future getDictionary(context) async {
   });
 }
 
+Future Cadastro(context, senha, usuario, email) async {
+  var client = http.Client();
+  try {
+    var response = await client.post(Uri.https(urlbase, '/auth/register'),
+        body: {'name': 'doodle', 'color': 'blue'});
+    var decodedResponse = convert.jsonDecode(convert.utf8.decode(response.bodyBytes)) as Map;
+    var uri = Uri.parse(decodedResponse['uri'] as String);
+    print(await client.get(uri));
+  } finally {
+    
+  }
+}
+
 Future login(usuario, senha, context) async {
   //print('ola ${usuario.text} ${senha.text}');
   //do login
-  try {
-    final response = await http.post(
-      Uri.parse('$urlbase/auth/login'),
-      body: jsonEncode(<String, String>{
-        "email": "junior3@gmail.com",
-        "password": "junior123"
-      }),
-    );
+  //usuario.text  senha.text
 
-    if (response.statusCode == 201) {
-      print("Ola Tudo certo");
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ));
-      return true;
-    } else {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              content: Text("Email ou senha invalidos"),
-            );
-          });
-      print("Ola deu ruim");
-      return false;
-    }
+  try {
+
+    var url =
+      Uri.https('www.googleapis.com', '/books', {'q': '{http}'});
+
+  // Await the http get response, then decode the json-formatted response.
+  var response = await http.get(url);
+  if (response.statusCode == 200) {
+    var jsonResponse =
+        convert.jsonDecode(response.body) as Map<String, dynamic>;
+    var itemCount = jsonResponse['totalItems'];
+    print('Number of books about http: $itemCount.');
+  } else {
+    print('Request failed with status: ${response.statusCode}.');
+  }
+    
+    //var response = await client.post(Uri.https(urlbase, '/auth/login',),body: {"email": "$usuario", "password": "$senha"});
+    //var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+    //var uri = Uri.parse(decodedResponse['uri'] as String);
+    //print(await client.get(uri));
+
   } catch (e) {
     showDialog(
         context: context,
@@ -63,21 +71,21 @@ Future login(usuario, senha, context) async {
   }
 }
 
-Future logout(context) async{
-  try{
+Future logout(context) async {
+  try {
     //var response = await http.delete(Uri.parse('$urlbase/logout'));
     Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const LoginPage(),
         ));
-  }catch(e){
+  } catch (e) {
     showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              content: Text('erro'),
-            );
-          });
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            content: Text('erro'),
+          );
+        });
   }
 }
