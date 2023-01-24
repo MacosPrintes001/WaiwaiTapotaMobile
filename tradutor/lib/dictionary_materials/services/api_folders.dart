@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:tradutor/dictionary_materials/utils/util.dart';
 import 'package:tradutor/system_pages/home_page.dart';
 import 'package:tradutor/system_pages/login_page.dart';
@@ -51,24 +52,22 @@ Future login(email, senha, context) async {
 
   try {
     
+    var usuario = loginModel(email: email.text.toString(), password: senha.text.toString());
+    print("USUARIO CRIADO  ${usuario.toJson()}");
     var url = Uri.parse('${urlbase.toString()}/auth/login');
-    var response = await http.post(
-      url,
-      body: {
-        "email": email.text,
-        "password": senha.text,
-      },
-    );
+    print("URL CRIADA ${url}");
 
-    print(response.body);
-    print(response.statusCode);
+    
+
+    // print(response.body);
+    // print(response.statusCode);
 
   } catch (e) {
     showDialog(
         context: context,
         builder: (context) {
           return const AlertDialog(
-            content: Text("Erro"),
+            content: Text("ERRO NO CODIGO"),
           );
         });
   }

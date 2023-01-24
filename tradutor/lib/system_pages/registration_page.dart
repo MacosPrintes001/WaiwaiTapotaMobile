@@ -16,14 +16,13 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-
   final _formkey = GlobalKey<FormState>();
   final _userNameController = TextEditingController();
   final _emaiController = TextEditingController();
   final _senhaController = TextEditingController();
   final _confirSenhaController = TextEditingController();
-
- 
+  bool _verSenha = false;
+  bool _verSenhaConfirm = false;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +50,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     fontSize: 42,
                   ),
                   textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 //USER TEXT FIELD
                 TextFormField(
@@ -93,8 +95,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 //SENHA TEXT FIELD
                 TextFormField(
                   controller: _senhaController,
-                  decoration: const InputDecoration(
-                    label: Text('senha'),
+                  obscureText: !_verSenha,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(_verSenha
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined),
+                      onPressed: () {
+                        setState(() {
+                          _verSenha = !_verSenha;
+                        });
+                      },
+                    ),
+                    label: const Text('senha'),
                     hintText: 'Digite uma senha',
                     filled: true,
                     fillColor: Colors.white,
@@ -102,7 +115,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   validator: (senha) {
                     if (senha == null || senha.isEmpty) {
                       return 'Digite uma senha';
-                    }else if( senha.length < 6){
+                    } else if (senha.length < 6) {
                       return 'Digite uma senha mais forte';
                     }
                     return null;
@@ -114,8 +127,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 //Confirm SENHA TEXT FIELD
                 TextFormField(
                   controller: _confirSenhaController,
-                  decoration: const InputDecoration(
-                    label: Text('Confirme sua senha'),
+                  obscureText: !_verSenhaConfirm,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(_verSenhaConfirm
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined),
+                      onPressed: () {
+                        setState(() {
+                          _verSenhaConfirm = !_verSenhaConfirm;
+                        });
+                      },
+                    ),
+                    label: const Text('Confirme sua senha'),
                     hintText: 'Digite uma senha',
                     filled: true,
                     fillColor: Colors.white,
@@ -123,7 +147,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   validator: (senha) {
                     if (senha == null || senha.isEmpty) {
                       return 'Digite uma senha';
-                    }if(_senhaController.text.trim() != _confirSenhaController.text.trim()){
+                    }
+                    if (_senhaController.text.trim() !=
+                        _confirSenhaController.text.trim()) {
                       return 'Senhas Não Coincidem';
                     }
                     return null;
@@ -139,7 +165,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       minimumSize: const Size(40, 40)),
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
-                      Cadastro(context, _senhaController, _userNameController, _emaiController);
+                      Cadastro(context, _senhaController, _userNameController,
+                          _emaiController);
                     }
                   },
                   child: const Text(
@@ -147,7 +174,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
-
+                const SizedBox(
+                  height: 10,
+                ),
                 //REGISTRAR AGORA
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -166,7 +195,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         }));
                       },
                       child: Text(
-                        "Logar Agora",
+                        " Logar Agora",
                         style: GoogleFonts.roboto(
                             color: Colors.lightBlue,
                             fontWeight: FontWeight.bold,

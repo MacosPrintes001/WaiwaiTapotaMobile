@@ -19,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
   final _emaiController = TextEditingController();
   final _senhaController = TextEditingController();
+  bool _verSenha = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +73,17 @@ class _LoginPageState extends State<LoginPage> {
                 //SENHA TEXT FIELD
                 TextFormField(
                   controller: _senhaController,
-                  decoration: const InputDecoration(
-                    label: Text('senhal'),
+                  obscureText: !_verSenha,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(_verSenha ?  Icons.visibility_off_outlined : Icons.visibility_outlined),
+                      onPressed: () {
+                        setState(() {
+                          _verSenha = !_verSenha;
+                        });
+                      },
+                    ),
+                    label: const Text('senha'),
                     hintText: 'Digite sua senha',
                     filled: true,
                     fillColor: Colors.white,
@@ -91,9 +101,8 @@ class _LoginPageState extends State<LoginPage> {
                 //BOTÂO LOGAR
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(84, 11, 214, 108),
-                    minimumSize: const Size(40, 40)
-                  ),
+                      backgroundColor: const Color.fromARGB(84, 11, 214, 108),
+                      minimumSize: const Size(40, 40)),
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
                       login(_emaiController, _senhaController, context);
@@ -103,6 +112,10 @@ class _LoginPageState extends State<LoginPage> {
                     "ENTRAR",
                     style: TextStyle(fontSize: 18),
                   ),
+                ),
+
+                const SizedBox(
+                  height: 10,
                 ),
 
                 //REGISTRAR AGORA
@@ -123,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                         }));
                       },
                       child: Text(
-                        "Registrar Agora",
+                        " Registrar Agora",
                         style: GoogleFonts.roboto(
                             color: Colors.lightBlue,
                             fontWeight: FontWeight.bold,
