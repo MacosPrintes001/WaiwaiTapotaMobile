@@ -1,6 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
 
-
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:tradutor/dictionary_materials/utils/util.dart';
@@ -51,25 +50,26 @@ Future login(email, senha, context) async {
   //usuario.text  senha.text
 
   try {
-    
-    var usuario = loginModel(email: email.text.toString(), password: senha.text.toString());
-    print("USUARIO CRIADO  ${usuario.toJson()}");
-    var url = Uri.parse('${urlbase.toString()}/auth/login');
-    print("URL CRIADA ${url}");
+    //var response = await http.post(
+        // Uri.parse('http://localhost:5000/auth/login'),
+        // headers: {'Content-Type': 'application/json'},
+        // body: {"email": "junior3@gmail.com", "password": "junior123"});
 
-    
+    //print(response.statusCode);
 
     // print(response.body);
     // print(response.statusCode);
 
   } catch (e) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const AlertDialog(
-            content: Text("ERRO NO CODIGO"),
-          );
-        });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Colors.redAccent,
+        content: Text(
+          "ERRO NO CODIGO",
+        ),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
   }
 }
 

@@ -14,12 +14,11 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-
 class _LoginPageState extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
   final _emaiController = TextEditingController();
   final _senhaController = TextEditingController();
-  bool _verSenha = false;
+  bool verSenha = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                 //EMAIL TEXT FIELD
                 TextFormField(
                   controller: _emaiController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     label: Text('e-mail'),
                     hintText: 'eduardo@email.com',
@@ -73,13 +73,13 @@ class _LoginPageState extends State<LoginPage> {
                 //SENHA TEXT FIELD
                 TextFormField(
                   controller: _senhaController,
-                  obscureText: !_verSenha,
+                  obscureText: !verSenha,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
-                      icon: Icon(_verSenha ?  Icons.visibility_off_outlined : Icons.visibility_outlined),
+                      icon: Icon(verSenha ?  Icons.visibility_off_outlined : Icons.visibility_outlined),
                       onPressed: () {
                         setState(() {
-                          _verSenha = !_verSenha;
+                          verSenha = !verSenha;
                         });
                       },
                     ),
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                       minimumSize: const Size(40, 40)),
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
-                      login(_emaiController, _senhaController, context);
+                      login(_emaiController.text, _senhaController.text, context);
                     }
                   },
                   child: const Text(

@@ -76,6 +76,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 //EMAIL TEXT FIELD
                 TextFormField(
                   controller: _emaiController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     label: Text('e-mail'),
                     hintText: 'eduardo@email.com',
