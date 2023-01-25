@@ -164,10 +164,46 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(84, 11, 214, 108),
                       minimumSize: const Size(40, 40)),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formkey.currentState!.validate()) {
-                      Cadastro(context, _senhaController, _userNameController,
-                          _emaiController);
+                      try {
+                        var response = await cadastro(_senhaController,
+                            _userNameController, _emaiController);
+                        if (response == 200) {
+                          await login(_emaiController, _senhaController);
+                        } else if (response == 409) {
+                          //usuario ja existe
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.redAccent,
+                              content: Text(
+                                "Email ou senha já cadastrado",
+                              ),
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.redAccent,
+                              content: Text(
+                                "CADASTRO FALHOU",
+                              ),
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: Colors.redAccent,
+                            content: Text(
+                              "ERRO DE CONEXÃO",
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                      }
                     }
                   },
                   child: const Text(

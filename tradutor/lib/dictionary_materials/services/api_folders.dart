@@ -2,105 +2,79 @@
 
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
-import 'package:tradutor/dictionary_materials/utils/util.dart';
-import 'package:tradutor/system_pages/home_page.dart';
-import 'package:tradutor/system_pages/login_page.dart';
 import 'package:http/http.dart' as http;
 
-String urlbase = 'http://localhost:5000';
+import '../utils/util.dart';
 
-Future getDictionary(context) async {
-  Future.delayed(const Duration(seconds: 4)).then((value) {
+String urlbase = 'http://192.168.1.8:5000';
+
+Future<bool> temUsuario() async {
+  await Future.delayed(const Duration(seconds: 4)).then((value) {
     verificarUser().then((haveUser) {
       if (haveUser) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ),
-        );
+        return true;
       } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginPage(),
-          ),
-        );
+        return false;
       }
     });
   });
+
+  return false;
 }
 
-Future Cadastro(context, senha, usuario, email) async {
-  var user =
-      cadastroUserModel(email: email, username: usuario, password: senha);
-  var url = Uri.parse("$urlbase/auth/register");
-  var response = await http.post(url,
+Future pegarDicionario(accessToken) async{
+  var dicionarioUrl = Uri.parse("$urlbase/palavras");
+
+  var response = await http.get(dicionarioUrl, headers: {
+    'Authorization': 'Bearer $accessToken',
+    'Content-Type': 'application/json; charset=UTF-8'
+  });
+
+  var dicionario = jsonDecode(response.body);
+  print(response.body);
+  return dicionario;
+}
+
+Future cadastro(senha, usuario, email) async {
+  var registerUrl = Uri.parse("$urlbase/auth/register");
+
+  var user = cadastroUserModel(
+      email: email.text.toString().toLowerCase(),
+      password: senha.text,
+      username: usuario.text.toString().toLowerCase());
+
+  var response = await http.post(registerUrl,
       headers: {'Content-Type': 'application/json; charset=UTF-8'},
-      body: user.toJson());
+      body: jsonEncode(user));
 
-  if (response.statusCode == 201) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ),
-    );
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        backgroundColor: Colors.redAccent,
-        content: Text(
-          "CADASTRO FALHOU",
-        ),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-  }
+  return response.statusCode;
 }
 
-Future login(email, senha, context) async {
-  try {
-    http.post(
-      Uri.parse('http://localhost:5000/auth/login'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        "email": email,
-        "password": senha,
-      }),
-    );
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        backgroundColor: Colors.redAccent,
-        content: Text(
-          "ERRO NO CODIGO",
-        ),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-  }
+Future<http.Response> login(email, senha) async {
+  var loginUrl = Uri.parse("$urlbase/auth/login");
+
+  var user = loginModel(
+      email: email.text.toString().toLowerCase(), password: senha.text);
+
+  var response = await http.post(
+    loginUrl,
+    headers: {'Content-Type': 'application/json; charset=UTF-8'},
+    body: jsonEncode(user),
+  );
+
+  return response;
 }
 
-Future logout(context) async {
-  try {
-    //var response = await http.delete(Uri.parse('$urlbase/logout'));
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-        ));
-  } catch (e) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const AlertDialog(
-            content: Text('erro'),
-          );
-        });
-  }
+Future logout(accessToken, refreshToken) async {
+  print("$accessToken $refreshToken");
+  var registerUrl = Uri.parse("$urlbase/logout");
+  var response = await http.delete(registerUrl, headers: {
+    'Content-Type': 'application/json; charset=UTF-8'
+  }, body: {
+    "access_token": accessToken,
+    "refresh_token": refreshToken,
+  });
+
+  return response.statusCode;
 }

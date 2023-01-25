@@ -2,9 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/pages/dict_home_page.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart' as service;
+
+import 'login_page.dart';
+
 //Tela Para escolher Dicionario OU Tradutor
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({
+    super.key,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -13,19 +18,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-
     //Chamar dicionario
     callDict() {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const DictHomePage(),
-          ));
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DictHomePage(),
+        ),
+      );
     }
 
     //Deslogar do sistema
     logout() {
-      service.logout(context);
+
+      //service.logout(widget.acessToken, widget.refreshToken);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginPage(),
+          ),
+        );
     }
 
     return Scaffold(
