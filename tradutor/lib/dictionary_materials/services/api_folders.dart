@@ -1,5 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:tradutor/dictionary_materials/utils/util.dart';
@@ -32,34 +34,45 @@ Future getDictionary(context) async {
 }
 
 Future Cadastro(context, senha, usuario, email) async {
-  print("CADASTRSDO");
-  // var client = http.Client();
-  // try {
-  //   var response = await client.post(Uri.https(urlbase, '/auth/register'),
-  //       body: {'name': 'doodle', 'color': 'blue'});
-  //   var decodedResponse =
-  //       convert.jsonDecode(convert.utf8.decode(response.bodyBytes)) as Map;
-  //   var uri = Uri.parse(decodedResponse['uri'] as String);
-  //   print(await client.get(uri));
-  // } finally {}
+  var user =
+      cadastroUserModel(email: email, username: usuario, password: senha);
+  var url = Uri.parse("$urlbase/auth/register");
+  var response = await http.post(url,
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+      body: user.toJson());
+
+  if (response.statusCode == 201) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomePage(),
+      ),
+    );
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Colors.redAccent,
+        content: Text(
+          "CADASTRO FALHOU",
+        ),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
 }
 
 Future login(email, senha, context) async {
-  //print('ola ${usuario.text} ${senha.text}');
-  //do login
-  //usuario.text  senha.text
-
   try {
-    //var response = await http.post(
-        // Uri.parse('http://localhost:5000/auth/login'),
-        // headers: {'Content-Type': 'application/json'},
-        // body: {"email": "junior3@gmail.com", "password": "junior123"});
-
-    //print(response.statusCode);
-
-    // print(response.body);
-    // print(response.statusCode);
-
+    http.post(
+      Uri.parse('http://localhost:5000/auth/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "email": email,
+        "password": senha,
+      }),
+    );
   } catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

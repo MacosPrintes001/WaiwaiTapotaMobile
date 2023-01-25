@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 import 'package:tradutor/system_pages/registration_page.dart';
+import 'package:http/http.dart' as http;
 
 //Tela de login de usuário
 class LoginPage extends StatefulWidget {
@@ -103,9 +104,10 @@ class _LoginPageState extends State<LoginPage> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(84, 11, 214, 108),
                       minimumSize: const Size(40, 40)),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formkey.currentState!.validate()) {
-                      login(_emaiController.text, _senhaController.text, context);
+                       http.Response response = await login(_emaiController.text, _senhaController.text, context);
+                       print(response.body);
                     }
                   },
                   child: const Text(

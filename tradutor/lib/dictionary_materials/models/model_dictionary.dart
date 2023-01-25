@@ -1,4 +1,6 @@
 //Modelo simplificado de dicionario
+// ignore_for_file: camel_case_types
+
 class WordModel {
   String? brWord;
   String? waiWord;
@@ -29,10 +31,24 @@ class loginModel {
   }
 }
 
-class CadastroModel {
+class cadastroUserModel {
   String? username;
   String? email;
   String? password;
 
-  CadastroModel(this.username, this.email, this.password);
+  cadastroUserModel({this.username, this.email, this.password});
+
+  cadastroUserModel.fromJson(Map<String, dynamic> json) {
+    username = json['username'];
+    email = json['email'];
+    password = json['password'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['username'] = this.username;
+    data['email'] = this.email;
+    data['password'] = this.password;
+    return data;
+  }
 }
