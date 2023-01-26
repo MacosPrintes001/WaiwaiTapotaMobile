@@ -44,9 +44,10 @@ cd WawaiWithouBDConection
 Apos concluir todas as etapas anteriores, execute o comando:
 
 ```
-npm run dev
-ou
-yarn dev
+cd \WawaiWithouBDConection\tradutor
+```
+```
+flutter run
 ```
 
 ## 📝 Licença
