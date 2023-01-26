@@ -18,7 +18,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 
 
-## Sobre o WawaiWithouBDConection
+## Sobre o WaiwaiTapotaMobile
 Este repositorio faz parte do projeto Waiwai Tapota que é um projeto de tradução de linguas maternas brasileiras faciltado, este é dividido em três partes principais: API manager, Aplicativo mobile e sistema web.
 
 Vá para http://www.ufopa.edu.br/ufopa/ para obter mais informações e documentação.
