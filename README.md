@@ -1,11 +1,7 @@
-# Waiwai Tapota Mobile
+# Waiwai Tapota Mobile v0.1
 <!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
-![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/devsuperior/sds1-wmazoni/blob/master/LICENSE) 
 
 
 ### Ajustes e melhorias
@@ -46,6 +42,10 @@ Apos concluir todas as etapas anteriores, execute o comando:
 ```
 flutter run
 ```
+## 📱 Interface
+
+![Mobile 1](https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/a0daa74943f61d597b8c12cc207b620a690e49f2/tradutor/Interface/busca.jpeg) 
+
 
 ## 📝 Licença
 
