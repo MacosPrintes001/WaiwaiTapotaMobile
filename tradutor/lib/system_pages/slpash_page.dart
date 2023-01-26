@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-import 'login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tradutor/system_pages/home_page.dart';
+import 'package:tradutor/system_pages/login_page.dart';
 
 //Pagina Para load de informações do banco
 
@@ -16,18 +17,29 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  void initState() {
+  initState() {
     super.initState();
 
-    //esprando tempo para chamar proxima tela
-    //Mudar para atualização dicionario
-    Future.delayed(const Duration(seconds: 4)).then((value) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginPage(),
-          ));
-    });
+    verificaUsuario().then((temUsuario) {
+        if (temUsuario) {
+          //pegar tokens e logar
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ),
+          );
+        } else {
+          //mandar usuario logar
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginPage(),
+            ),
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -44,10 +56,6 @@ class _SplashPageState extends State<SplashPage> {
               image: AssetImage("assets/logo.png"),
               width: 300,
             ),
-            Text(
-              "Updating Dictionary...",
-              style: TextStyle(color: Colors.white),
-            ),
             SizedBox(height: 30),
             SpinKitWave(
               color: Color.fromARGB(75, 0, 191, 166),
@@ -56,5 +64,16 @@ class _SplashPageState extends State<SplashPage> {
         ),
       ),
     );
+  }
+
+  Future<bool> verificaUsuario() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+
+    if(token == null){
+      return false;
+    }  else{
+      return true;
+    }
   }
 }

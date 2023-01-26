@@ -1,11 +1,15 @@
 //Tela onde vai ficar direcionador dicionario ou tradutor
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/pages/dict_home_page.dart';
-import 'package:tradutor/system_pages/login_page.dart';
+
+import 'login_page.dart';
 
 //Tela Para escolher Dicionario OU Tradutor
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({
+    super.key,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -14,23 +18,32 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-
     //Chamar dicionario
     callDict() {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const DictHomePage(),
-          ));
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DictHomePage(),
+        ),
+      );
     }
 
     //Deslogar do sistema
-    logout() {
-      Navigator.push(
+    logout() async {
+      final prefs = await SharedPreferences.getInstance();
+      final String? token = prefs.getString('token');
+      
+      //logoutUser(token);
+
+      final success = await prefs.remove('token').then((value) {
+        //CHAMAR LOGOUUSER
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const LoginPage(),
-          ));
+          ),
+        );
+      });
     }
 
     return Scaffold(

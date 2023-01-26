@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
 class WordPage extends StatefulWidget {
-  const WordPage(
-      {super.key,
-      required this.brWord,
-      required this.waiWord,
-      required this.brDescript,
-      required this.waiDescript});
+  const WordPage({
+    super.key,
+    required this.wordPort,
+    required this.translationWaiwai,
+    required this.category,
+    required this.meaningPort,
+    required this.meaningWaiwai,
+    required this.synonymPort,
+    required this.synonymWaiwai,
+  });
 
-  final String brWord;
-  final String waiWord;
-  final String brDescript;
-  final String waiDescript;
+  final String wordPort;
+  final String translationWaiwai;
+  final String category;
+  final String meaningPort;
+  final String meaningWaiwai;
+  final String synonymPort;
+  final String synonymWaiwai;
   //final ImageBitmap imagem;
 
   @override
@@ -44,7 +51,7 @@ class _WordPageState extends State<WordPage> {
               TextButton.icon(
                 icon: const Icon(Icons.play_arrow),
                 onPressed: () {},
-                label: Text(widget.brWord,
+                label: Text(widget.wordPort,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold)),
               ),
@@ -54,7 +61,7 @@ class _WordPageState extends State<WordPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    widget.brDescript,
+                    widget.meaningPort,
                     style: const TextStyle(
                       fontSize: 15,
                     ),
@@ -67,7 +74,7 @@ class _WordPageState extends State<WordPage> {
               TextButton.icon(
                 icon: const Icon(Icons.play_arrow),
                 onPressed: () {},
-                label: Text(widget.waiWord,
+                label: Text(widget.translationWaiwai,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold)),
               ),
@@ -77,7 +84,7 @@ class _WordPageState extends State<WordPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    widget.waiDescript,
+                    widget.meaningWaiwai,
                     style: const TextStyle(
                       fontSize: 15,
                     ),

@@ -1,84 +1,51 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tradutor/system_pages/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 
 import 'login_page.dart';
+import 'slpash_page.dart';
 
 class RegistrationPage extends StatefulWidget {
-
-  const RegistrationPage({Key? key, }) : super(key: key);
+  const RegistrationPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-
-  //text controllers
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPassword = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPassword.dispose();
-    super.dispose();
-
-  }
-
-  bool _passWordConfirmed(){
-    if(_passwordController.text.trim() == _confirmPassword.text.trim()){
-        return true;
-    } else{
-      return false;
-    }
-  }
-
-  Future signUp() async{
-    if(_passWordConfirmed()){
-      try{
-        // await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        //   email: _emailController.text.trim(), 
-        //   password: _passwordController.text.trim(),
-        // );
-        Navigator.of(context).push(CupertinoPageRoute(builder: (ctx) =>  const HomePage()));
-      }catch(w){
-        showDialog(
-        context: context, 
-        builder: (context){
-          // ignore: prefer_const_constructors
-          return AlertDialog(
-            content: const Text(""),
-          );
-        }
-      );
-      }
-    }
-  }
+  final _formkey = GlobalKey<FormState>();
+  final _userNameController = TextEditingController();
+  final _emaiController = TextEditingController();
+  final _senhaController = TextEditingController();
+  final _confirSenhaController = TextEditingController();
+  bool _verSenha = false;
+  bool _verSenhaConfirm = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  const Color.fromARGB(255, 0, 77, 64),//Verde escuro 255, 0, 77, 64 // Verde Claro 75, 0, 191, 165 // Mais ou menos acor da professora 190, 0, 77, 64
-      body:  SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
+      backgroundColor: const Color.fromARGB(255, 0, 77, 64),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Form(
+            key: _formkey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-
-                //Icon
+                //LOGO
                 const Image(
                   image: AssetImage('assets/logo.png'),
-                  width: 200,
-                  ),
-
-                //App Name
+                  height: 200,
+                ),
+                //TITLE
                 Text(
                   "Waiwai Translator",
                   style: GoogleFonts.roboto(
@@ -86,143 +53,223 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     fontWeight: FontWeight.bold,
                     fontSize: 42,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 10,),
-                Text(
-                  "Translating your will", 
-                  style: GoogleFonts.roboto(
-                    color: Colors.white,
-                    fontSize: 24,
-                    )
-                  ),
-                
-          
-                const SizedBox(height: 30,),
-          
-                //email textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    controller: _emailController,
-                    decoration:  InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12)
-                      ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color.fromARGB(84, 11, 214, 108)),
-                      borderRadius: BorderRadius.circular(12)
-                    ),
-                    hintText: 'Email',
-                    fillColor: Colors.grey[200],
+                const SizedBox(
+                  height: 10,
+                ),
+                //USER TEXT FIELD
+                TextFormField(
+                  controller: _userNameController,
+                  decoration: const InputDecoration(
+                    label: Text('Nome de usuario'),
+                    hintText: 'Eduardo Silva',
                     filled: true,
-                    ),
+                    fillColor: Colors.white,
                   ),
+                  validator: (email) {
+                    if (email == null || email.isEmpty) {
+                      return 'Digite um nome de usuario';
+                    }
+                    return null;
+                  },
                 ),
-          
-                const  SizedBox(height: 10),
-          
-                //password textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    obscureText: true,
-                    controller: _passwordController,
-                    decoration:  InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12)
-                        ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color.fromARGB(84, 11, 214, 108)),
-                        borderRadius: BorderRadius.circular(12)
-                      ),
-                      hintText: 'Password',
-                      fillColor: Colors.grey[200],
-                      
-                      filled: true,
-                    ),
+                const SizedBox(
+                  height: 10,
+                ),
+                //EMAIL TEXT FIELD
+                TextFormField(
+                  controller: _emaiController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    label: Text('e-mail'),
+                    hintText: 'eduardo@email.com',
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
+                  validator: (email) {
+                    if (email == null || email.isEmpty) {
+                      return 'Digite seu email';
+                    }
+                    return null;
+                  },
                 ),
-                
+                const SizedBox(
+                  height: 10,
+                ),
+                //SENHA TEXT FIELD
+                TextFormField(
+                  controller: _senhaController,
+                  obscureText: !_verSenha,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(_verSenha
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined),
+                      onPressed: () {
+                        setState(() {
+                          _verSenha = !_verSenha;
+                        });
+                      },
+                    ),
+                    label: const Text('senha'),
+                    hintText: 'Digite uma senha',
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                  validator: (senha) {
+                    if (senha == null || senha.isEmpty) {
+                      return 'Digite uma senha';
+                    } else if (senha.length < 6) {
+                      return 'Digite uma senha mais forte';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                //Confirm SENHA TEXT FIELD
+                TextFormField(
+                  controller: _confirSenhaController,
+                  obscureText: !_verSenhaConfirm,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(_verSenhaConfirm
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined),
+                      onPressed: () {
+                        setState(() {
+                          _verSenhaConfirm = !_verSenhaConfirm;
+                        });
+                      },
+                    ),
+                    label: const Text('Confirme sua senha'),
+                    hintText: 'Digite uma senha',
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                  validator: (senha) {
+                    if (senha == null || senha.isEmpty) {
+                      return 'Digite uma senha';
+                    }
+                    if (_senhaController.text.trim() !=
+                        _confirSenhaController.text.trim()) {
+                      return 'Senhas Não Coincidem';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                //BOTÂO LOGAR
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(84, 11, 214, 108),
+                      minimumSize: const Size(40, 40)),
+                  onPressed: () async {
+                    if (_formkey.currentState!.validate()) {
+                      try {
+                        var response = await cadastro(_senhaController,
+                            _userNameController, _emaiController);
 
-                const  SizedBox(height: 10),
+                        if (response.statusCode == 201) {
+                          //cadastro aceito
+                          final prefs = await SharedPreferences.getInstance();
+                          var response =
+                              await login(_emaiController, _senhaController)
+                                  .then(
+                            (value) async {
+                              final prefs =
+                                  await SharedPreferences.getInstance();
+                              var accessToken =
+                                  jsonDecode(value.body)['access_token'];
+                              var refreshToken =
+                                  jsonDecode(value.body)['refresh_token'];
+                              //Criando seção do usuario
+                              await prefs
+                                  .setString('token', accessToken.toString())
+                                  .then((value) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SplashPage(),
+                                  ),
+                                );
+                              });
 
-                //confirm password textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    obscureText: true,
-                    controller: _confirmPassword,
-                    decoration:  InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12)
-                        ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color.fromARGB(84, 11, 214, 108)),
-                        borderRadius: BorderRadius.circular(12)
-                      ),
-                      hintText: 'Confirm Password',
-                      fillColor: Colors.grey[200],
-                      
-                      filled: true,
-                    ),
+                              //chamar tela home
+                            },
+                          );
+                        } else if (response.statusCode == 400) {
+                          //usuario ja existe
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.redAccent,
+                              content: Text(
+                                "Email ou Nome de Usuario já cadastrado",
+                              ),
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.redAccent,
+                              content: Text(
+                                "CADASTRO FALHOU",
+                              ),
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: Colors.redAccent,
+                            content: Text(
+                              "ERRO DE CONEXÃO",
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: const Text(
+                    "CADASTRAR",
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
-          
-                const SizedBox(height:  10),
-          
-                //sgin in button
-                Padding( 
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: GestureDetector(
-                    onTap: signUp,
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration:  BoxDecoration(
-                        color: const Color.fromARGB(84, 11, 214, 108),
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                      child: Center(
-                        child:Text(
-                          "Sign Up",
-                          style: GoogleFonts.roboto(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18
-                          ),//GoogleFonts
-                        )
-                      )
-                    ),
-                  ),
+                const SizedBox(
+                  height: 10,
                 ),
-
-                const SizedBox(height: 25),
-          
-                //not a member? register now
+                //REGISTRAR AGORA
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "I am a member!",
+                      "Já tem conta?",
                       style: GoogleFonts.roboto(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                      ),//GoogleFonts
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold), //GoogleFonts
                     ),
                     GestureDetector(
-                      onTap: (){
-                        Navigator.of(context).push(CupertinoPageRoute(builder: (ctx) =>  const LoginPage()));
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const LoginPage();
+                        }));
                       },
                       child: Text(
-                        " Login now", 
+                        " Logar Agora",
                         style: GoogleFonts.roboto(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                        ),//GoogleFonts
+                            color: Colors.lightBlue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ],

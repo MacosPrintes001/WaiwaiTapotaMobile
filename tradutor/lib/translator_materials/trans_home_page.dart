@@ -11,11 +11,7 @@ class TransHomePage extends StatefulWidget {
 
 class _TransHomePageState extends State<TransHomePage> {
   callDictionaryPage() {
-    try {
-      Navigator.of(context).pushReplacement(
-          // ignore: prefer_const_constructors
-          CupertinoPageRoute(builder: (ctx) => HomePage()));
-    } catch (e) {}
+    
   }
 
   @override
