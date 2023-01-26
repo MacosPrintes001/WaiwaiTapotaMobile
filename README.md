@@ -12,7 +12,11 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Conectar com API para realizar login, e solicitar os dados das palavras
+- [ ] Pegar palavras da API mostrar na lista de palavras
+- [ ] Criar botão dowload palavras
+- [ ] Deslogar da API
+
+
 
 
 ## Sobre o WawaiWithouBDConection
