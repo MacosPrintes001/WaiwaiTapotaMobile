@@ -19,8 +19,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   initState() {
     super.initState();
-
-    verificaUsuario().then((temUsuario) {
+    Future.delayed(const Duration(seconds: 1), () {
+      verificaUsuario().then(
+      (temUsuario) {
         if (temUsuario) {
           //pegar tokens e logar
           Navigator.pushReplacement(
@@ -40,6 +41,8 @@ class _SplashPageState extends State<SplashPage> {
         }
       },
     );
+    });
+    
   }
 
   @override
@@ -66,13 +69,13 @@ class _SplashPageState extends State<SplashPage> {
     );
   }
 
-  Future<bool> verificaUsuario() async{
+  Future<bool> verificaUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("token");
 
-    if(token == null){
+    if (token == null) {
       return false;
-    }  else{
+    } else {
       return true;
     }
   }

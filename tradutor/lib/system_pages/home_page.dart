@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/pages/dict_home_page.dart';
+import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 
 import 'login_page.dart';
 
@@ -30,20 +31,16 @@ class _HomePageState extends State<HomePage> {
 
     //Deslogar do sistema
     logout() async {
-      final prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('token');
-      
-      //logoutUser(token);
-
-      final success = await prefs.remove('token').then((value) {
-        //CHAMAR LOGOUUSER
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginPage(),
-          ),
-        );
-      });
+      await logoutUser().then(
+        (value) async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginPage(),
+            ),
+          );
+        },
+      );
     }
 
     return Scaffold(

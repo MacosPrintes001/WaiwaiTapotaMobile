@@ -68,6 +68,20 @@ class _WordPageState extends State<WordPage> {
                   ),
                 ),
               ),
+              const SizedBox(height: 10),
+              //Sinonimo portugues
+              Card(
+                color: const Color.fromARGB(255, 3, 172, 101).withOpacity(0.5),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    widget.synonymPort,
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              ),
               const SizedBox(height: 30),
 
               //Titulo Waiwai
@@ -85,6 +99,20 @@ class _WordPageState extends State<WordPage> {
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     widget.meaningWaiwai,
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              //sinonimo waiwai
+              Card(
+                color: const Color.fromARGB(255, 3, 172, 101).withOpacity(0.5),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    widget.synonymWaiwai,
                     style: const TextStyle(
                       fontSize: 15,
                     ),
