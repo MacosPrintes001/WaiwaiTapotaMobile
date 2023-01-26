@@ -35,17 +35,14 @@ https://docs.flutter.dev/get-started/install
 
 ### 2. Clone o repositorio e instale as dependencias
 ```
-git clone https://github.com/MacosPrintes001/WawaiWithouBDConection.git
-cd WawaiWithouBDConection
+https://github.com/MacosPrintes001/WaiwaiTapotaMobile.git
+cd WaiwaiTapotaMobile/tradutor
 ```
 
 ## ☕ Inicie o aplicativo
 
 Apos concluir todas as etapas anteriores, execute o comando:
 
-```
-cd \WawaiWithouBDConection\tradutor
-```
 ```
 flutter run
 ```
