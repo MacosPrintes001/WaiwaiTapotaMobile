@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:tradutor/dictionary_materials/services/api_folders.dart'
-    as services;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/system_pages/home_page.dart';
 import 'package:tradutor/system_pages/login_page.dart';
 
@@ -19,30 +18,28 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   initState() {
-    print("object");
-    services.temUsuario().then((resposta) {
-      if(resposta){
-        print("TEM");
-        //pegar tokens e logar
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ),
-        );
-      }else{
-        print("NÂO TEM");
-        //mandar usuario logar
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginPage(),
-          ),
-        );
-      }
-    },);
     super.initState();
-    
+
+    verificaUsuario().then((temUsuario) {
+        if (temUsuario) {
+          //pegar tokens e logar
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ),
+          );
+        } else {
+          //mandar usuario logar
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginPage(),
+            ),
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -67,5 +64,16 @@ class _SplashPageState extends State<SplashPage> {
         ),
       ),
     );
+  }
+
+  Future<bool> verificaUsuario() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+
+    if(token == null){
+      return false;
+    }  else{
+      return true;
+    }
   }
 }

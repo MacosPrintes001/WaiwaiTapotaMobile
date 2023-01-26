@@ -1,15 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<bool> verificarUser() async{
-  SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
-  String? token = _sharedPreference.getString('token');
+Future<bool> verificarUser() async {
+  final prefs = await SharedPreferences.getInstance();
+  final String? token = prefs.getString('token');
 
-  print(token);
-
-  if(token == null){
+  if (token == null) {
+    print("tem nada");
     return false;
-
-  }else{
+  } else {
+    print("Tem token");
     return true;
   }
 }

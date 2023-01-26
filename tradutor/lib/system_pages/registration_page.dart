@@ -1,10 +1,14 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 
 import 'login_page.dart';
+import 'slpash_page.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({
@@ -169,15 +173,42 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       try {
                         var response = await cadastro(_senhaController,
                             _userNameController, _emaiController);
-                        if (response == 200) {
-                          await login(_emaiController, _senhaController);
-                        } else if (response == 409) {
+
+                        if (response.statusCode == 201) {
+                          //cadastro aceito
+                          final prefs = await SharedPreferences.getInstance();
+                          var response =
+                              await login(_emaiController, _senhaController)
+                                  .then(
+                            (value) async {
+                              final prefs =
+                                  await SharedPreferences.getInstance();
+                              var accessToken =
+                                  jsonDecode(value.body)['access_token'];
+                              var refreshToken =
+                                  jsonDecode(value.body)['refresh_token'];
+                              //Criando seção do usuario
+                              await prefs
+                                  .setString('token', accessToken.toString())
+                                  .then((value) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SplashPage(),
+                                  ),
+                                );
+                              });
+
+                              //chamar tela home
+                            },
+                          );
+                        } else if (response.statusCode == 400) {
                           //usuario ja existe
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               backgroundColor: Colors.redAccent,
                               content: Text(
-                                "Email ou senha já cadastrado",
+                                "Email ou Nome de Usuario já cadastrado",
                               ),
                               behavior: SnackBarBehavior.floating,
                             ),

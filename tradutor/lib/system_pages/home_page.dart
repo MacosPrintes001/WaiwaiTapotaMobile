@@ -1,7 +1,7 @@
 //Tela onde vai ficar direcionador dicionario ou tradutor
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/pages/dict_home_page.dart';
-import 'package:tradutor/dictionary_materials/services/api_folders.dart' as service;
 
 import 'login_page.dart';
 
@@ -29,15 +29,21 @@ class _HomePageState extends State<HomePage> {
     }
 
     //Deslogar do sistema
-    logout() {
+    logout() async {
+      final prefs = await SharedPreferences.getInstance();
+      final String? token = prefs.getString('token');
+      
+      //logoutUser(token);
 
-      //service.logout(widget.acessToken, widget.refreshToken);
-      Navigator.pushReplacement(
+      final success = await prefs.remove('token').then((value) {
+        //CHAMAR LOGOUUSER
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const LoginPage(),
           ),
         );
+      });
     }
 
     return Scaffold(
