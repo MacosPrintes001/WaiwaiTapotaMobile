@@ -1,6 +1,6 @@
 # tradutor
 
-A new Flutter project.
+Esta é a pasta raiz do projeto aqui estão todos os arquivos flutter
 
 ## Getting Started
 
