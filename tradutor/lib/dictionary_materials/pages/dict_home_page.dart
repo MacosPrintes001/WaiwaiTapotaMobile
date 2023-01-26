@@ -1,23 +1,68 @@
 //PAGINA PRINCIPAL DICIONARIO
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
-import 'package:tradutor/dictionary_materials/services/api_folders.dart'
-    as api_folders;
 import 'word_page.dart';
 
 class DictHomePage extends StatefulWidget {
-  const DictHomePage({super.key, });
+  const DictHomePage({
+    super.key,
+  });
 
   @override
   State<DictHomePage> createState() => _DictHomePageState();
 }
 
 class _DictHomePageState extends State<DictHomePage> {
+
+  //Get WORDS
   
   //Criando Lista com valores estaticos, mudar para dinamico quando tiver API
-  static List<wordModel> main_words_list = [wordModel()];
+  static List<wordModel> main_words_list = [
+    wordModel(
+      category: 'asdasd',
+      wordPort: 'asdasd',
+      meaningPort: 'asdasd',
+      synonymPort: 'asdasd',
+      translationWaiwai: 'asdasd',
+      meaningWaiwai: 'asdasd',
+      synonymWaiwai: 'asdasdasd',
+    ),
+    wordModel(
+      category: 'asdasd',
+      wordPort: 'asdasd',
+      meaningPort: 'asdasd',
+      synonymPort: 'asdasd',
+      translationWaiwai: 'asdasd',
+      meaningWaiwai: 'asdasd',
+      synonymWaiwai: 'asdasdasd',
+    ),
+    wordModel(
+      category: 'asdasd',
+      wordPort: 'asdasd',
+      meaningPort: 'asdasd',
+      synonymPort: 'asdasd',
+      translationWaiwai: 'asdasd',
+      meaningWaiwai: 'asdasd',
+      synonymWaiwai: 'asdasdasd',
+    ),
+    wordModel(
+      category: 'asdasd',
+      wordPort: 'asdasd',
+      meaningPort: 'asdasd',
+      synonymPort: 'asdasd',
+      translationWaiwai: 'asdasd',
+      meaningWaiwai: 'asdasd',
+      synonymWaiwai: 'asdasdasd',
+    ),
+  ];
 
-  List<wordModel> display_list = List.from(main_words_list);
+  List<wordModel> _display_list = List<wordModel>.from(main_words_list);
+
+  List<wordModel> get display_list => _display_list;
+
+  set display_list(List<wordModel> value) {
+    _display_list = value;
+  }
 
   void updateList(String value) {
     setState(() {
@@ -44,7 +89,7 @@ class _DictHomePageState extends State<DictHomePage> {
             onPressed: () {},
             icon: const Icon(
               color: Colors.white,
-              Icons.replay_outlined,
+              Icons.download,
             ),
             label: const Text(
               "update",
@@ -86,40 +131,37 @@ class _DictHomePageState extends State<DictHomePage> {
             Expanded(
               child: ListView.builder(
                 itemCount: display_list.length,
-                itemBuilder: ((context, index) => ListTile(
-                      onTap: (() {
-                        //madar pra outra tela com informações
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WordPage(
-                              category: '',
-                              wordPort: display_list[index].wordPort.toString(),
-                              meaningPort: '',
-                              synonymPort: '',
-                              translationWaiwai: '',
-                              meaningWaiwai: '',
-                              synonymWaiwai: '',
-                              // waiWord: display_list[index].waiWord.toString(),
-                              // brDescript:display_list[index].brDescription.toString(),
-                              // waiDescript: display_list[index].WaiDescription.toString(),
-                            ),
-                          ),
-                        );
-                      }),
-                      contentPadding: const EdgeInsets.all(8.0),
-                      title: Text(
-                        display_list[index].waiWord!,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
+                itemBuilder: (BuildContext context, int index) => ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WordPage(
+                          category: display_list[index].category.toString(),
+                          wordPort: display_list[index].category.toString(),
+                          meaningPort: display_list[index].category.toString(),
+                          synonymPort: display_list[index].category.toString(),
+                          translationWaiwai:
+                              display_list[index].category.toString(),
+                          meaningWaiwai:
+                              display_list[index].category.toString(),
+                          synonymWaiwai:
+                              display_list[index].category.toString(),
                         ),
                       ),
-                      subtitle: Text(
-                        display_list[index].brWord!,
-                      ),
-                      //trailing: Text(dtime.toString()),
-                    )),
+                    );
+                  },
+                  contentPadding: const EdgeInsets.all(8.0),
+                  title: Text(
+                    display_list[index].wordPort!,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(display_list[index].translationWaiwai!),
+                  //trailing: Text(dtime.toString()),
+                ),
               ),
             ),
           ],

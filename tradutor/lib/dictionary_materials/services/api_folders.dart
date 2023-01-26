@@ -2,21 +2,23 @@
 
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:http/http.dart' as http;
 
 String urlbase = 'http://192.168.1.8:5000';
 
-Future pegarDicionario(accessToken) async {
-  var dicionarioUrl = Uri.parse("$urlbase/palavras");
+Future pegarDicionario() async {
+  final prefs = await SharedPreferences.getInstance();
+  final String? accessToken = prefs.getString('token');
 
+  var dicionarioUrl = Uri.parse("$urlbase/palavras");
   var response = await http.get(dicionarioUrl, headers: {
     'Authorization': 'Bearer $accessToken',
     'Content-Type': 'application/json; charset=UTF-8'
   });
 
   var dicionario = jsonDecode(response.body);
-  print(response.body);
   return dicionario;
 }
 
@@ -50,15 +52,21 @@ Future<http.Response> login(email, senha) async {
   return response;
 }
 
-Future logoutUser(accessToken) async {
-  var registerUrl = Uri.parse("$urlbase/logout");
-  var response = await http.delete(registerUrl, headers: {
-    'Content-Type': 'application/json; charset=UTF-8'
-  }, body: {
-    "access_token": accessToken,
-    //"refresh_token": refreshToken,
-  });
+Future logoutUser() async {
+  final prefs = await SharedPreferences.getInstance();
+  final String? accessToken = prefs.getString('token');
 
-  print('${response.body} /n ${response.statusCode} logout');
-  return response.statusCode;
+  var registerUrl = Uri.parse("$urlbase/logout");
+  var response = await http.delete(
+    registerUrl,
+    headers: {
+      'Authorization': 'Bearer $accessToken',
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+  ).then(
+    (value) async {
+      final success = await prefs.remove('token');
+    },
+  );
+  //print('${response.body} /n ${response.statusCode} logout');
 }
