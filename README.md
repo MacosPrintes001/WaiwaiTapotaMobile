@@ -23,7 +23,7 @@ Este repositorio faz parte do projeto Waiwai Tapota que é um projeto de traduç
 
 Vá para http://www.ufopa.edu.br/ufopa/ para obter mais informações e documentação.
 
-## 🚀 Primeiros passos
+## ☕ Primeiros passos
 
 Para instalar o Waiwai Tapota mobile, siga estas etapas:
 
@@ -39,7 +39,7 @@ https://github.com/MacosPrintes001/WaiwaiTapotaMobile.git
 cd WaiwaiTapotaMobile/tradutor
 ```
 
-## ☕ Inicie o aplicativo
+## 🚀 Inicie o aplicativo
 
 Apos concluir todas as etapas anteriores, execute o comando:
 
