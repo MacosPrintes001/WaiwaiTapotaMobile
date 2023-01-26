@@ -14,7 +14,6 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 - [ ] Pegar palavras da API mostrar na lista de palavras
 - [ ] Criar botão dowload palavras
-- [ ] Deslogar da API
 
 
 
