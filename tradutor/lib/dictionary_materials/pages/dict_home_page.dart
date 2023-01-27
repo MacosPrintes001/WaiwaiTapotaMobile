@@ -1,6 +1,9 @@
 //PAGINA PRINCIPAL DICIONARIO
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
+import '../services/api_folders.dart';
 import 'word_page.dart';
 
 class DictHomePage extends StatefulWidget {
@@ -13,9 +16,29 @@ class DictHomePage extends StatefulWidget {
 }
 
 class _DictHomePageState extends State<DictHomePage> {
-
   //Get WORDS
-  
+  @override
+  void initState() {
+    super.initState();
+    pegarDicionario().then((value) {
+      var dicionario  = jsonDecode(value.body);
+      print(dicionario);
+      // for (var i = 0; i < dicionario; i++) {
+      //   List<wordModel> main_words_list = [
+      //     wordModel(
+      //       category: 'asdasd',
+      //       wordPort: 'asdasd',
+      //       meaningPort: 'asdasd',
+      //       synonymPort: 'asdasd',
+      //       translationWaiwai: 'asdasd',
+      //       meaningWaiwai: 'asdasd',
+      //       synonymWaiwai: 'asdasdasd',
+      //     )
+      //   ];
+      // }
+    });
+  }
+
   //Criando Lista com valores estaticos, mudar para dinamico quando tiver API
   static List<wordModel> main_words_list = [
     wordModel(

@@ -6,9 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:http/http.dart' as http;
 
-String urlbase = 'http://192.168.1.8:5000';
+String urlbase = 'http://192.168.1.8:5000'; // UFOPA
+//String urlbase = 'http://192.168.1.105:5000'; // casa
 
-Future pegarDicionario() async {
+Future<http.Response> pegarDicionario() async {
   final prefs = await SharedPreferences.getInstance();
   final String? accessToken = prefs.getString('token');
 
@@ -18,8 +19,8 @@ Future pegarDicionario() async {
     'Content-Type': 'application/json; charset=UTF-8'
   });
 
-  var dicionario = jsonDecode(response.body);
-  return dicionario;
+  
+  return response;
 }
 
 Future<http.Response> cadastro(senha, usuario, email) async {
