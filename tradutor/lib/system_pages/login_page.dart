@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                               jsonDecode(response.body)['access_token'];
                           var refreshToken =
                               jsonDecode(response.body)['refresh_token'];
-
+                              print(accessToken);
                           await prefs
                               .setString('token', accessToken.toString())
                               .then((value) {
