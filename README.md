@@ -43,8 +43,10 @@ Apos concluir todas as etapas anteriores, execute o comando:
 flutter run
 ```
 ## 📱 Interface
+![Mobile 1](tradutor/Interface/login.jpeg) ![Mobile 2](tradutor/Interface/cadastro.jpeg)
 
-![Mobile 1](https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/a0daa74943f61d597b8c12cc207b620a690e49f2/tradutor/Interface/busca.jpeg) 
+![Mobile 3](tradutor/Interface/busca.jpeg) ![Mobile 1](tradutor/Interface/significado.jpeg) 
+
 
 
 ## 📝 Licença
