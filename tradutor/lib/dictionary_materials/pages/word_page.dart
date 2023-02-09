@@ -20,10 +20,88 @@ class WordPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 16.0,),
-            Center(
-              
-            )
+            const SizedBox(
+              height: 16.0,
+            ),
+            const Center(
+              child: Hero(
+                tag: "image",
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      "tradutor/assets/noImage.png"), //mudar quando vier imagem(tirar const)
+                  radius: 100.0,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 22.0,
+            ),
+            Text(
+              word.wordPort,
+              style: const TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            Text(
+              word.meaningPort,
+              style: const TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            Text(
+              word.synonymPort,
+              style: const TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            Text(
+              word.translationWaiwai,
+              style: const TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            Text(
+              word.meaningWaiwai,
+              style: const TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            Text(
+              word.synonymWaiwai,
+              style: const TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
           ],
         ),
       ),

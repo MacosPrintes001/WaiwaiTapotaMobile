@@ -2,22 +2,25 @@
 // ignore_for_file: camel_case_types
 
 class wordModel {
-  String wordPort="";
-  String translationWaiwai="";
-  String category="";
-  String meaningPort="";
-  String meaningWaiwai="";
-  String synonymPort="";
-  String synonymWaiwai="";
+  String wordPort = "";
+  String translationWaiwai = "";
+  String category = "";
+  String meaningPort = "";
+  String meaningWaiwai = "";
+  String synonymPort = "";
+  String synonymWaiwai = "";
+  //String image = '';
 
-  wordModel(
-      {required this.wordPort,
-      required this.translationWaiwai,
-      required this.category,
-      required this.meaningPort,
-      required this.meaningWaiwai,
-      required this.synonymPort,
-      required this.synonymWaiwai});
+  wordModel({
+    required this.wordPort,
+    required this.translationWaiwai,
+    required this.category,
+    required this.meaningPort,
+    required this.meaningWaiwai,
+    required this.synonymPort,
+    required this.synonymWaiwai,
+    //required this.image,
+  });
 
   wordModel.fromJson(Map<String, dynamic> json) {
     wordPort = json['wordPort'];
@@ -27,8 +30,8 @@ class wordModel {
     meaningWaiwai = json['meaningWaiwai'];
     synonymPort = json['synonymPort'];
     synonymWaiwai = json['synonymWaiwai'];
+    //image = json['image'];
   }
-
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -39,6 +42,7 @@ class wordModel {
     data['meaningWaiwai'] = this.meaningWaiwai;
     data['synonymPort'] = this.synonymPort;
     data['synonymWaiwai'] = this.synonymWaiwai;
+    //data['image'] = this.image;
     return data;
   }
 }
