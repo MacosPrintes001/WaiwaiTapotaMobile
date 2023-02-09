@@ -2,22 +2,22 @@
 // ignore_for_file: camel_case_types
 
 class wordModel {
-  String? wordPort;
-  String? translationWaiwai;
-  String? category;
-  String? meaningPort;
-  String? meaningWaiwai;
-  String? synonymPort;
-  String? synonymWaiwai;
+  String wordPort="";
+  String translationWaiwai="";
+  String category="";
+  String meaningPort="";
+  String meaningWaiwai="";
+  String synonymPort="";
+  String synonymWaiwai="";
 
   wordModel(
-      {this.wordPort,
-      this.translationWaiwai,
-      this.category,
-      this.meaningPort,
-      this.meaningWaiwai,
-      this.synonymPort,
-      this.synonymWaiwai});
+      {required this.wordPort,
+      required this.translationWaiwai,
+      required this.category,
+      required this.meaningPort,
+      required this.meaningWaiwai,
+      required this.synonymPort,
+      required this.synonymWaiwai});
 
   wordModel.fromJson(Map<String, dynamic> json) {
     wordPort = json['wordPort'];
@@ -29,13 +29,6 @@ class wordModel {
     synonymWaiwai = json['synonymWaiwai'];
   }
 
-  get brWord => null;
-
-  get waiWord => null;
-
-  get brDescription => null;
-
-  get WaiDescription => null;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

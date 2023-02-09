@@ -1,102 +1,35 @@
-//PAGINA PRINCIPAL DICIONARIO
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
-import '../services/api_folders.dart';
-import 'word_page.dart';
+import 'package:tradutor/dictionary_materials/services/api_folders.dart';
+import 'package:tradutor/dictionary_materials/utils/loading_widget.dart';
+import 'package:tradutor/dictionary_materials/utils/word_tile.dart';
 
 class DictHomePage extends StatefulWidget {
-  const DictHomePage({
-    super.key,
-  });
+  const DictHomePage({super.key});
 
   @override
   State<DictHomePage> createState() => _DictHomePageState();
 }
 
 class _DictHomePageState extends State<DictHomePage> {
-  //Get WORDS
+  final List<wordModel> _words = <wordModel>[];
+  List<wordModel> _wordDisplay = <wordModel>[];
+
+  bool _isLoading = true;
+
   @override
   void initState() {
+    // ignore: todo
+    // TODO: implement initState
     super.initState();
-    pegarDicionario().then((value) {
-      var dicionario  = jsonDecode(value.body);
-      print(dicionario);
-      // for (var i = 0; i < dicionario; i++) {
-      //   List<wordModel> main_words_list = [
-      //     wordModel(
-      //       category: 'asdasd',
-      //       wordPort: 'asdasd',
-      //       meaningPort: 'asdasd',
-      //       synonymPort: 'asdasd',
-      //       translationWaiwai: 'asdasd',
-      //       meaningWaiwai: 'asdasd',
-      //       synonymWaiwai: 'asdasdasd',
-      //     )
-      //   ];
-      // }
+    fetchWords().then((value) {
+      setState(() {
+        _isLoading = false;
+        _words.addAll(value);
+        _wordDisplay = _words;
+      });
     });
   }
-
-  //Criando Lista com valores estaticos, mudar para dinamico quando tiver API
-  static List<wordModel> main_words_list = [
-    wordModel(
-      category: 'asdasd',
-      wordPort: 'asdasd',
-      meaningPort: 'asdasd',
-      synonymPort: 'asdasd',
-      translationWaiwai: 'asdasd',
-      meaningWaiwai: 'asdasd',
-      synonymWaiwai: 'asdasdasd',
-    ),
-    wordModel(
-      category: 'asdasd',
-      wordPort: 'asdasd',
-      meaningPort: 'asdasd',
-      synonymPort: 'asdasd',
-      translationWaiwai: 'asdasd',
-      meaningWaiwai: 'asdasd',
-      synonymWaiwai: 'asdasdasd',
-    ),
-    wordModel(
-      category: 'asdasd',
-      wordPort: 'asdasd',
-      meaningPort: 'asdasd',
-      synonymPort: 'asdasd',
-      translationWaiwai: 'asdasd',
-      meaningWaiwai: 'asdasd',
-      synonymWaiwai: 'asdasdasd',
-    ),
-    wordModel(
-      category: 'asdasd',
-      wordPort: 'asdasd',
-      meaningPort: 'asdasd',
-      synonymPort: 'asdasd',
-      translationWaiwai: 'asdasd',
-      meaningWaiwai: 'asdasd',
-      synonymWaiwai: 'asdasdasd',
-    ),
-  ];
-
-  List<wordModel> _display_list = List<wordModel>.from(main_words_list);
-
-  List<wordModel> get display_list => _display_list;
-
-  set display_list(List<wordModel> value) {
-    _display_list = value;
-  }
-
-  void updateList(String value) {
-    setState(() {
-      display_list = main_words_list
-          .where((element) =>
-              element.brWord!.toLowerCase().contains(value.toLowerCase()))
-          .toList();
-    });
-  }
-
-  //final dtime =  DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +37,8 @@ class _DictHomePageState extends State<DictHomePage> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(190, 0, 77, 40),
-        title: const Text("Dicionario"),
         elevation: 0.0,
+        title: const Text("Dicionario", textAlign: TextAlign.left),
         actions: [
           //Botão para atualizar o dicionario local
           TextButton.icon(
@@ -121,73 +54,46 @@ class _DictHomePageState extends State<DictHomePage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Busque uma palavra",
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            //Campo de busca de palavras
-            TextField(
-              onChanged: (value) => updateList(value),
-              //style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[50],
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                  borderSide: BorderSide.none,
-                ),
-                hintText: "Ex: Macaco",
-                prefixIcon: const Icon(Icons.search),
-                //prefixIconColor: ,
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            Expanded(
-              child: ListView.builder(
-                itemCount: display_list.length,
-                itemBuilder: (BuildContext context, int index) => ListTile(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WordPage(
-                          category: display_list[index].category.toString(),
-                          wordPort: display_list[index].category.toString(),
-                          meaningPort: display_list[index].category.toString(),
-                          synonymPort: display_list[index].category.toString(),
-                          translationWaiwai:
-                              display_list[index].category.toString(),
-                          meaningWaiwai:
-                              display_list[index].category.toString(),
-                          synonymWaiwai:
-                              display_list[index].category.toString(),
-                        ),
-                      ),
+      body: SafeArea(
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            if (!_isLoading) {
+              return index == 0
+                  ? _searchBar()
+                  : WordTile(
+                      word: this._wordDisplay[index - 1],
                     );
-                  },
-                  contentPadding: const EdgeInsets.all(8.0),
-                  title: Text(
-                    display_list[index].wordPort!,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(display_list[index].translationWaiwai!),
-                  //trailing: Text(dtime.toString()),
-                ),
-              ),
-            ),
-          ],
+            } else {
+              return const LoadingView();
+            }
+          },
+          itemCount: _wordDisplay.length + 1,
+        ),
+      ),
+    );
+  }
+
+  _searchBar() {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: TextField(
+        autofocus: false,
+        onChanged: (searchText) {
+          searchText = searchText.toLowerCase();
+          setState(() {
+            _wordDisplay = _words.where((u) {
+              var ptWord = u.wordPort.toLowerCase();
+              var waiWord = u.translationWaiwai.toLowerCase();
+              return ptWord.contains(searchText) ||
+                  waiWord.contains(searchText);
+            }).toList();
+          });
+        },
+        // controller: _textController,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          prefixIcon: Icon(Icons.search),
+          hintText: 'Buscar Palavras',
         ),
       ),
     );

@@ -2,25 +2,39 @@
 
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:http/http.dart' as http;
 
 String urlbase = 'http://192.168.1.8:5000'; // UFOPA
-//String urlbase = 'http://192.168.1.105:5000'; // casa
 
-Future<http.Response> pegarDicionario() async {
+
+List<wordModel> parseWord(String responseBody){
+  var list = json.decode(responseBody) as List<dynamic>;
+  var words = list.map((e) => wordModel.fromJson(e)).toList();
+  return words;
+}
+
+Future<List<wordModel>> fetchWords() async {
+  
   final prefs = await SharedPreferences.getInstance();
   final String? accessToken = prefs.getString('token');
 
-  var dicionarioUrl = Uri.parse("$urlbase/palavras");
-  var response = await http.get(dicionarioUrl, headers: {
-    'Authorization': 'Bearer $accessToken',
-    'Content-Type': 'application/json; charset=UTF-8'
-  });
+  var registerUrl = Uri.parse("$urlbase/palavras");
+  var response = await http.get(
+    registerUrl,
+    headers: {
+      'Authorization': 'Bearer $accessToken',
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+  );
 
-  
-  return response;
+  if (response.statusCode == 200) {
+    return compute(parseWord, response.body);
+  } else {
+    throw Exception(response.statusCode);
+  }
 }
 
 Future<http.Response> cadastro(senha, usuario, email) async {
