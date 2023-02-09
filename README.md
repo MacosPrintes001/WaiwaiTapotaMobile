@@ -8,8 +8,8 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Pegar palavras da API mostrar na lista de palavras
-- [ ] Criar botão dowload palavras
+- [ ] Atualizar Token do usuario periodicamente
+- [ ] Fazer front-end tela significado
 
 
 
