@@ -42,7 +42,7 @@ class _DictHomePageState extends State<DictHomePage> {
         actions: [
           //Botão para atualizar o dicionario local
           TextButton.icon(
-            onPressed: () {},
+            onPressed: fetchWords,
             icon: const Icon(
               color: Colors.white,
               Icons.download,

@@ -16,93 +16,73 @@ class WordPage extends StatelessWidget {
         elevation: 0.0,
         actions: [],
       ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 16.0,
-            ),
-            const Center(
-              child: Hero(
-                tag: "image",
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "tradutor/assets/noImage.png"), //mudar quando vier imagem(tirar const)
-                  radius: 100.0,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 16.0),
+              const Image(
+                image: AssetImage("assets/noImage.png"),
+                width: 300,
+              ),
+              const SizedBox(height: 22.0),
+              TextButton.icon(
+                icon: const Icon(Icons.mic),
+                onPressed: () {}, //dar play no audio
+                label: Text(
+                  word.wordPort,
+                  style: const TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 22.0,
-            ),
-            Text(
-              word.wordPort,
-              style: const TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.w700,
+              Text(
+                word.meaningPort.toString(),
+                style: const TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.left,
               ),
-              textAlign: TextAlign.left,
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-            Text(
-              word.meaningPort,
-              style: const TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.w700,
+              Text(
+                word.synonymPort,
+                style: const TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.left,
               ),
-              textAlign: TextAlign.left,
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-            Text(
-              word.synonymPort,
-              style: const TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.w700,
+              TextButton.icon(
+                icon: const Icon(Icons.mic),
+                onPressed: () {}, //dar play no audio
+                label: Text(
+                  word.translationWaiwai,
+                  style: const TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
-              textAlign: TextAlign.left,
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-            Text(
-              word.translationWaiwai,
-              style: const TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.w700,
+              Text(
+                word.meaningWaiwai,
+                style: const TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.left,
               ),
-              textAlign: TextAlign.left,
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-            Text(
-              word.meaningWaiwai,
-              style: const TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.w700,
+              Text(
+                word.synonymWaiwai,
+                style: const TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.left,
               ),
-              textAlign: TextAlign.left,
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-            Text(
-              word.synonymWaiwai,
-              style: const TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.w700,
-              ),
-              textAlign: TextAlign.left,
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

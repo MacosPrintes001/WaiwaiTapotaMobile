@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'system_pages/slpash_page.dart';
-import 'dictionary_materials/pages/dict_home_page.dart';
 
 
 //Função principal Flutter
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DictHomePage(),
+      home: SplashPage(),
     );
   }
 }

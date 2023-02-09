@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:http/http.dart' as http;
 
-String urlbase = 'http://192.168.1.8:5000'; // UFOPA
+String urlbase = 'http://34.95.165.58';
 
 
 List<wordModel> parseWord(String responseBody){
@@ -22,17 +22,16 @@ Future<List<wordModel>> fetchWords() async {
   final String? accessToken = prefs.getString('token');
 
   var registerUrl = Uri.parse("$urlbase/palavras");
-  var response = await http.get(
+  final http.Response response = await http.get(
     registerUrl,
     headers: {
       'Authorization': 'Bearer $accessToken',
       'Content-Type': 'application/json; charset=UTF-8'
     },
   );
-
   if (response.statusCode == 200) {
     return compute(parseWord, response.body);
-  } else {
+  }else{
     throw Exception(response.statusCode);
   }
 }
@@ -83,5 +82,5 @@ Future logoutUser() async {
       final success = await prefs.remove('token');
     },
   );
-  //print('${response.body} /n ${response.statusCode} logout');
+  print('${response.body} /n ${response.statusCode} logout');
 }
