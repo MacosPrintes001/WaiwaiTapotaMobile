@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
+import 'package:tradutor/dictionary_materials/utils/util.dart';
 import 'package:tradutor/system_pages/registration_page.dart';
 import 'package:tradutor/system_pages/slpash_page.dart';
 
@@ -117,23 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                         var response =
                             await login(_emaiController, _senhaController);
                         if (response.statusCode == 200) {
-                          final prefs = await SharedPreferences.getInstance();
-                          //login aceito
-                          var accessToken =
-                              jsonDecode(response.body)['access_token'];
-                          var refreshToken =
-                              jsonDecode(response.body)['refresh_token'];
-                              print(accessToken);
-                          await prefs
-                              .setString('token', accessToken.toString())
-                              .then((value) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SplashPage(),
-                              ),
-                            );
-                          });
+                          setLogin(context, response, _senhaController.text, _emaiController.text);
                         } else if (response.statusCode == 400) {
                           //login invalido
                           ScaffoldMessenger.of(context).showSnackBar(
