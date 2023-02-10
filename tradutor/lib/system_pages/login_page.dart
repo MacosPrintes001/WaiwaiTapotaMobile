@@ -1,12 +1,11 @@
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages
+
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 import 'package:tradutor/dictionary_materials/utils/util.dart';
 import 'package:tradutor/system_pages/registration_page.dart';
-import 'package:tradutor/system_pages/slpash_page.dart';
 
 //Tela de login de usuário
 class LoginPage extends StatefulWidget {

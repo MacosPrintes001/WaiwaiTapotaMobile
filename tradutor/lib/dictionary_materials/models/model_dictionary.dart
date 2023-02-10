@@ -34,14 +34,14 @@ class wordModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['wordPort'] = this.wordPort;
-    data['translationWaiwai'] = this.translationWaiwai;
-    data['category'] = this.category;
-    data['meaningPort'] = this.meaningPort;
-    data['meaningWaiwai'] = this.meaningWaiwai;
-    data['synonymPort'] = this.synonymPort;
-    data['synonymWaiwai'] = this.synonymWaiwai;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['wordPort'] = wordPort;
+    data['translationWaiwai'] = translationWaiwai;
+    data['category'] = category;
+    data['meaningPort'] = meaningPort;
+    data['meaningWaiwai'] = meaningWaiwai;
+    data['synonymPort'] = synonymPort;
+    data['synonymWaiwai'] = synonymWaiwai;
     //data['image'] = this.image;
     return data;
   }
@@ -59,9 +59,9 @@ class loginModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['email'] = this.email;
-    data['password'] = this.password;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['email'] = email;
+    data['password'] = password;
     return data;
   }
 }
@@ -80,10 +80,10 @@ class cadastroUserModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['username'] = this.username;
-    data['email'] = this.email;
-    data['password'] = this.password;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['username'] = username;
+    data['email'] = email;
+    data['password'] = password;
     return data;
   }
 }
