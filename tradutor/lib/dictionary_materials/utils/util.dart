@@ -1,14 +1,24 @@
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-Future<bool> verificarUser() async {
+import '../../system_pages/slpash_page.dart';
+
+Future setLogin(BuildContext context, http.Response response,
+    String senha, String usuario) async {
   final prefs = await SharedPreferences.getInstance();
-  final String? token = prefs.getString('token');
+  //login aceito
+  var accessToken = jsonDecode(response.body)['access_token'];
 
-  if (token == null) {
-    print("tem nada");
-    return false;
-  } else {
-    print("Tem token");
-    return true;
-  }
+  await prefs.setString('token', accessToken.toString());
+  await prefs.setString('user', usuario.toString().toLowerCase());
+  await prefs.setString('senha', senha.toString()).then((value) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SplashPage(),
+      ),
+    );
+  });
 }
