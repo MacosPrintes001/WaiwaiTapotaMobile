@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:http/http.dart' as http;
 
-String urlbase = 'http://34.95.165.58';
+String urlbase = 'http://34.95.153.197';
 
 
 List<wordModel> parseWord(String responseBody){
@@ -66,21 +66,14 @@ Future<http.Response> login(email, senha) async {
   return response;
 }
 
-Future logoutUser() async {
-  final prefs = await SharedPreferences.getInstance();
-  final String? accessToken = prefs.getString('token');
-
-  var registerUrl = Uri.parse("$urlbase/logout");
-  var response = await http.delete(
-    registerUrl,
+Future<http.Response> logoutUser(accessToken) async {
+  var logoutUrl = Uri.parse("$urlbase/logout");
+  final http.Response response = await http.delete(
+    logoutUrl,
     headers: {
       'Authorization': 'Bearer $accessToken',
       'Content-Type': 'application/json; charset=UTF-8'
     },
-  ).then(
-    (value) async {
-      final success = await prefs.remove('token');
-    },
   );
-  print('${response.body} /n ${response.statusCode} logout');
+  return response;
 }

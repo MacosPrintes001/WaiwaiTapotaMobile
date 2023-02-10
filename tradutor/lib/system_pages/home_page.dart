@@ -30,17 +30,32 @@ class _HomePageState extends State<HomePage> {
     }
 
     //Deslogar do sistema
-    logout() async {
-      await logoutUser().then(
-        (value) async {
+    Future logout() async {
+      final prefs = await SharedPreferences.getInstance();
+      final String? accessToken = prefs.getString('token');
+      var response = await logoutUser(accessToken);
+
+      if (response.statusCode == 200) {
+        await prefs.remove('token').then((value) {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => const LoginPage(),
             ),
           );
-        },
-      );
+        });
+      } else {
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              "EMAIL OU SENHA INVALIDOS",
+            ),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
     }
 
     return Scaffold(
