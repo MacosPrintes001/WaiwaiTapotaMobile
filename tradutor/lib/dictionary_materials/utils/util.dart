@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 import '../../system_pages/slpash_page.dart';
 
-Future setLogin(BuildContext context, http.Response response,
+Future setLogin(http.Response response,
     String senha, String usuario) async {
   final prefs = await SharedPreferences.getInstance();
   //login aceito
@@ -15,12 +15,8 @@ Future setLogin(BuildContext context, http.Response response,
 
   await prefs.setString('token', accessToken.toString());
   await prefs.setString('user', usuario.toString().toLowerCase());
-  await prefs.setString('senha', senha.toString()).then((value) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SplashPage(),
-      ),
-    );
-  });
+  await prefs.setString('senha', senha.toString());
+
+  return true;
+
 }

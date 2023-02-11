@@ -36,7 +36,9 @@ class _HomePageState extends State<HomePage> {
       var response = await logoutUser(accessToken);
 
       if (response.statusCode == 200) {
-        await prefs.remove('token').then((value) {
+        await prefs.remove('token');
+        await prefs.remove('user');
+        await prefs.remove('senha').then((value) {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -50,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           const SnackBar(
             backgroundColor: Colors.redAccent,
             content: Text(
-              "EMAIL OU SENHA INVALIDOS",
+              "ERRO, VERIFIQUE SUA CONEXÃO E TENTE NOVAMENTE",
             ),
             behavior: SnackBarBehavior.floating,
           ),

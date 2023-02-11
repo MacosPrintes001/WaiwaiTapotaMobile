@@ -23,7 +23,7 @@ class WordPage extends StatelessWidget {
             children: [
               const SizedBox(height: 16.0),
               const Image(
-                image: AssetImage("assets/noImage.png"),
+                image: AssetImage("assets/noImage.png"),//mudar para imagem dinamica
                 width: 300,
               ),
               const SizedBox(height: 22.0),
@@ -53,6 +53,7 @@ class WordPage extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
                 textAlign: TextAlign.left,
+                
               ),
               TextButton.icon(
                 icon: const Icon(Icons.mic),

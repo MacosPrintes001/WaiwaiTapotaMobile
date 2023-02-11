@@ -26,6 +26,7 @@ class _DictHomePageState extends State<DictHomePage> {
       setState(() {
         _isLoading = false;
         _words.addAll(value);
+        //criar arquivo json local com value para acessar offline
         _wordDisplay = _words;
       });
     });
@@ -43,12 +44,13 @@ class _DictHomePageState extends State<DictHomePage> {
           //Botão para atualizar o dicionario local
           TextButton.icon(
             onPressed: () {
+              //colocar função de atualizar só o listviwe
               Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const DictHomePage(),
-            ),
-          );
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DictHomePage(),
+                ),
+              );
             },
             icon: const Icon(
               color: Colors.white,

@@ -1,11 +1,11 @@
 // ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages
 
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 import 'package:tradutor/dictionary_materials/utils/util.dart';
 import 'package:tradutor/system_pages/registration_page.dart';
+import 'package:tradutor/system_pages/slpash_page.dart';
 
 //Tela de login de usuário
 class LoginPage extends StatefulWidget {
@@ -117,7 +117,16 @@ class _LoginPageState extends State<LoginPage> {
                         var response =
                             await login(_emaiController, _senhaController);
                         if (response.statusCode == 200) {
-                          setLogin(context, response, _senhaController.text, _emaiController.text);
+                          bool resp = await setLogin(response,
+                              _senhaController.text, _emaiController.text);
+                          if (resp) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SplashPage(),
+                              ),
+                            );
+                          }
                         } else if (response.statusCode == 400) {
                           //login invalido
                           ScaffoldMessenger.of(context).showSnackBar(
