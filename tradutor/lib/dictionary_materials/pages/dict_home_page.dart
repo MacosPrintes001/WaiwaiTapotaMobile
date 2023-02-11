@@ -22,7 +22,7 @@ class _DictHomePageState extends State<DictHomePage> {
     // ignore: todo
     // TODO: implement initState
     super.initState();
-    fetchWords().then((value) {
+    fetchWords(context).then((value) {
       setState(() {
         _isLoading = false;
         _words.addAll(value);
@@ -70,7 +70,7 @@ class _DictHomePageState extends State<DictHomePage> {
               return index == 0
                   ? _searchBar()
                   : WordTile(
-                      word: this._wordDisplay[index - 1],
+                      word: _wordDisplay[index - 1],
                     );
             } else {
               return const LoadingView();

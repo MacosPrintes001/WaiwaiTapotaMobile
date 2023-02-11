@@ -34,7 +34,7 @@ class wordModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['wordPort'] = wordPort;
     data['translationWaiwai'] = translationWaiwai;
     data['category'] = category;
@@ -59,7 +59,7 @@ class loginModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['email'] = email;
     data['password'] = password;
     return data;
@@ -80,7 +80,7 @@ class cadastroUserModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['username'] = username;
     data['email'] = email;
     data['password'] = password;

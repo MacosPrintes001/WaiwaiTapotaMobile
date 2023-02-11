@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tradutor/system_pages/home_page.dart';
 
 class TransHomePage extends StatefulWidget {
   const TransHomePage({Key? key}) : super(key: key);

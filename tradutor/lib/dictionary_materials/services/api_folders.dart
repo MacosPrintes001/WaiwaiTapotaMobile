@@ -1,23 +1,24 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously
 
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:http/http.dart' as http;
+import 'package:tradutor/dictionary_materials/utils/util.dart';
+import 'package:tradutor/system_pages/slpash_page.dart';
 
 String urlbase = 'http://34.95.153.197';
 
-
-List<wordModel> parseWord(String responseBody){
+List<wordModel> parseWord(String responseBody) {
   var list = json.decode(responseBody) as List<dynamic>;
   var words = list.map((e) => wordModel.fromJson(e)).toList();
   return words;
 }
 
-Future<List<wordModel>> fetchWords() async {
-  
+Future<List<wordModel>> fetchWords(BuildContext context) async {
   final prefs = await SharedPreferences.getInstance();
   final String? accessToken = prefs.getString('token');
 
@@ -29,11 +30,27 @@ Future<List<wordModel>> fetchWords() async {
       'Content-Type': 'application/json; charset=UTF-8'
     },
   );
+
+
   if (response.statusCode == 200) {
     return compute(parseWord, response.body);
-  }else{
-    throw Exception(response.statusCode);
+  } else if (response.statusCode == 401 || response.statusCode == 422) {
+    String? email = prefs.getString('user');
+    String? senha =  prefs.getString('senha');
+    var newResp = await login(email!, senha!);
+    if (newResp.statusCode == 200) {
+      bool resp = await setLogin(newResp, senha, email);
+      if (resp) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SplashPage(),
+          ),
+        );
+      }
+    }
   }
+  throw Exception(response.statusCode);
 }
 
 Future<http.Response> cadastro(senha, usuario, email) async {
@@ -51,11 +68,10 @@ Future<http.Response> cadastro(senha, usuario, email) async {
   return response;
 }
 
-Future<http.Response> login(email, senha) async {
+Future<http.Response> login(String email, String senha) async {
   var loginUrl = Uri.parse("$urlbase/auth/login");
 
-  var user = loginModel(
-      email: email.text.toString().toLowerCase(), password: senha.text);
+  var user = loginModel(email: email.toLowerCase(), password: senha);
 
   var response = await http.post(
     loginUrl,

@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (_formkey.currentState!.validate()) {
                       try {
                         var response =
-                            await login(_emaiController, _senhaController);
+                            await login(_emaiController.text.toString(), _senhaController.text.toString());
                         if (response.statusCode == 200) {
                           bool resp = await setLogin(response,
                               _senhaController.text, _emaiController.text);

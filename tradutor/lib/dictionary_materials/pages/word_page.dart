@@ -14,7 +14,7 @@ class WordPage extends StatelessWidget {
         centerTitle: true,
         title: const Text("Significado"),
         elevation: 0.0,
-        actions: [],
+        actions: const [],
       ),
       body: SingleChildScrollView(
         child: Center(
