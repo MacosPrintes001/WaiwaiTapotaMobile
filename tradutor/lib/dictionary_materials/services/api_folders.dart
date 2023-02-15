@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:tradutor/dictionary_materials/utils/util.dart';
 import 'package:tradutor/system_pages/slpash_page.dart';
 
-String urlbase = 'http://34.95.153.197';
+String urlbase = 'https://waiwaitapota.homes';
 
 List<wordModel> parseWord(String responseBody) {
   var list = json.decode(responseBody) as List<dynamic>;
@@ -31,12 +31,11 @@ Future<List<wordModel>> fetchWords(BuildContext context) async {
     },
   );
 
-
   if (response.statusCode == 200) {
     return compute(parseWord, response.body);
   } else if (response.statusCode == 401 || response.statusCode == 422) {
     String? email = prefs.getString('user');
-    String? senha =  prefs.getString('senha');
+    String? senha = prefs.getString('senha');
     var newResp = await login(email!, senha!);
     if (newResp.statusCode == 200) {
       bool resp = await setLogin(newResp, senha, email);
@@ -51,6 +50,31 @@ Future<List<wordModel>> fetchWords(BuildContext context) async {
     }
   }
   throw Exception(response.statusCode);
+}
+
+Future getWordData(id) async {
+  final prefs = await SharedPreferences.getInstance();
+  final String? accessToken = prefs.getString('token');
+
+  var imgUrl = Uri.parse("$urlbase/palavras/$id");
+  final http.Response response = await http.get(
+    imgUrl,
+    headers: {
+      'Authorization': 'Bearer $accessToken',
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+  );
+
+  if (response.statusCode == 200) {
+    var word = json.decode(response.body);
+    var resImge = await http.get(Uri.parse("$urlbase/uploads/${word['image']}"));
+
+    print(resImge);
+    // var bodyImg = json.decode(resImge.body);
+    // var boob = bodyImg[''];
+    // var image = Base64Decoder(bloob);
+
+  }
 }
 
 Future<http.Response> cadastro(senha, usuario, email) async {

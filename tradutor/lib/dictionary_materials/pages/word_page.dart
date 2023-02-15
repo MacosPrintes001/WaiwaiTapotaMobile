@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
+import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 
-class WordPage extends StatelessWidget {
+class WordPage extends StatefulWidget {
   final wordModel word;
   const WordPage({super.key, required this.word});
+
+  @override
+  State<WordPage> createState() => _WordPageState();
+}
+
+class _WordPageState extends State<WordPage> {
+  var image = "assets/noImage.png";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var blobed, img = getWordData(widget.word.wodrId).then((value) {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +38,8 @@ class WordPage extends StatelessWidget {
             children: [
               const SizedBox(height: 16.0),
               const Image(
-                image: AssetImage("assets/noImage.png"),//mudar para imagem dinamica
+                image: AssetImage(
+                    "assets/noImage.png"), //mudar para imagem dinamica
                 width: 300,
               ),
               const SizedBox(height: 22.0),
@@ -31,7 +47,7 @@ class WordPage extends StatelessWidget {
                 icon: const Icon(Icons.mic),
                 onPressed: () {}, //dar play no audio
                 label: Text(
-                  word.wordPort,
+                  widget.word.wordPort,
                   style: const TextStyle(
                     fontSize: 25.0,
                     fontWeight: FontWeight.w700,
@@ -39,7 +55,7 @@ class WordPage extends StatelessWidget {
                 ),
               ),
               Text(
-                word.meaningPort.toString(),
+                widget.word.meaningPort.toString(),
                 style: const TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.w700,
@@ -47,19 +63,18 @@ class WordPage extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
               Text(
-                word.synonymPort,
+                widget.word.synonymPort,
                 style: const TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.w700,
                 ),
                 textAlign: TextAlign.left,
-                
               ),
               TextButton.icon(
                 icon: const Icon(Icons.mic),
                 onPressed: () {}, //dar play no audio
                 label: Text(
-                  word.translationWaiwai,
+                  widget.word.translationWaiwai,
                   style: const TextStyle(
                     fontSize: 25.0,
                     fontWeight: FontWeight.w700,
@@ -67,7 +82,7 @@ class WordPage extends StatelessWidget {
                 ),
               ),
               Text(
-                word.meaningWaiwai,
+                widget.word.meaningWaiwai,
                 style: const TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.w700,
@@ -75,7 +90,7 @@ class WordPage extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
               Text(
-                word.synonymWaiwai,
+                widget.word.synonymWaiwai,
                 style: const TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.w700,

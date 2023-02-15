@@ -2,6 +2,7 @@
 // ignore_for_file: camel_case_types
 
 class wordModel {
+  String wodrId = "";
   String wordPort = "";
   String translationWaiwai = "";
   String category = "";
@@ -9,7 +10,6 @@ class wordModel {
   String meaningWaiwai = "";
   String synonymPort = "";
   String synonymWaiwai = "";
-  //String image = '';
 
   wordModel({
     required this.wordPort,
@@ -19,7 +19,7 @@ class wordModel {
     required this.meaningWaiwai,
     required this.synonymPort,
     required this.synonymWaiwai,
-    //required this.image,
+    required this.wodrId
   });
 
   wordModel.fromJson(Map<String, dynamic> json) {
@@ -30,6 +30,7 @@ class wordModel {
     meaningWaiwai = json['meaningWaiwai'];
     synonymPort = json['synonymPort'];
     synonymWaiwai = json['synonymWaiwai'];
+    wodrId = json['_id'];
     //image = json['image'];
   }
 
@@ -42,7 +43,7 @@ class wordModel {
     data['meaningWaiwai'] = meaningWaiwai;
     data['synonymPort'] = synonymPort;
     data['synonymWaiwai'] = synonymWaiwai;
-    //data['image'] = this.image;
+    data['_id'] = wodrId;
     return data;
   }
 }

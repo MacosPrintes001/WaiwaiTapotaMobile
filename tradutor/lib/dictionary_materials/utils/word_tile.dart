@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:tradutor/dictionary_materials/pages/word_page.dart';
+
 
 class WordTile extends StatelessWidget {
   final wordModel word;
@@ -16,7 +19,7 @@ class WordTile extends StatelessWidget {
           ListTile(
             title: Text(word.wordPort),
             subtitle: Text(word.translationWaiwai),
-            onTap: () {
+            onTap: () async {
               Navigator.push(
                 context,
                 MaterialPageRoute(
