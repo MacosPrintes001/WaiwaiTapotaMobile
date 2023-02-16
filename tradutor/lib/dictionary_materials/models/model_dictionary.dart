@@ -2,6 +2,7 @@
 // ignore_for_file: camel_case_types
 
 class wordModel {
+  String wodrId = "";
   String wordPort = "";
   String translationWaiwai = "";
   String category = "";
@@ -9,7 +10,6 @@ class wordModel {
   String meaningWaiwai = "";
   String synonymPort = "";
   String synonymWaiwai = "";
-  //String image = '';
 
   wordModel({
     required this.wordPort,
@@ -19,7 +19,7 @@ class wordModel {
     required this.meaningWaiwai,
     required this.synonymPort,
     required this.synonymWaiwai,
-    //required this.image,
+    required this.wodrId
   });
 
   wordModel.fromJson(Map<String, dynamic> json) {
@@ -30,19 +30,20 @@ class wordModel {
     meaningWaiwai = json['meaningWaiwai'];
     synonymPort = json['synonymPort'];
     synonymWaiwai = json['synonymWaiwai'];
+    wodrId = json['_id'];
     //image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['wordPort'] = this.wordPort;
-    data['translationWaiwai'] = this.translationWaiwai;
-    data['category'] = this.category;
-    data['meaningPort'] = this.meaningPort;
-    data['meaningWaiwai'] = this.meaningWaiwai;
-    data['synonymPort'] = this.synonymPort;
-    data['synonymWaiwai'] = this.synonymWaiwai;
-    //data['image'] = this.image;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['wordPort'] = wordPort;
+    data['translationWaiwai'] = translationWaiwai;
+    data['category'] = category;
+    data['meaningPort'] = meaningPort;
+    data['meaningWaiwai'] = meaningWaiwai;
+    data['synonymPort'] = synonymPort;
+    data['synonymWaiwai'] = synonymWaiwai;
+    data['_id'] = wodrId;
     return data;
   }
 }
@@ -59,9 +60,9 @@ class loginModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['email'] = this.email;
-    data['password'] = this.password;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['email'] = email;
+    data['password'] = password;
     return data;
   }
 }
@@ -80,10 +81,10 @@ class cadastroUserModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['username'] = this.username;
-    data['email'] = this.email;
-    data['password'] = this.password;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['username'] = username;
+    data['email'] = email;
+    data['password'] = password;
     return data;
   }
 }

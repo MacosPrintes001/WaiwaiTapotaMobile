@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/pages/dict_home_page.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
+import 'package:tradutor/system_pages/login_page.dart';
 
-import 'login_page.dart';
 
 //Tela Para escolher Dicionario OU Tradutor
 class HomePage extends StatefulWidget {
@@ -36,21 +36,25 @@ class _HomePageState extends State<HomePage> {
       var response = await logoutUser(accessToken);
 
       if (response.statusCode == 200) {
-        await prefs.remove('token').then((value) {
+        await prefs.setBool('repeat', false)
+        // await prefs.remove('token');
+        // await prefs.remove('user');
+        // await prefs.remove('senha')
+        .then((value) {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => const LoginPage(),
             ),
           );
-        });
+         });
       } else {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: Colors.redAccent,
             content: Text(
-              "EMAIL OU SENHA INVALIDOS",
+              "ERRO, VERIFIQUE SUA CONEXÃO E TENTE NOVAMENTE",
             ),
             behavior: SnackBarBehavior.floating,
           ),

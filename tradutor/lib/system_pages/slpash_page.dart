@@ -71,9 +71,9 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<bool> verificaUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("token");
+    final bool? repeat = prefs.getBool('repeat');
 
-    if (token == null) {
+    if (repeat == false || repeat == null) {
       return false;
     } else {
       return true;

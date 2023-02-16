@@ -22,10 +22,11 @@ class _DictHomePageState extends State<DictHomePage> {
     // ignore: todo
     // TODO: implement initState
     super.initState();
-    fetchWords().then((value) {
+    fetchWords(context).then((value) {
       setState(() {
         _isLoading = false;
         _words.addAll(value);
+        //criar arquivo json local com value para acessar offline
         _wordDisplay = _words;
       });
     });
@@ -42,7 +43,15 @@ class _DictHomePageState extends State<DictHomePage> {
         actions: [
           //Botão para atualizar o dicionario local
           TextButton.icon(
-            onPressed: fetchWords,
+            onPressed: () {
+              //colocar função de atualizar só o listviwe
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DictHomePage(),
+                ),
+              );
+            },
             icon: const Icon(
               color: Colors.white,
               Icons.download,
@@ -61,7 +70,7 @@ class _DictHomePageState extends State<DictHomePage> {
               return index == 0
                   ? _searchBar()
                   : WordTile(
-                      word: this._wordDisplay[index - 1],
+                      word: _wordDisplay[index - 1],
                     );
             } else {
               return const LoadingView();
@@ -89,7 +98,6 @@ class _DictHomePageState extends State<DictHomePage> {
             }).toList();
           });
         },
-        // controller: _textController,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           prefixIcon: Icon(Icons.search),

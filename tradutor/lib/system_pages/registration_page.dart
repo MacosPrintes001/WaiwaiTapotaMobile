@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously
 
 import 'dart:convert';
 
@@ -176,17 +176,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                         if (response.statusCode == 201) {
                           //cadastro aceito
-                          final prefs = await SharedPreferences.getInstance();
-                          var response =
-                              await login(_emaiController, _senhaController)
-                                  .then(
+
+                          await login(_emaiController.text.toString(),
+                                  _senhaController.text.toString())
+                              .then(
                             (value) async {
                               final prefs =
                                   await SharedPreferences.getInstance();
                               var accessToken =
                                   jsonDecode(value.body)['access_token'];
-                              var refreshToken =
-                                  jsonDecode(value.body)['refresh_token'];
                               //Criando seção do usuario
                               await prefs
                                   .setString('token', accessToken.toString())
