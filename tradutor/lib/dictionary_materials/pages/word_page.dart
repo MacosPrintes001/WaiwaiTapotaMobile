@@ -17,7 +17,9 @@ class _WordPageState extends State<WordPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var blobed, img = getWordData(widget.word.wodrId).then((value) {});
+    getWordData(widget.word.wodrId).then((value) {
+      
+    });
   }
 
   @override
