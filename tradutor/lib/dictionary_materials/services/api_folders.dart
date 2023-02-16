@@ -68,12 +68,14 @@ Future getWordData(id) async {
 
   if (response.statusCode == 200) {
     var word = json.decode(response.body);
-    var resImge =
-        await http.get(Uri.parse("$urlbase/uploads/${word['image']}"));
+    var resImge = await http.get(Uri.parse("$urlbase/uploads/${word['image']}"));
         
     if (resImge.statusCode == 200) {
-      
-      return word['image'];
+      var data = {
+        "audio": word['audio'],
+        "image": word['image']
+      };
+      return data;
     }else{
       return null;
     }
