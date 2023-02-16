@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -50,7 +52,7 @@ Future<List<wordModel>> fetchWords(BuildContext context) async {
   throw Exception(response.statusCode);
 }
 
-Future<http.Response> getWordData(id) async {
+Future getWordData(id) async {
   final prefs = await SharedPreferences.getInstance();
   final String? accessToken = prefs.getString('token');
 
@@ -61,18 +63,22 @@ Future<http.Response> getWordData(id) async {
       'Authorization': 'Bearer $accessToken',
       'Content-Type': 'application/json; charset=UTF-8'
     },
+    
   );
 
   if (response.statusCode == 200) {
     var word = json.decode(response.body);
     var resImge =
         await http.get(Uri.parse("$urlbase/uploads/${word['image']}"));
+        
     if (resImge.statusCode == 200) {
-      return resImge;
+      
+      return word['image'];
+    }else{
+      return null;
     }
   }
-
-  return response;
+  return null;
 }
 
 Future<http.Response> cadastro(senha, usuario, email) async {

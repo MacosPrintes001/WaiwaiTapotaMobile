@@ -11,14 +11,21 @@ class WordPage extends StatefulWidget {
 }
 
 class _WordPageState extends State<WordPage> {
-  var image = "assets/noImage.png";
+  var imageErro = "assets/noImage.png";
+  var url = urlbase;
+  // ignore: prefer_typing_uninitialized_variables
+  var imageId;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getWordData(widget.word.wodrId).then((value) {
-      
+      if (value != null) {
+        setState(() {
+          imageId = value;
+        });
+      }
     });
   }
 
@@ -39,10 +46,11 @@ class _WordPageState extends State<WordPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(height: 16.0),
-              const Image(
-                image: AssetImage(
-                    "assets/noImage.png"), //mudar para imagem dinamica
-                width: 300,
+              Image.network(
+                "$url/uploads/$imageId",
+                errorBuilder: (context, error, stackTrace) {
+                  return Image(image: AssetImage(imageErro));
+                },
               ),
               const SizedBox(height: 22.0),
               TextButton.icon(
