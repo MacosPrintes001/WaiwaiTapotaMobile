@@ -43,7 +43,7 @@ class _WordPageState extends State<WordPage> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(190, 0, 77, 40),
+        backgroundColor: const Color.fromRGBO(166, 51, 41, 1),
         centerTitle: true,
         title: const Text("Significado"),
         elevation: 0.0,
@@ -65,7 +65,17 @@ class _WordPageState extends State<WordPage> {
               const SizedBox(height: 22.0),
               TextButton.icon(
                 icon: const Icon(Icons.mic),
-                onPressed: () async {}, //dar play no audio pt-br
+                onPressed: () async {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.redAccent,
+                      content: Text(
+                        "Audio Não Registrado",
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }, //dar play no audio pt-br
                 label: Text(
                   widget.word.wordPort,
                   style: const TextStyle(
@@ -92,7 +102,17 @@ class _WordPageState extends State<WordPage> {
               ),
               TextButton.icon(
                 icon: const Icon(Icons.mic),
-                onPressed: () async {}, //dar play no audio waiwai
+                onPressed: () async {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.redAccent,
+                      content: Text(
+                        "Audio Não Registrado",
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }, //dar play no audio waiwai
                 label: Text(
                   widget.word.translationWaiwai,
                   style: const TextStyle(

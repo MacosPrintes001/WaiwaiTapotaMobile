@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:http/http.dart' as http;
 import 'package:tradutor/dictionary_materials/utils/util.dart';
-import 'package:tradutor/system_pages/slpash_page.dart';
+import 'package:tradutor/system_pages/splash_page.dart';
 
 String urlbase = 'https://waiwaitapota.homes';
 

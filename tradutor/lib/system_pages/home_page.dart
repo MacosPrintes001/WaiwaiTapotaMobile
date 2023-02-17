@@ -37,9 +37,6 @@ class _HomePageState extends State<HomePage> {
 
       if (response.statusCode == 200) {
         await prefs.setBool('repeat', false)
-        // await prefs.remove('token');
-        // await prefs.remove('user');
-        // await prefs.remove('senha')
         .then((value) {
           Navigator.push(
             context,
@@ -69,7 +66,7 @@ class _HomePageState extends State<HomePage> {
 
         //Welcome text
         title: const Text("Bem Vindo(a)"),
-        backgroundColor: const Color.fromARGB(190, 0, 77, 40),
+        backgroundColor: const Color.fromRGBO(166, 51, 41, 1),
       ),
 
       //Side Bar
@@ -116,8 +113,8 @@ class _HomePageState extends State<HomePage> {
             Ink(
               width: 100,
               height: 100,
-              decoration: BoxDecoration(
-                color: Colors.green[900],
+              decoration: const BoxDecoration(
+                color:  Color.fromRGBO(166, 51, 41, 1),
                 shape: BoxShape.rectangle,
               ),
 

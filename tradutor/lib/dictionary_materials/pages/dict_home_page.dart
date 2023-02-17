@@ -37,7 +37,7 @@ class _DictHomePageState extends State<DictHomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(190, 0, 77, 40),
+        backgroundColor: const Color.fromRGBO(166, 51, 41, 1),
         elevation: 0.0,
         title: const Text("Dicionario", textAlign: TextAlign.left),
         actions: [
