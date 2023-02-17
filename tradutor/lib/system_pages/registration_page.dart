@@ -28,6 +28,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   bool _verSenha = false;
   bool _verSenhaConfirm = false;
 
+  Color aletColor = Colors.redAccent;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -199,9 +201,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           } else if (response.statusCode == 400) {
                             //usuario ja existe
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                backgroundColor: Colors.redAccent,
-                                content: Text(
+                              SnackBar(
+                                backgroundColor: aletColor,
+                                content: const Text(
                                   "Email ou Nome de Usuario já cadastrado",
                                 ),
                                 behavior: SnackBarBehavior.floating,
@@ -209,9 +211,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                backgroundColor: Colors.redAccent,
-                                content: Text(
+                              SnackBar(
+                                backgroundColor: aletColor,
+                                content: const Text(
                                   "CADASTRO FALHOU",
                                 ),
                                 behavior: SnackBarBehavior.floating,
