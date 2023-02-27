@@ -85,6 +85,7 @@ class _WordPageState extends State<WordPage> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //Significado Portuges
                     Row(
@@ -94,7 +95,7 @@ class _WordPageState extends State<WordPage> {
                           "Significado:",
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                              fontWeight: FontWeight.bold, fontSize: 25),
                         ),
                         const SizedBox(
                           width: 10,
@@ -102,7 +103,7 @@ class _WordPageState extends State<WordPage> {
                         Expanded(
                             child: Text(
                           widget.word.meaningPort,
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 25),
                         )),
                       ],
                     ),
@@ -128,7 +129,7 @@ class _WordPageState extends State<WordPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "sinonimo:",
+                          "Sinonimo:",
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
@@ -146,7 +147,7 @@ class _WordPageState extends State<WordPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "sinonimo:",
+                          "Sinonimo:",
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
@@ -160,25 +161,29 @@ class _WordPageState extends State<WordPage> {
                         )
                       ],
                     ),
-                    const SizedBox(height: 6,),
-                    const Text(
-                      "Comentário",
-                      textAlign: TextAlign.left,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    const SizedBox(
+                      height: 6,
                     ),
+
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Text(
-                            widget.word.exampleSentence,
-                            textAlign: TextAlign.start,
-                            style: const TextStyle(fontSize: 20),
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: "Comentário:",
+                                      style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                    text: widget.word.exampleSentence,
+                                  ),
+                                ]),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10,
                         ),
                       ],
                     ),
