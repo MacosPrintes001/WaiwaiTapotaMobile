@@ -91,8 +91,8 @@ class _DictHomePageState extends State<DictHomePage> {
           searchText = searchText.toLowerCase();
           setState(() {
             _wordDisplay = _words.where((u) {
-              var ptWord = u.wordPort.toLowerCase();
-              var waiWord = u.translationWaiwai.toLowerCase();
+              var ptWord = u.meaningPort.toLowerCase();
+              var waiWord = u.meaningWaiwai.toLowerCase();
               return ptWord.contains(searchText) ||
                   waiWord.contains(searchText);
             }).toList();

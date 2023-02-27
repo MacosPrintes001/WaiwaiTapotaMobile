@@ -1,49 +1,50 @@
 //Modelo simplificado de dicionario
 // ignore_for_file: camel_case_types
 
+
 class wordModel {
+  String exampleSentence = "";
   String wodrId = "";
-  String wordPort = "";
-  String translationWaiwai = "";
   String category = "";
   String meaningPort = "";
   String meaningWaiwai = "";
   String synonymPort = "";
   String synonymWaiwai = "";
+  String fonema = "";
 
   wordModel({
-    required this.wordPort,
-    required this.translationWaiwai,
     required this.category,
     required this.meaningPort,
     required this.meaningWaiwai,
     required this.synonymPort,
     required this.synonymWaiwai,
-    required this.wodrId
+    required this.wodrId,
+    required this.exampleSentence,
+    required this.fonema
   });
 
   wordModel.fromJson(Map<String, dynamic> json) {
-    wordPort = json['wordPort'];
-    translationWaiwai = json['translationWaiwai'];
+    exampleSentence = json['exampleSentence'];
     category = json['category'];
     meaningPort = json['meaningPort'];
     meaningWaiwai = json['meaningWaiwai'];
     synonymPort = json['synonymPort'];
     synonymWaiwai = json['synonymWaiwai'];
     wodrId = json['_id'];
+    fonema = json['phonemicWaiwai'];
     //image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['wordPort'] = wordPort;
-    data['translationWaiwai'] = translationWaiwai;
     data['category'] = category;
     data['meaningPort'] = meaningPort;
     data['meaningWaiwai'] = meaningWaiwai;
     data['synonymPort'] = synonymPort;
     data['synonymWaiwai'] = synonymWaiwai;
+    data['exampleSentence'] = exampleSentence;
     data['_id'] = wodrId;
+    data['phonemicWaiwai'] = fonema;
     return data;
   }
 }

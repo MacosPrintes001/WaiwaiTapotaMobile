@@ -23,12 +23,12 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    Color alertColor = Colors.orange;
     return SafeArea(
       child: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage("assets/backGroud.png"))),
+                fit: BoxFit.cover, image: AssetImage("assets/backGroud.png"))),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: Center(
@@ -61,8 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                       controller: _emaiController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        label: Text('e-mail'),
+                      decoration: InputDecoration(
+                        errorStyle: TextStyle(color: alertColor),
+                        label: const Text('e-mail'),
                         hintText: 'eduardo@email.com',
                         filled: true,
                         fillColor: Colors.white,
@@ -77,13 +78,14 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 10,
                     ),
-    
+
                     //SENHA TEXT FIELD
                     TextFormField(
                       controller: _senhaController,
                       obscureText: !verSenha,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
+                        errorStyle: TextStyle(color: alertColor),
                         suffixIcon: IconButton(
                           icon: Icon(verSenha
                               ? Icons.visibility_off_outlined
@@ -111,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 12,
                     ),
-    
+
                     //BOTÂO LOGAR
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -175,11 +177,11 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
-    
+
                     const SizedBox(
                       height: 10,
                     ),
-    
+
                     //REGISTRAR AGORA
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
