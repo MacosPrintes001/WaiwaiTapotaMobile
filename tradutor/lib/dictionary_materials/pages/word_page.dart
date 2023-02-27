@@ -95,7 +95,7 @@ class _WordPageState extends State<WordPage> {
                           "Significado:",
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
+                              fontWeight: FontWeight.bold, fontSize: 28),
                         ),
                         const SizedBox(
                           width: 10,
