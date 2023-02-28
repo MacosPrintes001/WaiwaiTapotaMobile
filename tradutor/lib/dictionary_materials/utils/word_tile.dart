@@ -17,8 +17,8 @@ class WordTile extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            title: Text(word.wordPort),
-            subtitle: Text(word.translationWaiwai),
+            title: Text(word.meaningPort),
+            subtitle: Text(word.meaningWaiwai),
             onTap: () async {
               Navigator.push(
                 context,

@@ -21,16 +21,15 @@ class _WordPageState extends State<WordPage> {
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     getWordData(widget.word.wodrId).then((value) {
       if (value['image'] != null) {
-        if (value['audio'] != null) {
-          setState(() {
-            audioId = value['audio'];
-            imageId = value['image'];
-          });
-        }
+        setState(() {
+          imageId = value['image'];
+        });
+
         setState(() {
           imageId = value['image'];
         });
@@ -43,82 +42,176 @@ class _WordPageState extends State<WordPage> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(190, 0, 77, 40),
+        backgroundColor: const Color.fromRGBO(166, 51, 41, 1),
         centerTitle: true,
         title: const Text("Significado"),
         elevation: 0.0,
         actions: const [],
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: 16.0),
-              Image.network(
-                "$url/uploads/$imageId",
-                scale: 3,
-                errorBuilder: (context, error, stackTrace) {
-                  return Image(image: AssetImage(imageErro));
-                },
-              ),
-              const SizedBox(height: 22.0),
-              TextButton.icon(
-                icon: const Icon(Icons.mic),
-                onPressed: () async {}, //dar play no audio pt-br
-                label: Text(
-                  widget.word.wordPort,
-                  style: const TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.w700,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: 16.0),
+            Center(
+              child: Column(
+                children: [
+                  //Imagem
+                  Image.network(
+                    "$url/uploads/$imageId",
+                    scale: 3,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image(image: AssetImage(imageErro));
+                    },
                   ),
-                ),
-              ),
-              Text(
-                widget.word.meaningPort.toString(),
-                style: const TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.w700,
-                ),
-                textAlign: TextAlign.left,
-              ),
-              Text(
-                widget.word.synonymPort,
-                style: const TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.w700,
-                ),
-                textAlign: TextAlign.left,
-              ),
-              TextButton.icon(
-                icon: const Icon(Icons.mic),
-                onPressed: () async {}, //dar play no audio waiwai
-                label: Text(
-                  widget.word.translationWaiwai,
-                  style: const TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.w700,
+                  const SizedBox(
+                    height: 20,
                   ),
+                  //Titulo Waiwai
+                  Text(
+                    widget.word.meaningWaiwai.toString().toUpperCase(),
+                    style: const TextStyle(
+                      fontFamily: "RobotoMono",
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            //Significados
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    //Significado Portuges
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 28,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: "Significado:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                    text: widget.word.exampleSentence,
+                                  ),
+                                ]),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: "Fonema:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                    text: widget.word.fonema,
+                                  ),
+                                ]),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: "Sinonimo Pt:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                    text: widget.word.synonymPort,
+                                  ),
+                                ]),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: "Sinonimo Wai:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                    text: widget.word.synonymWaiwai,
+                                  ),
+                                ]),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: "Comentário:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                    text: widget.word.exampleSentence,
+                                  ),
+                                ]),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              Text(
-                widget.word.meaningWaiwai,
-                style: const TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.w700,
-                ),
-                textAlign: TextAlign.left,
-              ),
-              Text(
-                widget.word.synonymWaiwai,
-                style: const TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.w700,
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

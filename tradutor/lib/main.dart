@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'system_pages/slpash_page.dart';
+import 'system_pages/splash_page.dart';
 
 
 //Função principal Flutter
@@ -9,7 +9,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
