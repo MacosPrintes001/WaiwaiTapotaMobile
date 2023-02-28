@@ -89,76 +89,95 @@ class _WordPageState extends State<WordPage> {
                   children: [
                     //Significado Portuges
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Significado:",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 28),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
                         Expanded(
-                            child: Text(
-                          widget.word.meaningPort,
-                          style: const TextStyle(fontSize: 25),
-                        )),
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 28,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: "Significado:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                    text: widget.word.exampleSentence,
+                                  ),
+                                ]),
+                          ),
+                        ),
                       ],
                     ),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Fonema:",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                        Expanded(
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: "Fonema:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                    text: widget.word.fonema,
+                                  ),
+                                ]),
+                          ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          widget.word.fonema,
-                          style: const TextStyle(fontSize: 20),
-                        )
                       ],
                     ),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Sinonimo:",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                        Expanded(
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: "Sinonimo Pt:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                    text: widget.word.synonymPort,
+                                  ),
+                                ]),
+                          ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          widget.word.synonymPort,
-                          style: const TextStyle(fontSize: 20),
-                        )
                       ],
                     ),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Sinonimo:",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                        Expanded(
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: "Sinonimo Wai:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                    text: widget.word.synonymWaiwai,
+                                  ),
+                                ]),
+                          ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          widget.word.synonymWaiwai,
-                          style: const TextStyle(fontSize: 20),
-                        )
                       ],
                     ),
                     const SizedBox(
@@ -178,7 +197,8 @@ class _WordPageState extends State<WordPage> {
                                 children: <TextSpan>[
                                   const TextSpan(
                                       text: "Comentário:",
-                                      style: TextStyle(fontWeight: FontWeight.bold)),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
                                   TextSpan(
                                     text: widget.word.exampleSentence,
                                   ),
