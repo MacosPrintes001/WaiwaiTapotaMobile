@@ -64,9 +64,7 @@ class _WordPageState extends State<WordPage> {
                       return Image(image: AssetImage(imageErro));
                     },
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   //Titulo Waiwai
                   Text(
                     widget.word.meaningWaiwai.toString().toUpperCase(),
@@ -94,19 +92,20 @@ class _WordPageState extends State<WordPage> {
                           child: RichText(
                             textAlign: TextAlign.left,
                             text: TextSpan(
-                                style: const TextStyle(
-                                  fontSize: 28,
-                                  color: Colors.black,
+                              style: const TextStyle(
+                                fontSize: 28,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                const TextSpan(
+                                    text: "Significado: ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(
+                                  text: widget.word.meaningPort,
                                 ),
-                                children: <TextSpan>[
-                                  const TextSpan(
-                                      text: "Significado:",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  TextSpan(
-                                    text: widget.word.exampleSentence,
-                                  ),
-                                ]),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -117,19 +116,20 @@ class _WordPageState extends State<WordPage> {
                           child: RichText(
                             textAlign: TextAlign.left,
                             text: TextSpan(
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                const TextSpan(
+                                    text: "Fonema: ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(
+                                  text: widget.word.fonema,
                                 ),
-                                children: <TextSpan>[
-                                  const TextSpan(
-                                      text: "Fonema:",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  TextSpan(
-                                    text: widget.word.fonema,
-                                  ),
-                                ]),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -140,19 +140,20 @@ class _WordPageState extends State<WordPage> {
                           child: RichText(
                             textAlign: TextAlign.left,
                             text: TextSpan(
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                const TextSpan(
+                                    text: "Sinonimo Pt: ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(
+                                  text: widget.word.synonymPort,
                                 ),
-                                children: <TextSpan>[
-                                  const TextSpan(
-                                      text: "Sinonimo Pt:",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  TextSpan(
-                                    text: widget.word.synonymPort,
-                                  ),
-                                ]),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -163,26 +164,25 @@ class _WordPageState extends State<WordPage> {
                           child: RichText(
                             textAlign: TextAlign.left,
                             text: TextSpan(
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                const TextSpan(
+                                    text: "Sinonimo Wai: ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(
+                                  text: widget.word.synonymWaiwai,
                                 ),
-                                children: <TextSpan>[
-                                  const TextSpan(
-                                      text: "Sinonimo Wai:",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  TextSpan(
-                                    text: widget.word.synonymWaiwai,
-                                  ),
-                                ]),
+                              ],
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 6,
-                    ),
+                    const SizedBox(height: 6),
 
                     Row(
                       children: [
@@ -190,19 +190,20 @@ class _WordPageState extends State<WordPage> {
                           child: RichText(
                             textAlign: TextAlign.left,
                             text: TextSpan(
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                const TextSpan(
+                                    text: "Comentário: ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(
+                                  text: widget.word.exampleSentence,
                                 ),
-                                children: <TextSpan>[
-                                  const TextSpan(
-                                      text: "Comentário:",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  TextSpan(
-                                    text: widget.word.exampleSentence,
-                                  ),
-                                ]),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -210,7 +211,7 @@ class _WordPageState extends State<WordPage> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

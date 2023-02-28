@@ -72,7 +72,6 @@ Future getWordData(id) async {
         
     if (resImge.statusCode == 200) {
       var data = {
-        "audio": word['audio'],
         "image": word['image']
       };
       return data;
