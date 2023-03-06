@@ -4,7 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/pages/dict_home_page.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 import 'package:tradutor/system_pages/login_page.dart';
-
+import 'about_Equipe_page.dart';
+import 'about_project_page.dart';
 
 //Tela Para escolher Dicionario OU Tradutor
 class HomePage extends StatefulWidget {
@@ -29,6 +30,24 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
+    aboutProject() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AboutProjectPage(),
+        ),
+      );
+    }
+
+    aboutComponets() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AboutEquipePage(),
+        ),
+      );
+    }
+
     //Deslogar do sistema
     Future logout() async {
       final prefs = await SharedPreferences.getInstance();
@@ -36,15 +55,14 @@ class _HomePageState extends State<HomePage> {
       var response = await logoutUser(accessToken);
 
       if (response.statusCode == 200) {
-        await prefs.setBool('repeat', false)
-        .then((value) {
+        await prefs.setBool('repeat', false).then((value) {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => const LoginPage(),
             ),
           );
-         });
+        });
       } else {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
@@ -100,6 +118,20 @@ class _HomePageState extends State<HomePage> {
               ),
               label: const Text('Logout'),
             ),
+            TextButton.icon(
+              onPressed: aboutProject,
+              icon: const Icon(
+                Icons.info,
+              ),
+              label: const Text('Sobre Projeto'),
+            ),
+            TextButton.icon(
+              onPressed: aboutComponets,
+              icon: const Icon(
+                Icons.supervised_user_circle_sharp,
+              ),
+              label: const Text('Sobre Integrantes'),
+            ),
           ],
         ),
       ),
@@ -114,7 +146,7 @@ class _HomePageState extends State<HomePage> {
               width: 100,
               height: 100,
               decoration: const BoxDecoration(
-                color:  Color.fromRGBO(166, 51, 41, 1),
+                color: Color.fromRGBO(166, 51, 41, 1),
                 shape: BoxShape.rectangle,
               ),
 

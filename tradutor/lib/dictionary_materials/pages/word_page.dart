@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
@@ -12,7 +11,6 @@ class WordPage extends StatefulWidget {
 }
 
 class _WordPageState extends State<WordPage> {
-  AudioPlayer player = AudioPlayer();
 
   var imageErro = "assets/noImage.png";
   var url = urlbase;
