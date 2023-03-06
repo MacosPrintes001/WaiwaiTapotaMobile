@@ -25,11 +25,7 @@ class _WordPageState extends State<WordPage> {
     // TODO: implement initState
     super.initState();
     getWordData(widget.word.wodrId).then((value) {
-      if (value['image'] != null) {
-        setState(() {
-          imageId = value['image'];
-        });
-
+      if (value != null) {
         setState(() {
           imageId = value['image'];
         });
@@ -59,7 +55,7 @@ class _WordPageState extends State<WordPage> {
                   //Imagem
                   Image.network(
                     "$url/uploads/$imageId",
-                    scale: 3,
+                    scale: 1,
                     errorBuilder: (context, error, stackTrace) {
                       return Image(image: AssetImage(imageErro));
                     },
