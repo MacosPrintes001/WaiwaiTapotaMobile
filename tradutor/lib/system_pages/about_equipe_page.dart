@@ -24,7 +24,6 @@ class _AboutEquipePageState extends State<AboutEquipePage> {
         child: Column(
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CardMember(camila, "Camila Jacome", "Lorem ipsum")
                ],
