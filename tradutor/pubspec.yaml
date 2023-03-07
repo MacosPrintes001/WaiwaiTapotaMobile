@@ -1,8 +1,7 @@
 name: tradutor
 description: A new Flutter project.
 
-
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -34,15 +33,13 @@ dev_dependencies:
   #provider de email e senha
   provider: ^6.0.4
 
-
-
 flutter:
-
   uses-material-design: true
 
   assets:
-  - assets/
-  - assets/equipImages
+    - assets/
+    - assets/equipImages/
+    # - assets/equipImages
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

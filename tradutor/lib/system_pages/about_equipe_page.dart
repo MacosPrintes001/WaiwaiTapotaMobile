@@ -10,7 +10,13 @@ class AboutEquipePage extends StatefulWidget {
 }
 
 class _AboutEquipePageState extends State<AboutEquipePage> {
-  String camila = "assets/equipImages/camila.jpeg";
+  String camila = "assets/equipImages/camila.png";
+  String crystian = "assets/equipImages/crys.png";
+  String davia = "assets/equipImages/davia.jpg";
+  String debs = "assets/equipImages/debs.jpeg";
+  String flavia = "assets/equipImages/flavia.jpg";
+  String marcos = "assets/equipImages/marcos.jpg";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,14 +26,19 @@ class _AboutEquipePageState extends State<AboutEquipePage> {
         backgroundColor: const Color.fromRGBO(166, 51, 41, 1),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            Row(
-              children: [
-                CardMember(camila, "Camila Jacome", "Lorem ipsum")
-               ],
-            )
+            CardMember(camila, "Camila Jacome", "Pesquisadora", 3),
+            CardMember(crystian, "Crystian Printes",
+                "Desenvolvedor Frontend React", 11),
+            CardMember(davia, "Dávia Marciana Talgatti", "Pesquisadora", 9),
+            CardMember(
+                debs, "Debora marciao dos santos", "Designer Gráfico", 15),
+            CardMember(flavia, "Flávia Pessoa Monteiro",
+                "Gerente e Projetista de Software", 8),
+            CardMember(
+                marcos, "Marcos V. C. Printes", "Desenvolvedor Mobile", 8),
           ],
         ),
       ),

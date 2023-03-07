@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-CardMember(String imagem, nome, description) {
+CardMember(String imagem, String nome, String description, double escala) {
   return Card(
     child: Column(
       children: [
@@ -9,22 +9,23 @@ CardMember(String imagem, nome, description) {
           children: [
             Image.asset(
               imagem,
-              scale: 1.5,
+              scale: escala,
             ),
             const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "$nome",
-                  style: const TextStyle(fontSize: 20),
-                ),
-                Text(
-                  "$description",
-                  style: const TextStyle(fontSize: 15),
-                  textAlign: TextAlign.justify,
-                )
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Column(
+                children: [
+                  Text(
+                    nome,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    description,
+                    style: const TextStyle(fontSize: 15),
+                  )
+                ],
+              ),
             )
           ],
         )

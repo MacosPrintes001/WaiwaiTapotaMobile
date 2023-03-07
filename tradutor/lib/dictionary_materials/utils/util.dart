@@ -8,7 +8,7 @@ Future setLogin(http.Response response, String senha, String usuario) async {
   final prefs = await SharedPreferences.getInstance();
   //login aceito
   var accessToken = jsonDecode(response.body)['access_token'];
-  SharedPreferences.setMockInitialValues({});
+  //SharedPreferences.setMockInitialValues({});
 
   await prefs.setBool('repeat', false);
 
