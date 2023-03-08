@@ -29,15 +29,15 @@ class _AboutEquipePageState extends State<AboutEquipePage> {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            CardMember(camila, "Camila Jacome", "Pesquisadora", 3),
-            CardMember(crystian, "Crystian Printes",
-                "Desenvolvedor Frontend React", 11),
-            CardMember(davia, "Dávia Marciana Talgatti", "Pesquisadora", 10),
-            CardMember(
+            cardMember(camila, "Camila Jacome", "Pesquisadora", 3),
+            cardMember(crystian, "Crystian Printes",
+                "Desenvolvedor Frontend React", 15),
+            cardMember(davia, "Dávia Marciana Talgatti", "Pesquisadora", 10),
+            cardMember(
                 debs, "Debora marciao dos santos", "Designer Gráfico", 15),
-            CardMember(flavia, "Flávia Pessoa Monteiro",
+            cardMember(flavia, "Flávia Pessoa Monteiro",
                 "Gerente e Projetista de Software", 10),
-            CardMember(
+            cardMember(
                 marcos, "Marcos V. C. Printes", "Desenvolvedor Mobile", 7),
           ],
         ),

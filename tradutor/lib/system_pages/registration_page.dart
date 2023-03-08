@@ -1,11 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously
 
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
+import 'package:tradutor/dictionary_materials/utils/util.dart';
 
 import 'login_page.dart';
 import 'splash_page.dart';
@@ -53,7 +52,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       height: 200,
                     ),
                     //TITLE
-    
+
                     const SizedBox(
                       height: 70,
                     ),
@@ -61,12 +60,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     TextFormField(
                       controller: _userNameController,
                       decoration: InputDecoration(
-                        label: const Text('Nome de usuario'),
-                        hintText: 'Eduardo Silva',
-                        filled: true,
-                        fillColor: Colors.white,
-                        errorStyle: TextStyle(color: alertColor)
-                      ),
+                          label: const Text('Nome de usuario'),
+                          hintText: 'Eduardo Silva',
+                          filled: true,
+                          fillColor: Colors.white,
+                          errorStyle: TextStyle(color: alertColor)),
                       validator: (email) {
                         if (email == null || email.isEmpty) {
                           return 'Digite um nome de usuario';
@@ -174,36 +172,36 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       onPressed: () async {
                         if (_formkey.currentState!.validate()) {
                           try {
-                            var response = await cadastro(_senhaController,
+                            var responseCad = await cadastro(_senhaController,
                                 _userNameController, _emaiController);
-    
-                            if (response.statusCode == 201) {
+
+                            if (responseCad.statusCode == 201) {
                               //cadastro aceito
-    
+
                               await login(_emaiController.text.toString(),
                                       _senhaController.text.toString())
                                   .then(
                                 (value) async {
-                                  final prefs =
-                                      await SharedPreferences.getInstance();
-                                  var accessToken =
-                                      jsonDecode(value.body)['access_token'];
-                                  //Criando seção do usuario
-                                  await prefs
-                                      .setString('token', accessToken.toString())
-                                      .then((value) {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const SplashPage(),
-                                      ),
-                                    );
-                                  });
-    
+                                  
+                                  if (value.statusCode  == 200) {
+                                    bool resp = await setLogin(
+                                        value,
+                                        _senhaController.text,
+                                        _emaiController.text);
+                                    if (resp) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SplashPage(),
+                                        ),
+                                      );
+                                    }
+                                  }
                                   //chamar tela home
                                 },
                               );
-                            } else if (response.statusCode == 400) {
+                            } else if (responseCad.statusCode == 400) {
                               //usuario ja existe
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
