@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-CardMember(String imagem, String nome, String description, double escala) {
+cardMember(String imagem, String nome, String description, double escala) {
   return Card(
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,

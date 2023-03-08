@@ -15,7 +15,7 @@ String urlbase = 'https://waiwaitapota.homes';
 Future<List<wordModel>> updateWords(BuildContext context) async {
   final prefs = await SharedPreferences.getInstance();
   final String? accessToken = prefs.getString('token');
-  
+
   var registerUrl = Uri.parse("$urlbase/palavras");
   final http.Response response = await http.get(
     registerUrl,
@@ -110,7 +110,10 @@ Future<List<wordModel>> fetchWords(BuildContext context) async {
         }
       }
     }
-  } catch (err) {}
+  } catch (err) {
+      throw Exception(err);
+
+  }
 
   throw Exception(500);
 }
