@@ -44,13 +44,16 @@ class _DictHomePageState extends State<DictHomePage> {
           //Botão para atualizar o dicionario local
           TextButton.icon(
             onPressed: () {
-              //colocar função de atualizar só o listviwe
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const DictHomePage(),
-                ),
-              );
+              setState(() {
+                _isLoading = true;
+              });
+              updateWords(context).then((value) {
+                setState(() {
+                  _isLoading = false;
+                  _words.addAll(value);
+                  _wordDisplay = _words;
+                });
+              });
             },
             icon: const Icon(
               color: Colors.white,
