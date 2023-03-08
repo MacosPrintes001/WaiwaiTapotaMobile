@@ -2,31 +2,30 @@ import 'package:flutter/material.dart';
 
 CardMember(String imagem, String nome, String description, double escala) {
   return Card(
-    child: Column(
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        Image.asset(
+          imagem,
+          scale: escala,
+        ),
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              imagem,
-              scale: escala,
+            const SizedBox(
+              height: 2,
             ),
-            const SizedBox(width: 10),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Column(
-                children: [
-                  Text(
-                    nome,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  Text(
-                    description,
-                    style: const TextStyle(fontSize: 15),
-                  )
-                ],
-              ),
-            )
+            Text(
+              nome,
+              style: const TextStyle(fontSize: 20),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              description,
+              style: const TextStyle(fontSize: 15),
+            ),
           ],
         )
       ],
