@@ -32,13 +32,13 @@ class _AboutEquipePageState extends State<AboutEquipePage> {
             CardMember(camila, "Camila Jacome", "Pesquisadora", 3),
             CardMember(crystian, "Crystian Printes",
                 "Desenvolvedor Frontend React", 11),
-            CardMember(davia, "Dávia Marciana Talgatti", "Pesquisadora", 9),
+            CardMember(davia, "Dávia Marciana Talgatti", "Pesquisadora", 10),
             CardMember(
                 debs, "Debora marciao dos santos", "Designer Gráfico", 15),
             CardMember(flavia, "Flávia Pessoa Monteiro",
-                "Gerente e Projetista de Software", 8),
+                "Gerente e Projetista de Software", 10),
             CardMember(
-                marcos, "Marcos V. C. Printes", "Desenvolvedor Mobile", 8),
+                marcos, "Marcos V. C. Printes", "Desenvolvedor Mobile", 7),
           ],
         ),
       ),
