@@ -44,16 +44,6 @@ class _LoginPageState extends State<LoginPage> {
                       image: AssetImage('assets/tapotaLogo.png'),
                       height: 180,
                     ),
-                    //TITLE
-                    // Text(
-                    //   "Waiwai Translator",
-                    //   style: GoogleFonts.roboto(
-                    //     color: Colors.white,
-                    //     fontWeight: FontWeight.bold,
-                    //     fontSize: 42,
-                    //   ),
-                    //   textAlign: TextAlign.center,
-                    // ),
                     const SizedBox(
                       height: 80,
                     ),

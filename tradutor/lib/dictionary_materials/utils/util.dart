@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, invalid_use_of_visible_for_testing_member
 
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,9 +8,8 @@ Future setLogin(http.Response response, String senha, String usuario) async {
   final prefs = await SharedPreferences.getInstance();
   //login aceito
   var accessToken = jsonDecode(response.body)['access_token'];
-  await prefs.remove('token');
-  await prefs.remove('user');
-  await prefs.remove('senha');
+  //SharedPreferences.setMockInitialValues({});
+
   await prefs.setBool('repeat', false);
 
   await prefs.setString('token', accessToken.toString());

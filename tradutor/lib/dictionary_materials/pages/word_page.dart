@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
@@ -12,7 +11,6 @@ class WordPage extends StatefulWidget {
 }
 
 class _WordPageState extends State<WordPage> {
-  AudioPlayer player = AudioPlayer();
 
   var imageErro = "assets/noImage.png";
   var url = urlbase;
@@ -25,11 +23,7 @@ class _WordPageState extends State<WordPage> {
     // TODO: implement initState
     super.initState();
     getWordData(widget.word.wodrId).then((value) {
-      if (value['image'] != null) {
-        setState(() {
-          imageId = value['image'];
-        });
-
+      if (value != null) {
         setState(() {
           imageId = value['image'];
         });
@@ -59,7 +53,7 @@ class _WordPageState extends State<WordPage> {
                   //Imagem
                   Image.network(
                     "$url/uploads/$imageId",
-                    scale: 3,
+                    scale: 1,
                     errorBuilder: (context, error, stackTrace) {
                       return Image(image: AssetImage(imageErro));
                     },
