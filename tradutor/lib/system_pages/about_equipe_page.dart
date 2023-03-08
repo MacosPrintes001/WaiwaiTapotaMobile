@@ -31,7 +31,7 @@ class _AboutEquipePageState extends State<AboutEquipePage> {
           children: [
             CardMember(camila, "Camila Jacome", "Pesquisadora", 3),
             CardMember(crystian, "Crystian Printes",
-                "Desenvolvedor Frontend React", 11),
+                "Desenvolvedor Frontend React", 15),
             CardMember(davia, "Dávia Marciana Talgatti", "Pesquisadora", 10),
             CardMember(
                 debs, "Debora marciao dos santos", "Designer Gráfico", 15),
