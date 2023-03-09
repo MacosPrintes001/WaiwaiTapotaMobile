@@ -12,48 +12,50 @@ import 'package:tradutor/system_pages/splash_page.dart';
 
 String urlbase = 'https://waiwaitapota.homes';
 
-Future<List<wordModel>> updateWords(BuildContext context) async {
+Future updateWords(BuildContext context) async {
   final prefs = await SharedPreferences.getInstance();
   final String? accessToken = prefs.getString('token');
 
-  var registerUrl = Uri.parse("$urlbase/palavras");
-  final http.Response response = await http.get(
-    registerUrl,
-    headers: {
-      'Authorization': 'Bearer $accessToken',
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
-  );
-
-  if (response.statusCode == 200) {
-    await prefs.setString('dicionario', response.body);
-    return compute(parseWord, response.body);
-  } else if (response.statusCode == 401 || response.statusCode == 422) {
-    String? email = prefs.getString('user');
-    String? senha = prefs.getString('senha');
-    var newResp = await login(email!, senha!);
-    if (newResp.statusCode == 200) {
-      bool resp = await setLogin(newResp, senha, email);
-      if (resp) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: Colors.redAccent,
-            content: Text(
-              "Token expirou, reconectanto",
+  try {
+    var registerUrl = Uri.parse("$urlbase/palavras");
+    final http.Response response = await http.get(
+      registerUrl,
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+    );
+    if (response.statusCode == 200) {
+      await prefs.setString('dicionario', response.body);
+      return compute(parseWord, response.body);
+    } else if (response.statusCode == 401 || response.statusCode == 422) {
+      String? email = prefs.getString('user');
+      String? senha = prefs.getString('senha');
+      var newResp = await login(email!, senha!);
+      if (newResp.statusCode == 200) {
+        bool resp = await setLogin(newResp, senha, email);
+        if (resp) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.redAccent,
+              content: Text(
+                "Token expirou, reconectanto",
+              ),
+              behavior: SnackBarBehavior.floating,
             ),
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const SplashPage(),
-          ),
-        );
+          );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SplashPage(),
+            ),
+          );
+        }
       }
     }
+  } catch (err) {
+    return null;
   }
-  throw Exception(500);
 }
 
 List<wordModel> parseWord(String responseBody) {
@@ -122,28 +124,31 @@ Future getWordData(id) async {
   final String? accessToken = prefs.getString('token');
 
   var imgUrl = Uri.parse("$urlbase/palavras/$id");
-  final http.Response response = await http.get(
-    imgUrl,
-    headers: {
-      'Authorization': 'Bearer $accessToken',
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
-  );
+  try {
+    final http.Response response = await http.get(
+      imgUrl,
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+    );
+    if (response.statusCode == 200) {
+      var word = json.decode(response.body);
+      if (word['image'] != null) {
+        var resImge =
+            await http.get(Uri.parse("$urlbase/uploads/${word['image']}"));
 
-  if (response.statusCode == 200) {
-    var word = json.decode(response.body);
-    if (word['image'] != null) {
-      var resImge =
-          await http.get(Uri.parse("$urlbase/uploads/${word['image']}"));
-
-      if (resImge.statusCode == 200) {
-        final bytes = resImge.bodyBytes;
-        final image = base64Decode(base64Encode(bytes));
-        return image;
+        if (resImge.statusCode == 200) {
+          final bytes = resImge.bodyBytes;
+          final image = base64Decode(base64Encode(bytes));
+          return image;
+        }
+      } else {
+        return null;
       }
-    } else {
-      return null;
     }
+  } catch (err) {
+    return 404;
   }
 
   throw Exception();
@@ -164,28 +169,34 @@ Future<http.Response> cadastro(senha, usuario, email) async {
   return response;
 }
 
-Future<http.Response> login(String email, String senha) async {
-  var loginUrl = Uri.parse("$urlbase/auth/login");
+Future login(String email, String senha) async {
+  try {
+    var loginUrl = Uri.parse("$urlbase/auth/login");
+    var user = loginModel(email: email.toLowerCase(), password: senha);
+    var response = await http.post(
+      loginUrl,
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+      body: jsonEncode(user),
+    );
 
-  var user = loginModel(email: email.toLowerCase(), password: senha);
-
-  var response = await http.post(
-    loginUrl,
-    headers: {'Content-Type': 'application/json; charset=UTF-8'},
-    body: jsonEncode(user),
-  );
-
-  return response;
+    return response;
+  } catch (err) {
+    return null;
+  }
 }
 
-Future<http.Response> logoutUser(accessToken) async {
-  var logoutUrl = Uri.parse("$urlbase/logout");
-  final http.Response response = await http.delete(
-    logoutUrl,
-    headers: {
-      'Authorization': 'Bearer $accessToken',
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
-  );
-  return response;
+Future logoutUser(accessToken) async {
+  try {
+    var logoutUrl = Uri.parse("$urlbase/logout");
+    final http.Response response = await http.delete(
+      logoutUrl,
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+    );
+    return response;
+  } catch (err) {
+    return null;
+  }
 }

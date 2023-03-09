@@ -48,11 +48,23 @@ class _DictHomePageState extends State<DictHomePage> {
                 _isLoading = true;
               });
               updateWords(context).then((value) {
-                setState(() {
-                  _isLoading = false;
-                  _words.addAll(value);
-                  _wordDisplay = _words;
-                });
+                if (value != null) {
+                  setState(() {
+                    _isLoading = false;
+                    _words.addAll(value);
+                    _wordDisplay = _words;
+                  });
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.redAccent,
+                      content: Text(
+                        "SEM CONEXÃO COM INTERNET",
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
               });
             },
             icon: const Icon(

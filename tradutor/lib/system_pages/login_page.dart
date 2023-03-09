@@ -111,10 +111,22 @@ class _LoginPageState extends State<LoginPage> {
                           minimumSize: const Size(40, 40)),
                       onPressed: () async {
                         if (_formkey.currentState!.validate()) {
-                          try {
-                            var response = await login(
-                                _emaiController.text.toString(),
-                                _senhaController.text.toString());
+                          var response = await login(
+                              _emaiController.text.toString(),
+                              _senhaController.text.toString());
+
+                          if (response == null) {
+                            //uruario sem internet tentou fazer login
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                backgroundColor: Colors.redAccent,
+                                content: Text(
+                                  "SEM CONEXÃO COM INTERNET",
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          } else {
                             if (response.statusCode == 200) {
                               bool resp = await setLogin(response,
                                   _senhaController.text, _emaiController.text);
@@ -138,27 +150,16 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               );
                             } else {
-                              //api fora do ar
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   backgroundColor: Colors.redAccent,
                                   content: Text(
-                                    "API FORA DO AR",
+                                    "ERRO INTERNO, CONTATAR O SUPORTE",
                                   ),
                                   behavior: SnackBarBehavior.floating,
                                 ),
                               );
                             }
-                          } catch (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                backgroundColor: Colors.redAccent,
-                                content: Text(
-                                  "SEM CONEXÃO COM INTERNET",
-                                ),
-                                behavior: SnackBarBehavior.floating,
-                              ),
-                            );
                           }
                         }
                       },
