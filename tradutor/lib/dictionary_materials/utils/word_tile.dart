@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:tradutor/dictionary_materials/pages/word_page.dart';
-
 
 class WordTile extends StatelessWidget {
   final wordModel word;
@@ -17,8 +17,11 @@ class WordTile extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            title: Text(word.meaningWaiwai),
-            subtitle: Text(word.meaningPort),
+            title: Text(
+              word.meaningWaiwai,
+              style: GoogleFonts.openSans(),
+            ),
+            subtitle: Text(word.meaningPort, style: GoogleFonts.openSans()),
             onTap: () async {
               Navigator.push(
                 context,

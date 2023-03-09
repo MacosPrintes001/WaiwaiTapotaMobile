@@ -3,6 +3,7 @@ import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 import 'package:tradutor/dictionary_materials/utils/loading_widget.dart';
 import 'package:tradutor/dictionary_materials/utils/word_tile.dart';
+import "package:google_fonts/google_fonts.dart";
 
 class DictHomePage extends StatefulWidget {
   const DictHomePage({super.key});
@@ -23,12 +24,27 @@ class _DictHomePageState extends State<DictHomePage> {
     // TODO: implement initState
     super.initState();
     fetchWords(context).then((value) {
-      setState(() {
-        _isLoading = false;
-        _words.addAll(value);
-        //criar arquivo json local com value para acessar offline
-        _wordDisplay = _words;
-      });
+      if (value != null) {
+        setState(() {
+          _isLoading = false;
+          _words.addAll(value);
+          _wordDisplay = _words;
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              "SEM CONEXÃO COM INTERNET",
+            ),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        setState(() {
+          _isLoading = false;
+          _wordDisplay = [];
+        });
+      }
     });
   }
 
@@ -64,6 +80,10 @@ class _DictHomePageState extends State<DictHomePage> {
                       behavior: SnackBarBehavior.floating,
                     ),
                   );
+                  setState(() {
+                    _isLoading = false;
+                    _wordDisplay = [];
+                  });
                 }
               });
             },
@@ -101,6 +121,9 @@ class _DictHomePageState extends State<DictHomePage> {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: TextField(
+        style: GoogleFonts.openSans(
+          color: Colors.black,
+        ),
         autofocus: false,
         onChanged: (searchText) {
           searchText = searchText.toLowerCase();

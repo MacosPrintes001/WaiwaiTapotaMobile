@@ -3,6 +3,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 
@@ -114,14 +115,11 @@ class _WordPageState extends State<WordPage> {
 
                   const SizedBox(height: 20),
                   //Titulo Waiwai
-                  Text(
-                    widget.word.meaningWaiwai.toString().toUpperCase(),
-                    style: const TextStyle(
-                      fontFamily: "RobotoMono",
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  Text(widget.word.meaningWaiwai.toString().toUpperCase(),
+                      style: GoogleFonts.openSans(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ))
                 ],
               ),
             ),
@@ -145,10 +143,10 @@ class _WordPageState extends State<WordPage> {
                                 color: Colors.black,
                               ),
                               children: <TextSpan>[
-                                const TextSpan(
+                                TextSpan(
                                     text: "Significado: ",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                    style: GoogleFonts.openSans(
+                                        fontWeight: FontWeight.bold)),
                                 TextSpan(
                                   text: widget.word.meaningPort,
                                 ),
