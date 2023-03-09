@@ -8,8 +8,7 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Conexão com Firebase
-- [ ] Criar tela "Sobre"
+- [ ] Resolver Possiveis Bugs
 
 
 ## Sobre o WaiwaiTapotaMobile
