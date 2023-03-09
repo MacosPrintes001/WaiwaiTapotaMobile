@@ -15,6 +15,7 @@ class DictHomePage extends StatefulWidget {
 class _DictHomePageState extends State<DictHomePage> {
   final List<wordModel> _words = <wordModel>[];
   List<wordModel> _wordDisplay = <wordModel>[];
+  final _scrollController = ScrollController();
 
   bool _isLoading = true;
 
@@ -100,6 +101,8 @@ class _DictHomePageState extends State<DictHomePage> {
       ),
       body: SafeArea(
         child: ListView.builder(
+          controller: _scrollController,
+          itemCount: _wordDisplay.length + 1,
           itemBuilder: (context, index) {
             if (!_isLoading) {
               return index == 0
@@ -111,8 +114,18 @@ class _DictHomePageState extends State<DictHomePage> {
               return const LoadingView();
             }
           },
-          itemCount: _wordDisplay.length + 1,
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color.fromRGBO(166, 51, 41, 1),
+        onPressed: () {
+          _scrollController.animateTo(
+            0,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeIn,
+          );
+        },
+        child: const Icon(Icons.arrow_upward),
       ),
     );
   }
