@@ -89,3 +89,23 @@ class cadastroUserModel {
     return data;
   }
 }
+
+class MyImage {
+  final String id;
+  final String nome;
+  final String caminho;
+  final String extensao;
+
+  MyImage({required this.id, required this.nome, required this.caminho, required this.extensao});
+
+  factory MyImage.fromJson(Map<String, dynamic> json) {
+    return MyImage(
+      id: json['_id'] as String,
+      nome: json['nome'] as String,
+      caminho: json['caminho'] as String,
+      extensao: json['extensao'] as String,
+    );
+  }
+
+  String get url => caminho + id + extensao;
+}
