@@ -1,4 +1,5 @@
-import 'dart:convert';
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -33,14 +34,13 @@ class _WordPageState extends State<WordPage> {
         } else {
           setState(() {
             _imageError =
-                'Erro ao carregar imagem. Verifique sua conexão e tente novamente.';
+                '⚠ Erro ao carregar imagem. \nEsta palavra não possui imagem ainda,\n ou você está offline!';
           });
         }
       });
     } catch (err) {
       setState(() {
-        _imageError =
-            'Erro ao carregar imagem. Verifique sua conexão e tente novamente.';
+        _imageError = 'Erro ao carregar imagem';
       });
     }
   }
@@ -69,13 +69,20 @@ class _WordPageState extends State<WordPage> {
                       ? Column(
                           children: [
                             if (_imageError != null)
-                              Column(
+                              Stack(
                                 children: [
                                   Image(image: AssetImage(imageErro)),
-                                  Text(
-                                    _imageError.toString(),
-                                    textAlign: TextAlign.center,
-                                  )
+                                  Positioned(
+                                    top: 13.0,
+                                    left: 30.0,
+                                    child: Text(
+                                      _imageError.toString(),
+                                      style: const TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                    ),
+                                  ),
                                 ],
                               ),
                             if (_imageError == null)
