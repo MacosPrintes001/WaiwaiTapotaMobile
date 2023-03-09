@@ -52,18 +52,10 @@ class _HomePageState extends State<HomePage> {
     Future logout() async {
       final prefs = await SharedPreferences.getInstance();
       final String? accessToken = prefs.getString('token');
+
       var response = await logoutUser(accessToken);
 
-      if (response.statusCode == 200) {
-        await prefs.setBool('repeat', false).then((value) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const LoginPage(),
-            ),
-          );
-        });
-      } else {
+      if (response == null) {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -74,6 +66,17 @@ class _HomePageState extends State<HomePage> {
             behavior: SnackBarBehavior.floating,
           ),
         );
+      } else {
+        if (response.statusCode == 200) {
+          await prefs.setBool('repeat', false).then((value) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginPage(),
+              ),
+            );
+          });
+        }
       }
     }
 

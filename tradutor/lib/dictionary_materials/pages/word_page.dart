@@ -27,14 +27,19 @@ class _WordPageState extends State<WordPage> {
 
     try {
       getWordData(widget.word.wodrId).then((value) {
-        if (value != null) {
+        if (value != null && value != 404) {
           setState(() {
             _imageUrl = value;
+          });
+        } else if (value == 404) {
+          setState(() {
+            _imageError =
+                "⚠ Erro ao carregar imagem. \nVerifique sua conexão e tente novamente!";
           });
         } else {
           setState(() {
             _imageError =
-                '⚠ Erro ao carregar imagem. \nEsta palavra não possui imagem ainda,\n ou você está offline!';
+                '⚠ Erro ao carregar imagem. \nEsta palavra não possui imagem ainda!';
           });
         }
       });
@@ -70,17 +75,24 @@ class _WordPageState extends State<WordPage> {
                           children: [
                             if (_imageError != null)
                               Stack(
+                                alignment: Alignment.center,
                                 children: [
                                   Image(image: AssetImage(imageErro)),
-                                  Positioned(
-                                    top: 13.0,
-                                    left: 30.0,
-                                    child: Text(
-                                      _imageError.toString(),
-                                      style: const TextStyle(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
+                                  Positioned.fill(
+                                    child: Container(
+                                      padding: const EdgeInsets.all(16.0),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.8),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      child: Text(
+                                        _imageError.toString(),
+                                        style: const TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 24.0),
+                                      ),
                                     ),
                                   ),
                                 ],
