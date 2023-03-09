@@ -141,6 +141,8 @@ Future getWordData(id) async {
         final image = base64Decode(base64Encode(bytes));
         return image;
       }
+    } else {
+      return null;
     }
   }
 

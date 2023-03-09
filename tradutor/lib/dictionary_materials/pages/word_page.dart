@@ -26,9 +26,16 @@ class _WordPageState extends State<WordPage> {
 
     try {
       getWordData(widget.word.wodrId).then((value) {
-        setState(() {
-          _imageUrl = value;
-        });
+        if (value != null) {
+          setState(() {
+            _imageUrl = value;
+          });
+        } else {
+          setState(() {
+            _imageError =
+                'Erro ao carregar imagem. Verifique sua conexão e tente novamente.';
+          });
+        }
       });
     } catch (err) {
       setState(() {
@@ -61,17 +68,31 @@ class _WordPageState extends State<WordPage> {
                   _imageUrl == null
                       ? Column(
                           children: [
-                            const CircularProgressIndicator(),
-                            const SizedBox(height: 16),
-                            const Text('Carregando imagem...'),
-                            
-                            if (_imageError != null) Text(_imageError!),
+                            if (_imageError != null)
+                              Column(
+                                children: [
+                                  Image(image: AssetImage(imageErro)),
+                                  Text(
+                                    _imageError.toString(),
+                                    textAlign: TextAlign.center,
+                                  )
+                                ],
+                              ),
+                            if (_imageError == null)
+                              Column(
+                                children: const [
+                                  CircularProgressIndicator(),
+                                  SizedBox(height: 16),
+                                  Text('Carregando imagem...')
+                                ],
+                              ),
                           ],
                         )
                       : Image.memory(
                           Uint8List.fromList(_imageUrl),
                           fit: BoxFit.cover,
                         ),
+
                   const SizedBox(height: 20),
                   //Titulo Waiwai
                   Text(
