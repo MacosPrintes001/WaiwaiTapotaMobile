@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
 
@@ -111,8 +111,7 @@ Future<List<wordModel>> fetchWords(BuildContext context) async {
       }
     }
   } catch (err) {
-      throw Exception(err);
-
+    throw Exception(err);
   }
 
   throw Exception(500);
@@ -133,17 +132,19 @@ Future getWordData(id) async {
 
   if (response.statusCode == 200) {
     var word = json.decode(response.body);
-    var resImge =
-        await http.get(Uri.parse("$urlbase/uploads/${word['image']}"));
+    if (word['image'] != null) {
+      var resImge =
+          await http.get(Uri.parse("$urlbase/uploads/${word['image']}"));
 
-    if (resImge.statusCode == 200) {
-      var data = {"image": word['image']};
-      return data;
-    } else {
-      return null;
+      if (resImge.statusCode == 200) {
+        final bytes = resImge.bodyBytes;
+        final image = base64Decode(base64Encode(bytes));
+        return image;
+      }
     }
   }
-  return null;
+
+  throw Exception();
 }
 
 Future<http.Response> cadastro(senha, usuario, email) async {

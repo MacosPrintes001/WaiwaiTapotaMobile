@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
@@ -11,24 +14,28 @@ class WordPage extends StatefulWidget {
 }
 
 class _WordPageState extends State<WordPage> {
-
   var imageErro = "assets/noImage.png";
-  var url = urlbase;
-  // ignore: prefer_typing_uninitialized_variables
-  var imageId, audioId;
+  var _imageUrl;
+  String? _imageError;
 
   @override
   void initState() {
     // ignore: todo
     // TODO: implement initState
     super.initState();
-    getWordData(widget.word.wodrId).then((value) {
-      if (value != null) {
+
+    try {
+      getWordData(widget.word.wodrId).then((value) {
         setState(() {
-          imageId = value['image'];
+          _imageUrl = value;
         });
-      }
-    });
+      });
+    } catch (err) {
+      setState(() {
+        _imageError =
+            'Erro ao carregar imagem. Verifique sua conexão e tente novamente.';
+      });
+    }
   }
 
   @override
@@ -51,13 +58,20 @@ class _WordPageState extends State<WordPage> {
               child: Column(
                 children: [
                   //Imagem
-                  Image.network(
-                    "$url/uploads/$imageId",
-                    scale: 1,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image(image: AssetImage(imageErro));
-                    },
-                  ),
+                  _imageUrl == null
+                      ? Column(
+                          children: [
+                            const CircularProgressIndicator(),
+                            const SizedBox(height: 16),
+                            const Text('Carregando imagem...'),
+                            
+                            if (_imageError != null) Text(_imageError!),
+                          ],
+                        )
+                      : Image.memory(
+                          Uint8List.fromList(_imageUrl),
+                          fit: BoxFit.cover,
+                        ),
                   const SizedBox(height: 20),
                   //Titulo Waiwai
                   Text(
