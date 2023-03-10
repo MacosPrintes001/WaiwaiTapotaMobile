@@ -59,13 +59,14 @@ Future updateWords(BuildContext context) async {
 }
 
 List<wordModel> parseWord(String responseBody) {
-  var list = json.decode(responseBody) as List<dynamic>;
+  var listUtf8 = utf8.decode(responseBody.codeUnits);
+  var list = json.decode(listUtf8) as List<dynamic>;
   var words = list.map((e) => wordModel.fromJson(e)).toList();
 
   return words;
 }
 
-Future<List<wordModel>> fetchWords(BuildContext context) async {
+Future fetchWords(BuildContext context) async {
   final prefs = await SharedPreferences.getInstance();
   final String? accessToken = prefs.getString('token');
   final String? dicionarioOff = prefs.getString('dicionario');
@@ -113,10 +114,8 @@ Future<List<wordModel>> fetchWords(BuildContext context) async {
       }
     }
   } catch (err) {
-    throw Exception(err);
+    return null;
   }
-
-  throw Exception(500);
 }
 
 Future getWordData(id) async {

@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
 import 'dart:typed_data';
 
-import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
+import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 
 class WordPage extends StatefulWidget {
@@ -63,201 +62,169 @@ class _WordPageState extends State<WordPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 16.0),
+            const SizedBox(
+              height: 16,
+            ),
+            // Imagem centralizada
             Center(
-              child: Column(
-                children: [
-                  //Imagem
-                  _imageUrl == null
-                      ? Column(
-                          children: [
-                            if (_imageError != null)
-                              Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Image(image: AssetImage(imageErro)),
-                                  Positioned.fill(
-                                    child: Container(
-                                      padding: const EdgeInsets.all(16.0),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.8),
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
-                                      ),
-                                      child: Text(
-                                        _imageError.toString(),
-                                        style: const TextStyle(
-                                            color: Colors.red,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 24.0),
-                                      ),
+              child: _imageUrl == null
+                  ? Column(
+                      children: [
+                        if (_imageError != null)
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Image(image: AssetImage(imageErro)),
+                              Positioned.fill(
+                                child: Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.8),
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      _imageError.toString(),
+                                      style: GoogleFonts.openSans(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0),
                                     ),
                                   ),
-                                ],
+                                ),
                               ),
-                            if (_imageError == null)
-                              Column(
-                                children: const [
-                                  CircularProgressIndicator(),
-                                  SizedBox(height: 16),
-                                  Text('Carregando imagem...')
-                                ],
-                              ),
-                          ],
-                        )
-                      : Image.memory(
-                          Uint8List.fromList(_imageUrl),
-                          fit: BoxFit.cover,
-                        ),
-
-                  const SizedBox(height: 20),
-                  //Titulo Waiwai
-                  Text(
-                    widget.word.meaningWaiwai.toString().toUpperCase(),
-                    style: const TextStyle(
-                      fontFamily: "RobotoMono",
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
+                            ],
+                          ),
+                        if (_imageError == null)
+                          Column(
+                            children: const [
+                              CircularProgressIndicator(),
+                              SizedBox(height: 16),
+                              Text('Carregando imagem...')
+                            ],
+                          ),
+                      ],
+                    )
+                  : Image.memory(
+                      Uint8List.fromList(_imageUrl),
+                      fit: BoxFit.cover,
                     ),
-                  )
-                ],
+            ),
+
+            const SizedBox(height: 20),
+
+            // Título da imagem
+            Center(
+              child: Text(
+                widget.word.meaningWaiwai.toString().toUpperCase(),
+                style: GoogleFonts.openSans(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            //Significados
+            const SizedBox(height: 20),
+            //Descrição da palavra
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //Significado Portuges
-                    Row(
-                      children: [
-                        Expanded(
-                          child: RichText(
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              style: const TextStyle(
-                                fontSize: 28,
-                                color: Colors.black,
-                              ),
-                              children: <TextSpan>[
-                                const TextSpan(
-                                    text: "Significado: ",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(
-                                  text: widget.word.meaningPort,
-                                ),
-                              ],
-                            ),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Significado
+                  RichText(
+                    textAlign: TextAlign.left,
+                    text: TextSpan(
+                        style: GoogleFonts.openSans(
+                          fontSize: 22.0,
+                          color: Colors.black,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: "Significado: ",
+                              style: GoogleFonts.openSans(
+                                  fontWeight: FontWeight.bold)),
+                          TextSpan(
+                            text: widget.word.meaningPort,
                           ),
+                        ]),
+                  ),
+                  //Fonema
+                  RichText(
+                    textAlign: TextAlign.left,
+                    text: TextSpan(
+                      style: GoogleFonts.openSans(
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: "Fonema: ",
+                            style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: widget.word.fonema,
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: RichText(
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),
-                              children: <TextSpan>[
-                                const TextSpan(
-                                    text: "Fonema: ",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(
-                                  text: widget.word.fonema,
-                                ),
-                              ],
-                            ),
-                          ),
+                  ),
+                  //Sinonimo Pt-br
+                  RichText(
+                    textAlign: TextAlign.left,
+                    text: TextSpan(
+                      style: GoogleFonts.openSans(
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: "Sinonimo Pt: ",
+                            style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: widget.word.synonymPort,
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: RichText(
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),
-                              children: <TextSpan>[
-                                const TextSpan(
-                                    text: "Sinonimo Pt: ",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(
-                                  text: widget.word.synonymPort,
-                                ),
-                              ],
-                            ),
-                          ),
+                  ),
+                  RichText(
+                    textAlign: TextAlign.left,
+                    text: TextSpan(
+                      style: GoogleFonts.openSans(
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: "Sinonimo Wai: ",
+                            style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: widget.word.synonymWaiwai,
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: RichText(
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),
-                              children: <TextSpan>[
-                                const TextSpan(
-                                    text: "Sinonimo Wai: ",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(
-                                  text: widget.word.synonymWaiwai,
-                                ),
-                              ],
-                            ),
-                          ),
+                  ),
+                  RichText(
+                    textAlign: TextAlign.left,
+                    text: TextSpan(
+                      style: GoogleFonts.openSans(
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: "Comentário: ",
+                            style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: widget.word.exampleSentence,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 6),
-
-                    Row(
-                      children: [
-                        Expanded(
-                          child: RichText(
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),
-                              children: <TextSpan>[
-                                const TextSpan(
-                                    text: "Comentário: ",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(
-                                  text: widget.word.exampleSentence,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
