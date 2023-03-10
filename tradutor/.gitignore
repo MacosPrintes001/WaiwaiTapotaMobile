@@ -30,7 +30,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/build/dictionary_materials/services
+/build/dictionary_materials/services/
 
 
 # Web related
