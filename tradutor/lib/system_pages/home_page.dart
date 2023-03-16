@@ -53,7 +53,22 @@ class _HomePageState extends State<HomePage> {
       final prefs = await SharedPreferences.getInstance();
       final String? accessToken = prefs.getString('token');
 
-      var response = await logoutUser(accessToken);
+      var response = await logoutUser(accessToken).timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          return ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.redAccent,
+              content: Text(
+                "ERRO, VERIFIQUE SUA CONEXÃO E TENTE NOVAMENTE",
+              ),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        },
+      );
+
+      print(response);
 
       if (response == null) {
         // ignore: use_build_context_synchronously
@@ -68,15 +83,15 @@ class _HomePageState extends State<HomePage> {
         );
       } else {
         if (response.statusCode == 200) {
-          await prefs.setBool('repeat', false).then((value) {
-            prefs.clear();
+          prefs.clear();
+          build(context) {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const LoginPage(),
               ),
             );
-          });
+          }
         }
       }
     }
