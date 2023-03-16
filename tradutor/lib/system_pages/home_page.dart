@@ -69,6 +69,7 @@ class _HomePageState extends State<HomePage> {
       } else {
         if (response.statusCode == 200) {
           await prefs.setBool('repeat', false).then((value) {
+            prefs.clear();
             Navigator.push(
               context,
               MaterialPageRoute(

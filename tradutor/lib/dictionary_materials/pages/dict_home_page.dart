@@ -83,7 +83,7 @@ class _DictHomePageState extends State<DictHomePage> {
                   );
                   setState(() {
                     _isLoading = false;
-                    _wordDisplay = [];
+                    _wordDisplay = _words;
                   });
                 }
               });

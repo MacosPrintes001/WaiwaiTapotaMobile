@@ -9,9 +9,7 @@ Future setLogin(http.Response response, String senha, String usuario) async {
   //login aceito
   var accessToken = jsonDecode(response.body)['access_token'];
   //SharedPreferences.setMockInitialValues({});
-
-  await prefs.setBool('repeat', false);
-
+  await prefs.clear();
   await prefs.setString('token', accessToken.toString());
   await prefs.setString('user', usuario.toString().toLowerCase());
   await prefs.setString('senha', senha.toString());

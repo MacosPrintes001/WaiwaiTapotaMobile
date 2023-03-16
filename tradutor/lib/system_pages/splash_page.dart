@@ -49,8 +49,7 @@ class _SplashPageState extends State<SplashPage> {
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage("assets/splashBack.png"))),
+              fit: BoxFit.cover, image: AssetImage("assets/splashBack.png"))),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SizedBox(
@@ -77,6 +76,8 @@ class _SplashPageState extends State<SplashPage> {
   Future<bool> verificaUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool? repeat = prefs.getBool('repeat');
+
+    print(repeat);
 
     if (repeat == false || repeat == null) {
       return false;
