@@ -112,8 +112,22 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () async {
                         if (_formkey.currentState!.validate()) {
                           var response = await login(
-                              _emaiController.text.toString(),
-                              _senhaController.text.toString());
+                                  _emaiController.text.toString(),
+                                  _senhaController.text.toString())
+                              .timeout(
+                            const Duration(seconds: 5),
+                            onTimeout: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.redAccent,
+                                  content: Text(
+                                    "TEMPO LIMITE ESGOTADO",
+                                  ),
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
+                            },
+                          );
 
                           if (response == null) {
                             //uruario sem internet tentou fazer login

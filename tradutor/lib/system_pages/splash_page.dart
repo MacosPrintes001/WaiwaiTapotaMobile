@@ -77,8 +77,6 @@ class _SplashPageState extends State<SplashPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool? repeat = prefs.getBool('repeat');
 
-    print(repeat.toString());
-
     if (repeat == false || repeat == null) {
       return false;
     } else {

@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tradutor/dictionary_materials/pages/dict_home_page.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 import 'package:tradutor/system_pages/login_page.dart';
+import 'package:tradutor/system_pages/splash_page.dart';
 import 'about_Equipe_page.dart';
 import 'about_project_page.dart';
 
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
       final prefs = await SharedPreferences.getInstance();
       final String? accessToken = prefs.getString('token');
 
-      var response = await logoutUser(accessToken).timeout(
+      await logoutUser(accessToken).timeout(
         const Duration(seconds: 5),
         onTimeout: () {
           return ScaffoldMessenger.of(context).showSnackBar(
@@ -66,34 +67,30 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
-      );
-
-      print(response);
-
-      if (response == null) {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: Colors.redAccent,
-            content: Text(
-              "ERRO, VERIFIQUE SUA CONEXÃO E TENTE NOVAMENTE",
+      ).then((value) {
+        if (value == null) {
+          // ignore: use_build_context_synchronously
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.redAccent,
+              content: Text(
+                "ERRO, VERIFIQUE SUA CONEXÃO E TENTE NOVAMENTE",
+              ),
+              behavior: SnackBarBehavior.floating,
             ),
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-      } else {
-        if (response.statusCode == 200) {
-          prefs.clear();
-          build(context) {
-            Navigator.push(
+          );
+        } else {
+          if (value.statusCode == 200) {
+            prefs.clear();
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const LoginPage(),
+                builder: (context) => const SplashPage(),
               ),
             );
           }
         }
-      }
+      });
     }
 
     return Scaffold(
