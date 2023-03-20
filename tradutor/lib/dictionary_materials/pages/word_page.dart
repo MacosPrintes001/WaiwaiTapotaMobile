@@ -44,7 +44,7 @@ class _WordPageState extends State<WordPage> {
       });
     } catch (err) {
       setState(() {
-        _imageError = 'Erro ao carregar imagem';
+        _imageError = '⚠ Erro ao carregar imagem';
       });
     }
   }
