@@ -7,14 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future setLogin(http.Response response, String senha, String usuario) async {
   final prefs = await SharedPreferences.getInstance();
-  //login aceito
   var accessToken = jsonDecode(response.body)['access_token'];
-  //SharedPreferences.setMockInitialValues({});
   await prefs.clear();
+
   await prefs.setString('token', accessToken.toString());
   await prefs.setString('user', usuario.toString().toLowerCase());
   await prefs.setString('senha', senha.toString());
-  await prefs.setBool('repeat', true);
+  await prefs.setBool('logado', true);
 
   return true;
 }

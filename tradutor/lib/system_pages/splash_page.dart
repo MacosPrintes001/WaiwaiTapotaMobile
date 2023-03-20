@@ -23,7 +23,6 @@ class _SplashPageState extends State<SplashPage> {
       verificaUsuario().then(
         (temUsuario) {
           if (temUsuario) {
-            //pegar tokens e logar
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -31,7 +30,6 @@ class _SplashPageState extends State<SplashPage> {
               ),
             );
           } else {
-            //mandar usuario logar
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -74,13 +72,15 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<bool> verificaUsuario() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool? repeat = prefs.getBool('repeat');
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool logado = prefs.getBool('logado') ?? false;
 
-    if (repeat == false || repeat == null) {
-      return false;
-    } else {
-      return true;
-    }
+      if (logado) {
+        return true;
+      }
+    } catch (err) {}
+
+    return false;
   }
 }
