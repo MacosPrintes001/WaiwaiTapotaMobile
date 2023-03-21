@@ -48,10 +48,12 @@ flutter run
 <div style="display: flex; justify-content: center;">
   <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/login.png" width="300">
   <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/cadastro.png" width="300">
-  <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/busca.jpg" width="300">
-
   <br/>
+
+  <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/busca.jpg" width="300">
   <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/significado.jpg" width="300">
+  <br/>
+
   <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/aboutProject.png" width="300">
   <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/aboutEquipe.png" width="300">
 
