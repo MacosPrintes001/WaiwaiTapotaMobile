@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, empty_catches
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -23,7 +23,6 @@ class _SplashPageState extends State<SplashPage> {
       verificaUsuario().then(
         (temUsuario) {
           if (temUsuario) {
-            //pegar tokens e logar
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -31,7 +30,6 @@ class _SplashPageState extends State<SplashPage> {
               ),
             );
           } else {
-            //mandar usuario logar
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -49,8 +47,7 @@ class _SplashPageState extends State<SplashPage> {
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage("assets/splashBack.png"))),
+              fit: BoxFit.cover, image: AssetImage("assets/splashBack.png"))),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SizedBox(
@@ -75,13 +72,15 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<bool> verificaUsuario() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool? repeat = prefs.getBool('repeat');
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool logado = prefs.getBool('logado') ?? false;
 
-    if (repeat == false || repeat == null) {
-      return false;
-    } else {
-      return true;
-    }
+      if (logado) {
+        return true;
+      }
+    } catch (err) {}
+
+    return false;
   }
 }
