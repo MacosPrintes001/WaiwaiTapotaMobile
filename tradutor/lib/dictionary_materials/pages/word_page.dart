@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:typed_data';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +27,14 @@ class _WordPageState extends State<WordPage> {
     super.initState();
 
     try {
-      getWordData(widget.word.wodrId).then((value) {
+      getWordData(widget.word.wodrId).timeout(
+        const Duration(minutes: 1),
+        onTimeout: () {
+          setState(() {
+            _imageError = '⚠ Erro ao carregar imagem.\nTempo esgotado';
+          });
+        },
+      ).then((value) {
         if (value != null && value != 404) {
           setState(() {
             _imageUrl = value;
@@ -112,6 +121,7 @@ class _WordPageState extends State<WordPage> {
                       fit: BoxFit.cover,
                     ),
             ),
+            //Center(child: TextButton(onPressed: () {}, child: Text("Baixar"))),
 
             const SizedBox(height: 20),
 

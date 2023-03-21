@@ -16,6 +16,7 @@ class _AboutEquipePageState extends State<AboutEquipePage> {
   String debs = "assets/equipImages/debs.jpeg";
   String flavia = "assets/equipImages/flavia.jpg";
   String marcos = "assets/equipImages/marcos.jpg";
+  String rui = "assets/equipImages/rui.jpg";
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,7 @@ class _AboutEquipePageState extends State<AboutEquipePage> {
                 "Gerente e Projetista de Software", 10),
             cardMember(
                 marcos, "Marcos V. C. Printes", "Desenvolvedor Mobile", 7),
+            cardMember(rui, "Rui Massato Harayama", "Pesquisador", 7),
           ],
         ),
       ),
