@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:tradutor/dictionary_materials/utils/util.dart';
 import 'package:tradutor/system_pages/splash_page.dart';
 
-String urlbase = 'https://waiwaitapota.homes';
+String urlbase = "SUA URL DA API";
 
 Future updateWords(BuildContext context) async {
   final prefs = await SharedPreferences.getInstance();
