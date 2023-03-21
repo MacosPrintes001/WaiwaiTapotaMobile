@@ -30,9 +30,10 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/lib/dictionary_materials/services/api_folders.dart
 # Web related
 lib/generated_plugin_registrant.dart
+lib/dictionary_materials/services/api_folders.dart
+
 
 # Symbolication related
 app.*.symbols
