@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
@@ -17,7 +18,13 @@ class _WordPageState extends State<WordPage> {
   var imageErro = "assets/noImage.png";
   var _imageUrl;
   String? _imageError;
-  var audio;
+  final player = AudioPlayer();
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -122,20 +129,8 @@ class _WordPageState extends State<WordPage> {
                   var resp = await getAudio(widget.word.wodrId);
 
                   if (resp != null) {
-                    // AudioPlayer audioPlayer = AudioPlayer();
-                    // await audioPlayer.play("$urlbase/uploads/$resp");
-                    //play audio
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        backgroundColor: Colors.redAccent,
-                        content: Center(
-                          child: Text(
-                            "PALAVRA COM AUDIO",
-                          ),
-                        ),
-                        behavior: SnackBarBehavior.floating,
-                      ),
-                    );
+                    await player.setUrl("$urlbase/uploads/$resp");
+                    await player.play();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
