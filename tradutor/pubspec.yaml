@@ -26,6 +26,7 @@ dependencies:
   lottie: ^2.2.0
   #provider de email e senha
   provider: ^6.0.4
+
   dependencies:
 
 dev_dependencies:

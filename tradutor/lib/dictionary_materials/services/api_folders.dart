@@ -118,7 +118,7 @@ Future fetchWords(BuildContext context) async {
   }
 }
 
-Future getWordData(id) async {
+Future getImage(id) async {
   final prefs = await SharedPreferences.getInstance();
   final String? accessToken = prefs.getString('token');
 
@@ -181,6 +181,28 @@ Future login(String email, String senha) async {
     return response;
   } catch (err) {
     return null;
+  }
+}
+
+Future getAudio(id) async {
+  final prefs = await SharedPreferences.getInstance();
+  final String? accessToken = prefs.getString('token');
+
+  var imgUrl = Uri.parse("$urlbase/palavras/$id");
+  final http.Response response = await http.get(
+    imgUrl,
+    headers: {
+      'Authorization': 'Bearer $accessToken',
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+  );
+  if (response.statusCode == 200) {
+    var word = json.decode(response.body);
+    if (word['audio'] != null) {
+      return word['audio'];
+    } else {
+      return null;
+    }
   }
 }
 

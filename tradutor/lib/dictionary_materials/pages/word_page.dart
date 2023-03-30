@@ -17,6 +17,7 @@ class _WordPageState extends State<WordPage> {
   var imageErro = "assets/noImage.png";
   var _imageUrl;
   String? _imageError;
+  var audio;
 
   @override
   void initState() {
@@ -25,7 +26,7 @@ class _WordPageState extends State<WordPage> {
     super.initState();
 
     try {
-      getWordData(widget.word.wodrId).then((value) {
+      getImage(widget.word.wodrId).then((value) {
         if (value != null && value != 404) {
           setState(() {
             _imageUrl = value;
@@ -113,19 +114,52 @@ class _WordPageState extends State<WordPage> {
                     ),
             ),
 
-            const SizedBox(height: 20),
-
             // Título da imagem
             Center(
-              child: Text(
-                widget.word.meaningWaiwai.toString().toUpperCase(),
-                style: GoogleFonts.openSans(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
+              child: TextButton.icon(
+                icon: const Icon(Icons.spatial_audio_off),
+                onPressed: () async {
+                  var resp = await getAudio(widget.word.wodrId);
+
+                  if (resp != null) {
+                    // AudioPlayer audioPlayer = AudioPlayer();
+                    // await audioPlayer.play("$urlbase/uploads/$resp");
+                    //play audio
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: Colors.redAccent,
+                        content: Center(
+                          child: Text(
+                            "PALAVRA COM AUDIO",
+                          ),
+                        ),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: Colors.redAccent,
+                        content: Center(
+                          child: Text(
+                            "PALAVRA SEM AUDIO",
+                          ),
+                        ),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  }
+                },
+                label: Text(
+                  widget.word.meaningWaiwai.toString().toUpperCase(),
+                  style: GoogleFonts.openSans(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+
             //Descrição da palavra
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
