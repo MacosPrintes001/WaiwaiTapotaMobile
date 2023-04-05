@@ -6,6 +6,7 @@ import 'package:tradutor/dictionary_materials/models/model_dictionary.dart';
 import 'package:flutter/material.dart';
 import 'package:tradutor/dictionary_materials/services/api_folders.dart';
 
+
 class WordPage extends StatefulWidget {
   final wordModel word;
   const WordPage({super.key, required this.word});

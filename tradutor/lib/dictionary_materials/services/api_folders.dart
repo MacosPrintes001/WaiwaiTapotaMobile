@@ -17,7 +17,7 @@ Future updateWords(BuildContext context) async {
   final String? accessToken = prefs.getString('token');
 
   try {
-    var registerUrl = Uri.parse("$urlbase/palavras");
+    var registerUrl = Uri.parse("$urlbase/palavras?limit=7000");
     final http.Response response = await http.get(
       registerUrl,
       headers: {
@@ -26,6 +26,7 @@ Future updateWords(BuildContext context) async {
       },
     );
     if (response.statusCode == 200) {
+      // Pegar {"data":[palavras]}
       await prefs.setString('dicionario', response.body);
       return compute(parseWord, response.body);
     } else if (response.statusCode == 401 || response.statusCode == 422) {
