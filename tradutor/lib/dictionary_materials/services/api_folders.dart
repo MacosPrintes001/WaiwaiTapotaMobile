@@ -26,9 +26,11 @@ Future updateWords(BuildContext context) async {
       },
     );
     if (response.statusCode == 200) {
-      // Pegar {"data":[palavras]}
-      await prefs.setString('dicionario', response.body);
-      return compute(parseWord, response.body);
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
+
+      await prefs.setString('dicionario', jsonData.toString());
+
+      return compute(parseWord, jsonData);
     } else if (response.statusCode == 401 || response.statusCode == 422) {
       String? email = prefs.getString('user');
       String? senha = prefs.getString('senha');
@@ -59,11 +61,10 @@ Future updateWords(BuildContext context) async {
   }
 }
 
-List<wordModel> parseWord(String responseBody) {
-  var listUtf8 = utf8.decode(responseBody.codeUnits);
-  var list = json.decode(listUtf8) as List<dynamic>;
+List<wordModel> parseWord(Map<String, dynamic> jsonMap) {
+  var dicio = jsonMap['data'];
+  var list = dicio as List<dynamic>;
   var words = list.map((e) => wordModel.fromJson(e)).toList();
-
   return words;
 }
 
@@ -74,9 +75,11 @@ Future fetchWords(BuildContext context) async {
 
   try {
     if (dicionarioOff != null) {
-      return compute(parseWord, dicionarioOff);
+      Map<String, dynamic> jsonData = jsonDecode(dicionarioOff);
+
+      return compute(parseWord, jsonData);
     } else {
-      var registerUrl = Uri.parse("$urlbase/palavras");
+      var registerUrl = Uri.parse("$urlbase/palavras?limit=7000");
       final http.Response response = await http.get(
         registerUrl,
         headers: {
@@ -86,8 +89,9 @@ Future fetchWords(BuildContext context) async {
       );
 
       if (response.statusCode == 200) {
-        await prefs.setString('dicionario', response.body);
-        return compute(parseWord, response.body);
+        Map<String, dynamic> jsonData = jsonDecode(response.body);
+        await prefs.setString('dicionario', jsonData.toString());
+        return compute(parseWord, jsonData);
       } else if (response.statusCode == 401 || response.statusCode == 422) {
         String? email = prefs.getString('user');
         String? senha = prefs.getString('senha');
