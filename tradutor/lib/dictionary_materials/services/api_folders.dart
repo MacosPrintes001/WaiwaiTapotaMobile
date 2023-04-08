@@ -25,11 +25,11 @@ Future updateWords(BuildContext context) async {
         'Content-Type': 'application/json; charset=UTF-8'
       },
     );
+
     if (response.statusCode == 200) {
+      await prefs.setString('dicionario', response.body);
+
       Map<String, dynamic> jsonData = jsonDecode(response.body);
-
-      await prefs.setString('dicionario', jsonData.toString());
-
       return compute(parseWord, jsonData);
     } else if (response.statusCode == 401 || response.statusCode == 422) {
       String? email = prefs.getString('user');
@@ -76,7 +76,6 @@ Future fetchWords(BuildContext context) async {
   try {
     if (dicionarioOff != null) {
       Map<String, dynamic> jsonData = jsonDecode(dicionarioOff);
-
       return compute(parseWord, jsonData);
     } else {
       var registerUrl = Uri.parse("$urlbase/palavras?limit=7000");
@@ -89,8 +88,8 @@ Future fetchWords(BuildContext context) async {
       );
 
       if (response.statusCode == 200) {
+        await prefs.setString('dicionario', response.body);
         Map<String, dynamic> jsonData = jsonDecode(response.body);
-        await prefs.setString('dicionario', jsonData.toString());
         return compute(parseWord, jsonData);
       } else if (response.statusCode == 401 || response.statusCode == 422) {
         String? email = prefs.getString('user');
