@@ -1,36 +1,65 @@
-# CoffeeHouse
+# Waiwai Tapota Mobile v0.1
+<!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
-CoffeeHouse é um aplicativo de amostra para demonstrar o uso do Flutter na criação de uma interface de usuário de uma loja de café fictícia.
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/devsuperior/sds1-wmazoni/blob/master/LICENSE)
 
-## Visão Geral
+<div style="display:inline_block"><br/>
+<img align="center" alt="Flutter" src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"/>
+</div>
 
-O aplicativo CoffeeHouse foi desenvolvido como parte de um projeto de aprendizado de Flutter. Ele oferece uma interface simples para navegar por uma lista de produtos de café e adicionar itens a um carrinho de compras simulado.
 
-## Funcionalidades
+### Ajustes e melhorias
 
-- Exibe uma lista de produtos de café.
-- Permite ao usuário adicionar produtos ao carrinho de compras.
-- Permite ao usuário visualizar e limpar o carrinho de compras.
-- Fornece uma interface amigável e intuitiva.
+O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-## Capturas de Tela
+- [ ] Melhoria Continua
 
-![Tela Principal](screenshots/.png)
-![Carrinho de Compras](screenshots/cart.png)
-![Tela Principal](screenshots/home.png)
-![Carrinho de Compras](screenshots/cart.png)
-![Tela Principal](screenshots/home.png)
-![Carrinho de Compras](screenshots/cart.png)
 
-## Pré-requisitos
+## Sobre o WaiwaiTapotaMobile
+Este repositorio faz parte do projeto Waiwai Tapota que é um projeto de tradução de linguas maternas brasileiras faciltado, este é dividido em três partes principais: API manager, Aplicativo mobile e sistema web.
 
-- Flutter SDK instalado (https://flutter.dev/docs/get-started/install)
-- Um dispositivo Android ou iOS ou um emulador configurado
+Vá para http://www.ufopa.edu.br/ufopa/ para obter mais informações e documentação.
 
-## Como Executar
+## ☕ Primeiros passos
 
-1. Clone o repositório:
+Para instalar o Waiwai Tapota mobile, siga estas etapas:
 
-```bash
-git clone https://github.com/MarcosPrintes001/CoffeeHouse.git
+### 1. Instale o Flutter
+
 ```
+https://docs.flutter.dev/get-started/install
+```
+
+### 2. Clone o repositorio e instale as dependencias
+```
+https://github.com/MacosPrintes001/WaiwaiTapotaMobile.git
+cd WaiwaiTapotaMobile/tradutor
+```
+
+## 🚀 Inicie o aplicativo
+
+Apos concluir todas as etapas anteriores, execute o comando:
+
+```
+flutter run
+```
+## 📱 Interface
+
+<div style="display: flex; justify-content: center;">
+  <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/login.png" width="300">
+  <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/cadastro.png" width="300">
+  <br/>
+
+  <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/busca.jpg" width="300">
+  <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/significado.jpg" width="300">
+  <br/>
+
+  <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/aboutProject.png" width="300">
+  <img src="https://github.com/MacosPrintes001/WaiwaiTapotaMobile/blob/main/tradutor/Interface/aboutEquipe.png" width="300">
+
+
+</div>
+
+## 📝 Licença
+
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
